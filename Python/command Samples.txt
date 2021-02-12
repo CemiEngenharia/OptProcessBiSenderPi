@@ -1,0 +1,11 @@
+|28|{"command":"cleanqueue()"}
+|23|{"command":"getip()"}
+|86|{"date":"2021-02-11 16:33:15", "data" : {"itfunfs":"yep"}, "command":"settagdata()"}
+|144|{"date":"2021-02-11 16:33:15", "data" : ["{tag name}:{tag address}:{tag type}","{tag name}:{tag address}:{tag type}"], "command":"gettagid()"}
+
+|144|{"date":"2021-02-11 16:33:15", "data" : ["{tag name}:{tag address}:{tag type}","{tag name}:{tag address}:{tag type}"], "command":"settagdata()"}
+
+|85|{"date":"2021-02-11 16:33:15", "data" : "192.168.1.185", "command":"sethostname()"}
+|77|{"date":"2021-02-11 16:33:15", "data" : "21032", "command":"sethostport()"}
+|88|{"date":"2021-02-11 16:33:15", "data" : "betatesterproject", "command":"setproject()"}
+|105|{"date":"2021-02-11 16:33:15", "data" : "666ff9ac6be577858d019bc5df59f89a", "command":"setmachineid()"}
