@@ -29,6 +29,13 @@ class telemetryCore:
         self.tagDictFile = _home+"/.cemi/tags"
         self.queueFile = _home+"/.cemi/queue"
         self.queueSocket = _home+"/.cemi/queueSocket"
+        self.mobileNetworkConfigFile = "/etc/wvdial.conf"
+        self.wifiNetworkConfigFile = _home+"/.cemi/wpa_supplicant"
+        #self.wifiNetworkConfigFile = "/var/run/wpa_supplicant"
+        
+        #finaliza socket unix
+        if(os.path.exists(self.queueSocket)):
+            os.remove(self.queueSocket)
         
         #verifica se existem as pastar principais
         if(not os.path.isdir(self.home)):
@@ -47,6 +54,34 @@ class telemetryCore:
         if(not os.path.isfile(self.queueFile)):
             tmp = open(self.queueFile, "wb")
             tmp.write("[]")
+            tmp.close()
+            
+        if(not os.path.isfile(self.mobileNetworkConfigFile)):
+            tmp = open(self.mobileNetworkConfigFile, "wb")
+            tmp.write('''[Dialer 3gconnect]\n
+                        Init1 = ATZ\n
+                        Init2 = ATQ0 V1 E1 S0=0 &C1 &D2 +FCLASS=0\n
+                        Init3 = AT+CGDCONT=1,"IP","internet"\n
+                        Stupid Mode = 1\n
+                        Modem Type = Analog Modem\n
+                        ISDN = 0\n
+                        Phone = *99#\n
+                        Modem = /dev/gsmmodem\n
+                        Username = %apnuser%\n
+                        Password = %apnpass%\n
+                        Baud = 460800''')
+            tmp.close()
+            
+        if(not os.path.isfile(self.wifiNetworkConfigFile)):
+            tmp = open(self.wifiNetworkConfigFile, "wb")
+            tmp.write(
+            '''country=US # Your 2-digit country code
+            ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+            network={
+                ssid="%wifiuser%"
+                psk="%wifipass%"
+                key_mgmt=WPA-PSK
+            }''')
             tmp.close()
         
 #           define os comaandos aceitos array {"command": "fields separated by colma"}
@@ -71,6 +106,9 @@ class telemetryCore:
         
         #carrega configuracao no inicio da aplicacao
         self.loadConfig(self.configFile)
+        
+        #inicializa o gerente de tags
+        self.tagsmgmt = tagsMgmt(self.tagDictFile)
         
         #inicializa servidor de filas
         self.queuemgmt = queueMgmt()
@@ -174,46 +212,64 @@ class telemetryCore:
     
     #Processa comando enviado
     def processCommand(self, command):
+        #define o nome da apn de rede
         if(command["command"].lower() == "setapnname()"):
             if(len(command["data"]) >= 2):
                 self.config["apn"] = command["data"]
                 self.saveConfig(self.configFile)
+                
+                self.setApnConfig(command["data"], None, None)
                 return (True, "success")
             else:
                 return (False, "fail")
-            
+        
+        #define usuario da apn de rede de telefonia
         elif(command["command"].lower() == "setapnuser()"):
             if(len(command["data"]) >= 2):
                 self.config["apnuser"] = command["data"]
                 self.saveConfig(self.configFile)
+                
+                self.setApnConfig(None, command["data"], None)
                 return (True, "success")
             else:
                 return (False, "fail")
-            
+        
+        #define password da apn de telefonia    
         elif(command["command"].lower() == "setapnpass()"):
             if(len(command["data"]) >= 2):
                 self.config["apnpass"] = command["data"]
                 self.saveConfig(self.configFile)
+                
+                self.setApnConfig(None,None, command["data"])
                 return (True, "success")
             else:
                 return (False, "fail")
-            
+        
+        #define o ssid da wireless    
         elif(command["command"].lower() == "setwifissid()"):
             if(len(command["data"]) >= 3):
                 self.config["wifissid"] = command["data"]
                 self.saveConfig(self.configFile)
+                
+                self.setWifiConfig(command["data"], None)
+                    
                 return (True, "success")
             else:
                 return (False, "fail")
-            
+        
+        #define o password de rede wifi    
         elif(command["command"].lower() == "setwifipwd()"):
             if(len(command["data"]) >= 8):
                 self.config["wifipwd"] = command["data"]
                 self.saveConfig(self.configFile)
+                
+                self.setWifiConfig(None, command["data"])
+                    
                 return (True, "success")
             else:
                 return (False, "fail")
-            
+        
+        #define o nome do projeto para sincronizar com a nuvem    
         elif(command["command"].lower() == "setproject()"):
             if(len(command["data"]) >= 3):
                 self.config["project"] = command["data"]
@@ -221,7 +277,8 @@ class telemetryCore:
                 return (True, "success")
             else:
                 return (False, "fail")
-            
+        
+        #define o id da maquina para sincronizar com a nuvem   
         elif(command["command"].lower() == "setmachineid()"):
             if(len(command["data"]) == 32):
                 self.config["machineid"] = command["data"]
@@ -229,7 +286,8 @@ class telemetryCore:
                 return (True, "success")
             else:
                 return (False, "fail")
-            
+        
+        #define o hostname da nuvem para sincronizacao   
         elif(command["command"].lower() == "sethostname()"):
             if(len(command["data"]) >= 4):
                 self.config["hostname"] = command["data"]
@@ -237,7 +295,8 @@ class telemetryCore:
                 return (True, "success")
             else:
                 return (False, "fail")
-            
+        
+        #define porta de sincronizacao de rede    
         elif(command["command"].lower() == "sethostport()"):
             if(len(command["data"]) >= 4):
                 self.config["hostport"] = command["data"]
@@ -245,7 +304,8 @@ class telemetryCore:
                 return (True, "success")
             else:
                 return (False, "fail")
-            
+        
+        #define todos ids das tags para sincronizar    
         elif(command["command"].lower() == "gettagid()"):
             print(type(command["data"]) is list)
             
@@ -255,13 +315,13 @@ class telemetryCore:
             
             response = tc.syncTags(command["data"])
             
-            tdf = open(self.tagDictFile, "wb")
-            tdf.write(json.dumps(response))
-            tdf.close()
+            #adiciona ao arquivo de tags
+            self.tagsmgmt.updateTags(response)
             
             print("gettagid")
             return (True, response)
-            
+        
+        #envia dados de tag para a nuvem    
         elif(command["command"].lower() == "settagdata()"):
             print("settagdata")
             self.queueMgmtaddToQueue(command["data"])
@@ -276,22 +336,26 @@ class telemetryCore:
                 response = self.sendTagData(self.queueMgmtgetNext())
             
             return (True, response)
-            
+        
+        #faz leitura do sinal de rede    
         elif(command["command"].lower() == "getsignal()"):
             print("getsignal")
             return (True, "")
-            
+        
+        #verifica status da conexao de rede atravez de ping a um dns    
         elif(command["command"].lower() == "getconnectionstatus()"):
             if(self.ping("1.1.1.1")):
                 return (True, "connected")
             else:
                 return (False, "disconnected")
-            
+        
+        #recupera numero de arquivos na fila
         elif(command["command"].lower() == "getqueue()"):
             print(self.queueMgmtgetLenght())
             #print(self.queueMgmtgetNext())
             return (True, "{'length': "+str(self.queueMgmtgetLenght() + "}"))
-            
+        
+        #limpa fila de envio    
         elif(command["command"].lower() == "cleanqueue()"):
             if(self.queueMgmtclean()):
                 print()
@@ -299,25 +363,71 @@ class telemetryCore:
             else:
                 return (False, "fail")
         
+        #verifica o ip do dispositivo
         elif(command["command"].lower() == "getip()"):
             print("getip")
             ni.ifaddresses('eth0')
             ip = ni.ifaddresses('eth0')[ni.AF_INET][0]['addr']
             print(ip)  # should print "192.168.100.37"
             return (True, "{'ipaddress' : '" + ip + "'}")
-            
+        
+        #faz analize de rete atravez de ping    
         elif(command["command"].lower() == "getpinginfo()"):
             print("getpinginfo")
-            return (True, "")
             
+            pingdnstime = str(self.pingSpeed("1.1.1.1"))
+            pinghosttime = str(self.pingSpeed(self.config["hostname"]))
+            
+            print( (True, [pingdnstime, pinghosttime]))
+            return (True, [pingdnstime, pinghosttime])
+        
+        #reinicia servico na maquina    
         elif(command["command"].lower() == "restart()"):
             print("restart")
             return (True, "")
         
     #faz a configuracao da apn
-    def setApnConfigPwd(self, apnUsr):
-        print("cionfigurando apn")
+    def setApnConfig(self, apnName=None, apnUser=None, apnPass=None):        
+        print("configurando apn")
+        if(os.path.isfile(self.mobileNetworkConfigFile)):
+            tmp = open(self.mobileNetworkConfigFile, "rb")
+            data = tmp.read()
+            tmp.close()
+            
+            if(apnUser):
+                data = re.sub(r'Username = [\S*\d*_.-]*', 'Username = '+apnUser , data)  #data.replace("%apnuser%", apnUser)
+                self.config["apnuser"] = apnUser
+            if(apnPass):
+                data = re.sub(r'Password = [\S*\d*_.-]*', 'Password = '+apnPass, data)  #data.replace("%apnpass%", apnPass)
+                self.config["apnpass"] = apnPass
+            if(apnName):
+                data = re.sub(r'Apn = [\S*\d*_.-]*', 'Apn = '+apnName, data)  #data.replace("%apnname%", apnName)
+                self.config["apnname"] = apnName
     
+            tmp = open(self.mobileNetworkConfigFile, "wb")
+            tmp.write(data)
+            tmp.close()
+            
+    #faz a configuracao da wifi
+    def setWifiConfig(self, wifiUser=None, wifiPass=None):        
+        print("configurando wifi")
+        if(os.path.isfile(self.wifiNetworkConfigFile)):
+            tmp = open(self.wifiNetworkConfigFile, "rb")
+            data = tmp.read()
+            tmp.close()
+            
+            if(wifiUser):
+                data =  re.sub(r'ssid="[\S*\d*_.-]*"', 'ssid="'+wifiUser+'"', data)  #data.replace("%wifiuser%", wifiUser)
+                self.config["wifiuser"] = wifiUser
+                
+            if(wifiPass):
+                data =  re.sub(r'psk="[\S*\d*_.-]*"', 'psk="'+wifiPass+'"', data)   #data.replace("%wifipass%", wifiPass)
+                self.config["wifipass"] = wifiPass
+    
+            tmp = open(self.wifiNetworkConfigFile, "wb")
+            tmp.write(data)
+            tmp.close()
+
 
     def ping(self, host):
         """
@@ -332,6 +442,26 @@ class telemetryCore:
         command = ['ping', param, '1', host]
 
         return subprocess.call(command) == 0
+    
+    def pingSpeed(self, host):
+        """
+        Returns True if host (str) responds to a ping request.
+        Remember that a host may not respond to a ping (ICMP) request even if the host name is valid.
+        """
+
+        # Option for the number of packets as a function of
+        param = '-n' if platform.system().lower()=='windows' else '-c'
+
+        # Building the command. Ex: "ping -c 1 google.com"
+        command = ['ping', param, '1', host]
+
+        sprocResult = str(subprocess.check_output(command))
+        
+        pingdnstime = re.finditer(r"time=(\d+\.*\d*\s*ms)", sprocResult, re.MULTILINE)
+        for matchNum, match in enumerate(pingdnstime, start=1):
+            return (match.group(1) if matchNum == 1 else None)
+        
+        return None
     
     #cria uma thread para manipular a fila
     def queueMgmtgetNext(self):
@@ -525,7 +655,7 @@ class queueMgmt:
         #desbloqueia o arquivo para escrita e leitura
         self.lock = False
         
-        return nextData
+        return json.dumps(nextData)
         
     #recupera tamanho da fila
     def queueMgmtgetLenght(self):
@@ -592,7 +722,179 @@ class queueMgmt:
         #desbloqueia o arquivo para escrita e leitura
         self.lock = False
         
-        return True     
+        return True   
+    
+class tagsMgmt:
+    def __init__(self, tagfile):
+        self.tagFile = tagfile
+    
+    #adiciona tags a lista de tags do arquivo    
+    def appendTags(self, tags):
+        tagContents = open(self.tagFile, "rb")
+        data = json.loads(tagContents.read())
+        tagContents.close()
+        
+        if(type(tags) == list):
+            print("tags is list")
+            for tag in tags:
+                print(type(tags))
+                if(type(tag) == dict):
+                    #adiciona tag a lissta do arquivo
+                    print("tags is dict")
+                    if(tag.keys()[0] not in data):
+                        data[tag.keys()[0]] = tag[tag.keys()[0]]
+                        
+        elif(type(tags) == dict):
+            print("tags is dict")
+            #adiciona tag a lissta do arquivo
+            if(tags.keys()[0] not in data):
+                data[tags.keys()[0]] = tags[tags.keys()[0]]
+    
+        else:
+            print("invalid")
+            
+        print(data)
+        tagContents = open(self.tagFile, "wb")
+        tagContents.write(json.dumps(data))
+        tagContents.close()
+            
+    #verifica se contem dados no arquivo de tag
+    def containsTag(self, tag):
+        tagContents = open(self.tagFile, "r")
+        data = json.loads(tagContents.read())
+        tagContents.close()
+        
+        if(type(tag) == list):
+            print("tags is list")
+                
+        elif(type(tag) == dict):
+            print("tags is dict")
+            #adiciona tag a lissta do arquivo
+            if(tag.keys()[0] not in data):
+                return True
+        
+        else:
+            print("invalid")
+            
+        return False   
+     
+    #atualiza sem verificar se existe
+    def updateTags(self, tags):
+        tagContents = open(self.tagFile, "rb")
+        data = json.loads(tagContents.read())
+        tagContents.close()
+        
+        if(type(tags) == list):
+            print("tags is list")
+            for tag in tags:
+                print(type(tags))
+                if(type(tag) == dict):
+                    #adiciona tag a lissta do arquivo
+                    print("tags is dict")
+                    data[tag.keys()[0]] = tag[tag.keys()[0]]
+                        
+        elif(type(tags) == dict):
+            print("tags is dict")
+            #adiciona tag a lissta do arquivo
+            data[tags.keys()[0]] = tags[tags.keys()[0]]
+    
+        else:
+            print("invalid")
+            
+        print(data)
+        tagContents = open(self.tagFile, "wb")
+        tagContents.write(json.dumps(data))
+        tagContents.close()
+            
+      
+    #atualiza sem verificar se existe
+    def getTags(self, tags):
+        tagContents = open(self.tagFile, "rb")
+        data = json.loads(tagContents.read())
+        tagContents.close()
+        
+        #variavel para guardar respostas
+        response = {}
+        
+        print(type(tags))
+        
+        if(type(tags) == list):
+            print("tags is list")
+            for tag in tags:
+                print(type(tags))
+                if(type(tag) == dict):
+                    #adiciona tag a lissta do arquivo
+                    print("tags is dict")
+                    response[tag.keys()[0]] = data[tag.keys()[0]]
+                    
+                elif(type(tag) == str):
+                    #adiciona tag a lissta do arquivo
+                    print("tags is text")
+                    response[tag] = data[tag]
+                        
+        elif(type(tags) == dict):
+            print("tags is dict")
+            #adiciona tag a lissta do arquivo
+            response[tags.keys()[0]] = data[tags.keys()[0]]
+        
+        elif(type(tags) == str):
+            response[tags] = data[tags]
+        
+        return response
+            
+    #adiciona tags a lista de tags do arquivo    
+    def removeTags(self, tags):
+        tagContents = open(self.tagFile, "rb")
+        data = json.loads(tagContents.read())
+        tagContents.close()
+        
+        if(type(tags) == list):
+            print("tags is list")
+            for tag in tags:
+                print(type(tags))
+                if(type(tag) == dict):
+                    #adiciona tag a lissta do arquivo
+                    print("tags is dict")
+                    if(tag.keys()[0] in data):
+                        del data[tag.keys()[0]]
+                        
+        elif(type(tags) == dict):
+            print("tags is dict")
+            #adiciona tag a lissta do arquivo
+            if(tags.keys()[0] in data):
+                del data[tags.keys()[0]]
+    
+        else:
+            if(tags in data):
+                del data[tags]
+            
+        print(data)
+        tagContents = open(self.tagFile, "wb")
+        tagContents.write(json.dumps(data))
+        tagContents.close()
+            
+    #adiciona tags a lista de tags do arquivo    
+    def cleanTags(self):         
+        tagContents = open(self.tagFile, "wb")
+        tagContents.write(json.dumps({}))
+        tagContents.close()
+            
+
+#inicializa o gerente de tags
+_home = expanduser("~")
+tagDictFile = _home+"/.cemi/tags"
+
+tagsmgmt = tagsMgmt(tagDictFile)
+tagsmgmt.appendTags([{"nome": "Eduardo"}])
+
+
+print(tagsmgmt.getTags([{"nome": "Eduardo"}]))
+print(tagsmgmt.getTags(["nome"]))
+print(tagsmgmt.getTags("nome"))
+
+tagsmgmt.removeTags("nome")
+tagsmgmt.cleanTags()
+
 
 #inicializa telemetry core
 tc = telemetryCore()
@@ -618,3 +920,4 @@ while(True):
     #jsonData = tc.messageValidation("|79|{\"command\":\"settagdata()\", \"data\":\"settagdata()\", \"date\":\"2021-01-29 16:54:55\"}")
 
     ser.write(tc.sendResponse(json.dumps({'date' : str(datetime.now()), 'status': response[0], 'desc': response[1]})) + "\r\n")
+
