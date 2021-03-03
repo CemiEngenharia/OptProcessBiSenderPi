@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+ 
 import socket
 import requests
 import re
@@ -12,25 +15,67 @@ import socket
 import netifaces as ni
 import thread
 import time
+from gpiozero import LED
+
+class StatusIndication:
+    def __init__(self):
+        self.networkLed = LED(2) #indicador de rede
+        self.scriptLed  = LED(3) #indicador de atividade
+        self.workingLed = LED(4) #indicador de ligado
+
+    def networkStatus(self):
+        while(True):
+            self.networkLed.off()
+            time.sleep(1)
+            if(self.ping("1.1.1.1")):
+                self.networkLed.on()
+            time.sleep(1)
+                
+    def scriptStatus(self):
+        while(True):
+            self.scriptLed.on()
+            time.sleep(1)
+            self.scriptLed.off()
+            time.sleep(1)
+        
+    def ping(self, host):
+        """
+        Returns True if host (str) responds to a ping request.
+        Remember that a host may not respond to a ping (ICMP) request even if the host name is valid.
+        """
+
+        # Option for the number of packets as a function of
+        param = '-n' if platform.system().lower()=='windows' else '-c'
+
+        # Building the command. Ex: "ping -c 1 google.com"
+        command = ['ping', param, '1', host]
+
+        return subprocess.call(command) == 0
 
 class telemetryCore:
     def __init__(self):
         print("iniciado")
         
+        #define o diretorio de funcionamento
+        ppath = "/var/cemi/"
+        #define o diretorio de funcionamento do script
+        os.chdir(ppath)
+
+
         #pega diretorio home
-        _home = expanduser("~")
-        print("home Directory")
-        print(_home)
-        print("________________")
+        #        _home = expanduser("~")
+        #        print("home Directory")
+        #        print(_home)
+        #        print("________________")
         
         #define pastas principais
-        self.home = _home+"/.cemi"
-        self.configFile = _home+"/.cemi/config"
-        self.tagDictFile = _home+"/.cemi/tags"
-        self.queueFile = _home+"/.cemi/queue"
-        self.queueSocket = _home+"/.cemi/queueSocket"
+        self.home = ppath+"/.config"
+        self.configFile = ppath+"/.config/config"
+        self.tagDictFile = ppath+"/.config/tags"
+        self.queueFile = ppath+"/.config/queue"
+        self.queueSocket = ppath+"/.config/queueSocket"
         self.mobileNetworkConfigFile = "/etc/wvdial.conf"
-        self.wifiNetworkConfigFile = _home+"/.cemi/wpa_supplicant"
+        self.wifiNetworkConfigFile = ppath+"/.config/wpa_supplicant"
         #self.wifiNetworkConfigFile = "/var/run/wpa_supplicant"
         
         #finaliza socket unix
@@ -75,7 +120,7 @@ class telemetryCore:
         if(not os.path.isfile(self.wifiNetworkConfigFile)):
             tmp = open(self.wifiNetworkConfigFile, "wb")
             tmp.write(
-            '''country=US # Your 2-digit country code
+            '''country=BR # Your 2-digit country code
             ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
             network={
                 ssid="%wifiuser%"
@@ -90,6 +135,9 @@ class telemetryCore:
         self.commandSet["setapnpwd()"] = "data"
         self.commandSet["setwifissid()"] = "data"
         self.commandSet["setwifipwd()"] = "data"
+        self.commandSet["setip()"] = "data"
+        self.commandSet["setgateway()"] = "data"
+        self.commandSet["setdns()"] = "data"
         self.commandSet["setproject()"] = "data"
         self.commandSet["setmachineid()"] = "data"
         self.commandSet["sethostname()"] = "data"
@@ -111,8 +159,23 @@ class telemetryCore:
         self.tagsmgmt = tagsMgmt(self.tagDictFile)
         
         #inicializa servidor de filas
-        self.queuemgmt = queueMgmt()
+        self.queuemgmt = queueMgmt(ppath, self.queueFile, self.queueSocket)
         thread.start_new_thread(self.queuemgmt.startSocket, tuple())
+        
+        #verifica o modo de operacao e inicia a rede
+        if("mode" not in self.config):
+            self.setMobileMode()
+        elif(self.config["mode"] == "wifi"):
+            self.setWifiMode()            
+        else:
+            self.setMobileMode()
+            
+        #indica status do dispositivo
+        statusIndication = StatusIndication()
+        thread.start_new_thread(statusIndication.networkStatus, ())
+        thread.start_new_thread(statusIndication.scriptStatus, ())
+        
+        print("Started")
                 
     def loadConfig(self, configFile):
         tmp = open(self.configFile, "rb")
@@ -268,6 +331,58 @@ class telemetryCore:
                 return (True, "success")
             else:
                 return (False, "fail")
+            
+        #define o ip de rede wifi    000.000.000.000
+        elif(command["command"].lower() == "setip()"):
+            if(re.search(r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$",command["data"], re.MULTILINE)):
+                self.config["ipaddress"] = command["data"]
+                self.saveConfig(self.configFile)
+                
+                #define endereco ip e mascara de rede do dispositivo
+                self.setipaddress(command["data"], "255.255.255.0" if self.config["netmask"] == None else self.config["netmask"])
+                    
+                return (True, "success")
+            else:
+                return (False, "fail")
+            
+        #define o ip de rede wifi    000.000.000.000
+        elif(command["command"].lower() == "setnetmask()"):
+            if(re.search(r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$",command["data"], re.MULTILINE)):
+                self.config["netmask"] = command["data"]
+                self.saveConfig(self.configFile)
+                
+                #define endereco ip e mascara de rede do dispositivo
+                self.setipaddress("192.168.0.1" if self.config["ipaddress"] == None else self.config["ipaddress"], command["data"])
+                    
+                return (True, "success")
+            else:
+                return (False, "fail")
+                
+        #define o gateway de rede wifi    
+        elif(command["command"].lower() == "setgateway()"):
+            if(re.search(r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$",command["data"], re.MULTILINE)):
+                self.config["gateway"] = command["data"]
+                self.saveConfig(self.configFile)
+                
+                #define endereco ip e mascara de rede do dispositivo
+                self.setgateway(command["data"])
+                    
+                return (True, "success")
+            else:
+                return (False, "fail")
+            
+        #define o dns de rede wifi    
+        elif(command["command"].lower() == "setdns()"):
+            if(re.search(r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$",command["data"], re.MULTILINE)):
+                self.config["dns"] = command["data"]
+                self.saveConfig(self.configFile)
+                
+                #define endereco ip e mascara de rede do dispositivo
+                self.setdns(command["data"])
+                    
+                return (True, "success")
+            else:
+                return (False, "fail")
         
         #define o nome do projeto para sincronizar com a nuvem    
         elif(command["command"].lower() == "setproject()"):
@@ -365,12 +480,19 @@ class telemetryCore:
         
         #verifica o ip do dispositivo
         elif(command["command"].lower() == "getip()"):
-            print("getip")
-            ni.ifaddresses('eth0')
-            ip = ni.ifaddresses('eth0')[ni.AF_INET][0]['addr']
-            print(ip)  # should print "192.168.100.37"
-            return (True, "{'ipaddress' : '" + ip + "'}")
-        
+            try:
+                print("getip")
+                ni.ifaddresses('wlan0')
+                ip = ni.ifaddresses('wlan0')[ni.AF_INET][0]['addr']
+                print(ip)  # should print "192.168.100.37"
+                return (True, "{'ipaddress' : '" + ip + "'}")
+            except:
+                print("getip")
+                ni.ifaddresses('ppp0')
+                ip = ni.ifaddresses('ppp0')[ni.AF_INET][0]['addr']
+                print(ip)  # should print "192.168.100.37"
+                return (True, "{'ipaddress' : '" + ip + "'}")
+                
         #faz analize de rete atravez de ping    
         elif(command["command"].lower() == "getpinginfo()"):
             print("getpinginfo")
@@ -382,9 +504,44 @@ class telemetryCore:
             return (True, [pingdnstime, pinghosttime])
         
         #reinicia servico na maquina    
+        elif(command["command"].lower() == "setmode()"):
+            if(command["data"] == "wifi"):
+                self.setWifiMode()
+                self.config["mode"] = command["data"]
+                self.saveConfig()
+                return (True, "success")
+            elif(command["data"] == "wifi"):
+                self.config["mode"] = command["data"]
+                self.setMobileMode()
+                self.saveConfig()
+                return (True, "success")
+            else:
+                return (False, "error. invalid mode")
+        
+        #reinicia servico na maquina    
         elif(command["command"].lower() == "restart()"):
             print("restart")
             return (True, "")
+        
+    def setipaddress(self, ip, netmask):
+        #ifconfig eth0 192.168.1.5 netmask 255.255.255.0 up
+        command = ["ifconfig","wlan0",ip,"netmask",netmask,"up"]
+        
+        if(ip == "0.0.0.0"):
+                command = ['dhclient','eth0','-v']
+                
+        return subprocess.call(command) == 0
+        
+    def setgateway(self, gateway):
+        #route add default gw 192.168.1.1
+        command = ['route','add','default','gw',gateway]
+        return subprocess.call(command) == 0
+        
+    def setdns(self, dns):
+        #echo "nameserver 1.1.1.1" > /etc/resolv.conf
+        command = ['echo','"nameserver '+dns+'"','>','/etc/resolv.conf']
+        
+        return subprocess.call(command) == 0
         
     #faz a configuracao da apn
     def setApnConfig(self, apnName=None, apnUser=None, apnPass=None):        
@@ -554,18 +711,23 @@ class telemetryCore:
             return {}
         
         #connection.request("POST", '/setuptags', body=json.dumps(body))
+    def setWifiMode(self):
+        os.system("killall wvdial")
+        os.system("ifconfig wlan0 up")
+        
+    def setMobileMode(self):    
+        os.system("ifconfig wlan0 down")
+        os.system("wvdial")
+        
         
 class queueMgmt:
-    def __init__(self):         
-        
-        #pega diretorio home
-        _home = expanduser("~")
-        
+    def __init__(self, home, queueFile, queueSocket):         
+                
         #define pastas principais
-        self.home = _home+"/.cemi"
+        self.home = home
         
-        self.queueFile = _home+"/.cemi/queue"
-        self.queueSocket = _home+"/.cemi/queueSocket"
+        self.queueFile = queueFile
+        self.queueSocket = queueSocket
         self.lock = False
         self.toWrite = ""
         self.lastWrite = None   
@@ -878,35 +1040,20 @@ class tagsMgmt:
         tagContents = open(self.tagFile, "wb")
         tagContents.write(json.dumps({}))
         tagContents.close()
+
             
-
-#inicializa o gerente de tags
-_home = expanduser("~")
-tagDictFile = _home+"/.cemi/tags"
-
-tagsmgmt = tagsMgmt(tagDictFile)
-tagsmgmt.appendTags([{"nome": "Eduardo"}])
-
-
-print(tagsmgmt.getTags([{"nome": "Eduardo"}]))
-print(tagsmgmt.getTags(["nome"]))
-print(tagsmgmt.getTags("nome"))
-
-tagsmgmt.removeTags("nome")
-tagsmgmt.cleanTags()
-
-
 #inicializa telemetry core
 tc = telemetryCore()
+version = "1.0.16"
 
-ser = serial.Serial('/dev/ttyS0')  # open serial port
+ser = serial.Serial('/dev/serial0', 115200)  # open serial port
 #print(ser.name)         # check which port was really used
-#ser.write(b'hello')     # write a string
+ser.write('Iniciando\r\n'+str(datetime.now())+'\r\n')     # write a string
+ser.write(b'OptProcessBI Sender\r\n')     # write a string
+ser.write(b'Version = '+str(version) + "\r\n")     # write a string
+ser.write(b"\r\n")     # write a string
 #ser.close()             # close port
-
-print("Sync tags")
-print(tc.syncTags(['{tag name}:{tag address}:{tag type}','{tag name}:{tag address}:{tag type}']))
-print("------------------------------------")
+time.sleep(1)
 
 while(True):
     jsonData = tc.messageValidation(ser.readline())
@@ -919,5 +1066,5 @@ while(True):
     
     #jsonData = tc.messageValidation("|79|{\"command\":\"settagdata()\", \"data\":\"settagdata()\", \"date\":\"2021-01-29 16:54:55\"}")
 
-    ser.write(tc.sendResponse(json.dumps({'date' : str(datetime.now()), 'status': response[0], 'desc': response[1]})) + "\r\n")
+    ser.write(tc.sendResponse(json.dumps({'date' : str(datetime.now()), 'status': response[0], 'version': version, 'desc': response[1]})) + "\r\n")
 
