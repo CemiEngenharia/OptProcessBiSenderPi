@@ -278,8 +278,8 @@ async function addTagData(data, database, counter=0, res=null, client=null)
     query = {'project': data['project'],
     'machineid': data['machineid'],
     'date': data['date'],
-    'device_number': data['device_number'],
-    'device_imei': data['device_imei']}
+    'device_number': data['devicenumber'],
+    'device_imei': data['deviceimei']}
 
     //pega a chave do registro time
     time = (Object.keys(data["data"])[0]);
@@ -287,9 +287,15 @@ async function addTagData(data, database, counter=0, res=null, client=null)
 
     //cria registro das tags ou substitui
     value = {};
-    value[path] = data["data"][time];
+    //value[path] = data["data"][time];
+    value[path] = {"$each": data["data"][time]};
     update = {};
-    update["$set"] = value;
+    //update["$set"] = value;
+    update["$push"] = value;
+
+    console.log("update")
+    console.log(update)
+    console.log("+++++++++++++++++++++++++++++++++++++")
 
     //seleciona coleção de dados
     tagCollection = database.collection('values');
@@ -301,6 +307,7 @@ async function addTagData(data, database, counter=0, res=null, client=null)
             console.log(`Successfully updated document: ${JSON.stringify(doc)}.`)
         } else {
             console.log("No document matches the provided query.")
+            console.log(error)
         }
 
         //resposta positiva    

@@ -103,7 +103,7 @@ class telemetryCore:
             
         if(not os.path.isfile(self.mobileNetworkConfigFile)):
             tmp = open(self.mobileNetworkConfigFile, "wb")
-            tmp.write('''[Dialer 3gconnect]\n
+            tmp.write('''[default]\n
                         Init1 = ATZ\n
                         Init2 = ATQ0 V1 E1 S0=0 &C1 &D2 +FCLASS=0\n
                         Init3 = AT+CGDCONT=1,"IP","internet"\n
@@ -111,7 +111,7 @@ class telemetryCore:
                         Modem Type = Analog Modem\n
                         ISDN = 0\n
                         Phone = *99#\n
-                        Modem = /dev/gsmmodem\n
+                        Modem = /dev/ttyUSB0\n
                         Username = %apnuser%\n
                         Password = %apnpass%\n
                         Baud = 460800''')
@@ -149,7 +149,8 @@ class telemetryCore:
         self.commandSet["getqueue()"] = ""
         self.commandSet["cleanqueue()"] = ""
         self.commandSet["getip()"] = ""
-        self.commandSet["getpinginfo()"] = ""
+        self.commandSet["getpinginfo()"] = ""        
+        self.commandSet["identify()"] = ""
         self.commandSet["restart()"] = ""
         
         #carrega configuracao no inicio da aplicacao
@@ -188,7 +189,7 @@ class telemetryCore:
         tmp.close()
         
     def messageValidation(self, message):
-#           Predeclara Variaveis para evitar valores nulos ou flutuantes            
+#       Predeclara Variaveis para evitar valores nulos ou flutuantes            
         length = 0
         data = ""
         jsonData = {}
@@ -275,6 +276,10 @@ class telemetryCore:
     
     #Processa comando enviado
     def processCommand(self, command):
+        #define o nome da apn de rede
+        if(command["command"].lower() == "identify()"):
+            return (True, "processbisender")
+            
         #define o nome da apn de rede
         if(command["command"].lower() == "setapnname()"):
             if(len(command["data"]) >= 2):
@@ -510,7 +515,7 @@ class telemetryCore:
                 self.config["mode"] = command["data"]
                 self.saveConfig()
                 return (True, "success")
-            elif(command["data"] == "wifi"):
+            elif(command["data"] == "mobile"):
                 self.config["mode"] = command["data"]
                 self.setMobileMode()
                 self.saveConfig()
@@ -521,6 +526,8 @@ class telemetryCore:
         #reinicia servico na maquina    
         elif(command["command"].lower() == "restart()"):
             print("restart")
+            #Sai do script para o launcher reexecutar
+            exit()
             return (True, "")
         
     def setipaddress(self, ip, netmask):
@@ -1044,7 +1051,7 @@ class tagsMgmt:
             
 #inicializa telemetry core
 tc = telemetryCore()
-version = "1.0.16"
+version = "1.0.10"
 
 ser = serial.Serial('/dev/serial0', 115200)  # open serial port
 #print(ser.name)         # check which port was really used

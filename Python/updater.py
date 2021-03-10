@@ -83,7 +83,6 @@ while True:
             log("copiando novos arquivos")
             os.system("cp -vfr "+ppath+"* "+ppexe)
             pid = None
-            
         
         #inicia processo do servidor guardando o pid
         if(pid is None):
@@ -109,6 +108,17 @@ while True:
             os.chdir(ppath)
                 
             log("pid do processo criado -> "+ str(pid.pid))
+            
+        else:
+            #verifica se processo continua rodando    
+            poll = pid.poll()
+            if poll is not None:
+                log("process is Dead")
+                # p.subprocess is alive
+                pid = None
+            else:
+                log("script is running")
+                
         #da um tempo de 10 minutos para conferir de novo
         time.sleep(5)
     
