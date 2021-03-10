@@ -1,0 +1,274 @@
+
+<!DOCTYPE>
+<html>
+  <head>
+    <!-- HTML 4 -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- HTML5 -->
+    <meta charset="utf-8"/>
+
+    <title>Optsync Configuration Tool</title>
+
+    <style>
+        img {
+          width:40vw;
+          height:40vh;
+          position:absolute;
+          top:50vh; left:50vw;
+          margin-top:-20vh;
+          margin-left:-20vw;
+          opacity:0.1
+        }
+  
+      fieldset {
+          width:90vw;
+          margin-left: 5vw;
+          position: relative;
+      }
+  
+      form input
+      {
+          width: 100%;
+          margin: 3px;
+      }
+  
+      form input[disabled]
+      {
+          width: 100%;
+          margin: 3px;
+          text-align: center;
+      }
+
+    #signalStatus{
+        width: 100%;
+        height: 20px;
+        border: inset thin #000;
+        border-radius: 4px;
+
+        /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ff3232+0,fcfc2f+50,8aff59+100 */
+        background: #ff3232; /* Old browsers */
+        background: -moz-linear-gradient(left, #ff3232 0%, #fcfc2f 50%, #8aff59 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(left, #ff3232 0%,#fcfc2f 50%,#8aff59 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to right, #ff3232 0%,#fcfc2f 50%,#8aff59 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3232', endColorstr='#8aff59',GradientType=1 ); /* IE6-9 */
+
+        overflow: hidden;
+    }
+
+    #signalStatus b{
+        width: 200px;
+        float: left;
+        z-index: 100;
+        position:relative;
+        margin-top: -20px;
+        left: 50%;
+        margin-left: -100px;
+        text-align: center;
+    }
+
+    #signalIndicator{
+        width: 100%;
+        height: 20px;
+        background-color: white;
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+        float: left;
+        border-left: inset thin #000;
+    }
+
+    #AvailableTags{
+        width: 100%;
+    }
+    
+
+    #AvailableTags fieldset {
+          width:auto;
+          margin-left: 2vw;
+          margin-right: 2vw;
+          position: relative;
+      }
+
+    #AvailableTags fieldset input[type=button]{
+          width:100%;
+      }
+  
+    #AvailableTags div{
+        width: 100%;
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+
+        margin: 2px;
+        border-left: inset thin #000;
+    }
+
+    #AvailableTags input{
+        width: auto;
+        margin-right: 15px;
+        
+        
+    }
+
+    #AvailableTags label{
+        display: inline-block; 
+    }
+    </style>
+  
+  <script type="text/javascript">
+      function validateUrl(e) {
+          var path = e.target.value;
+  
+          if(path.length >= 3)
+          {
+              if((path[1] != ":") && (path[2] != "\\"))
+              {
+                  e.target.style.color = "red";
+                  document.getElementById("submit").setAttribute("disabled", "");
+              }
+              else
+              {
+                  e.target.style.color = "black";
+                  document.getElementById("submit").removeAttribute("disabled");
+              }
+          }
+          else
+          {
+              e.target.style.color = "red";
+              document.getElementById("submit").setAttribute("disabled", "");
+          }
+      }
+        function SelectAll(event)
+        {
+          console.log("SelectAll");
+          inputs = event.target.parentNode.getElementsByTagName("input");
+          for(var i = 0; i < inputs.length; i++) {
+                if(inputs[i].type.toLowerCase() == 'checkbox') {
+                    //seleciona todas caso nao contenha system no nome
+                    if(!inputs[i].parentNode.getElementsByTagName("label")[0].innerText.toLowerCase().includes("_system"))
+                        inputs[i].checked = true;
+                }
+            }
+        }
+        function UnselectAll(event)
+        {
+          console.log("UnselectAll");
+          inputs = event.target.parentNode.getElementsByTagName("input");
+          for(var i = 0; i < inputs.length; i++) {
+                if(inputs[i].type.toLowerCase() == 'checkbox') {
+                    inputs[i].checked = false;
+                }
+            }
+        }
+    </script>
+    
+  </head>
+  <body>
+    <img id="logo" src="logo.svg">
+        <fieldset>
+            <legend align="center"><h3>OptSync Configuration</h3></legend>
+            <form id="form" method="post" action="#">
+                <h4 style="width: 100%; text-align: center; margin: 1px; padding: 2px;">Local Info</h4>
+                <hr>
+                <input type="search" value="COMPUTER ID : %computerid%" disabled/>
+                <input type="search" value="DEVICE IMEI : %deviceid%" disabled/>
+                <hr>
+                <h4 style="width: 100%; text-align: center; margin: 1px; padding: 2px;">Apn Configuration</h4>
+                <hr>
+                <input type="search" name="apn" placeholder="Internet APN" list="apnList" value="%apn%" require/>
+                <input type="search" name="apnuser" placeholder="APN User" list="apnUserList" value="%apnuser%" require/>
+                <input type="search" name="apnpass" placeholder="APN Password" list="apnPasswordList" value="%apnpass%" require/>
+                <hr>
+                <h4 style="width: 100%; text-align: center; margin: 1px; padding: 2px;">WIFI Configuration</h4>
+                <hr>
+                <input type="search" name="ssid" placeholder="Network SSID" value="%wifissid%" require/>
+                <input type="password" id="password" name="wifipass" placeholder="Network Passwod" value="%wifipass%" require/><input type="button" style=" position: relative; display: inline-block; width: 120px; float: right; height: 22px; margin-right: 0px; margin: -4px; padding: 0px; margin-top: -25px;" onmousedown='getElementById("wifipass").setAttribute("type", "text");' onmouseup='getElementById("wifipass").setAttribute("type", "password");' value="Ver Senha"/>
+                <input type="search" name="ip" placeholder="IP Address (192.168.1.100)" value="%ipaddress%" require/>
+                <input type="search" name="gateway" placeholder="Network Gateway (192.168.1.1)" value="%ipgateway%" require/>
+                <input type="search" name="netmask" placeholder="Network Netmask (255.255.255.0)" value="%ipnetmask%" require/>
+                <hr>
+                <h4 style="width: 100%; text-align: center; margin: 1px; padding: 2px;">Project & Network Configuration</h4>
+                <hr>
+                <input id="filePath" type="search" name="projectpath" placeholder="Project Path" onkeyup="validateUrl(event)" value="%projectpath%" list="pathList" require/>
+                <input type="search" name="ftpdomain" placeholder="CEMI Ftp Domain" list="cemiFtpList" value="%domain%" require/>
+                <input type="search" name="ftpuser" placeholder="CEMI User" list="cemiUserList" value="%user%" require/>
+                <input style="display:inline-block;" id="password" type="password" name="ftppass" placeholder="CEMI Password" value="%pass%" require/><input type="button" style=" position: relative; display: inline-block; width: 120px; float: right; height: 22px; margin-right: 0px; margin: -4px; padding: 0px; margin-top: -25px;" onmousedown='getElementById("password").setAttribute("type", "text");' onmouseup='getElementById("password").setAttribute("type", "password");' value="Ver Senha"/>
+                <hr>
+                <h4 style="width: 100%; text-align: center; margin: 1px; padding: 2px;">Opc Configuration</h4>
+                <hr>
+                <input id="opchost" type="search" name="opchost" placeholder="Opc Host Name or Ip Address (EX: localhost, 127.0.0.1, 192.168.1.1)" value="%opchost%" list="opchostList" require/>
+                <input id="opcserver" type="search" name="opcserver" placeholder="Opc Name or Alias (EX: Matrikon.OPC.Simulation.1)" value="%opcserver%" list="opcList" require/>
+                <hr>
+                <h4 style="width: 100%; text-align: center; margin: 1px; padding: 2px;">Available Tags</h4>
+                <input type="button" onclick="SelectAll(event)" value="SelectAll" />
+                <input type="button" onclick="UnselectAll(event)" value="UnselectAll" />
+                <hr>
+                <div id="AvailableTags">%availabletags%</div>
+                <input id="submit" type="submit" value="Salvar Configuração">
+                <input type="reset" value="Descartar Configuração" onclick="window.close()">
+
+                <datalist id="apnList">
+                    <option value="timbrasil.br">Brasil TIM</option>
+                    <option value="claro.com.br">Brasil CLARO</option>
+                    <option value="gprs.oi.com.br">Brasil   OI</option>
+                    <option value="tim.br">Brasil TIM 2</option>
+                    <option value="www.djuice.com.ua">Ukraine DJuice</option>
+                    <option value="www.jeans.ua">Ukraine Jeans</option>
+                    <option value="www.kyivstar.net">Ukraine Kyivstar</option>
+                    <option value="internet.urs">Ukraine Mobi GSM</option>
+                    <option value="www.umc.ua">Ukraine UMC</option>
+                    <option value="proxy">USA AT&T/Cingular</option>      
+                    <option value="epc.tmobile.com">USA TMobile</option>
+                </datalist>
+
+                <datalist id="apnUserList">
+                    <option>tim</option>
+                    <option>claro</option>
+                    <option>guest</option>
+                    <option>igprs</option>
+                    <option>internet</option>
+                </datalist>
+
+                <datalist id="cemiFtpList">
+                    <option>ftp.cemi.eng.br</option>
+                    <option>ftp.optcemi.com</option>
+                    <option>ftp.optcemi.com.br</option>
+                    <option>ftp.optcemi.eng.br</option>
+                </datalist>
+
+                <datalist id="apnPasswordList">
+                    <option>tim</option>
+                    <option>claro</option>
+                    <option>guest</option>
+                    <option>CINGULAR1</option>
+                </datalist>
+
+                <datalist id="cemiUserList">
+                    <option>cemi</option>
+                    <option>admin</option>
+                    <option>root</option>
+                    <option>cemi01</option>
+                </datalist>
+
+                <datalist id="pathList">
+                    <option>C:\</option>
+                    <option>C:\CEMI</option>
+                    <option>C:\CEMI\Project</option>
+                    <option>C:\CEMI\optprocess</option>
+                </datalist>
+
+                <datalist id="opcList">
+                    %opcList%                 
+                </datalist>
+
+                <datalist id="opchostList">
+                    %hostList%                
+                </datalist>
+                
+                <hr>
+                <center>
+                    <h4>Signal Status</h4>
+                    <div id="signalStatus"><div id="signalIndicator" style="margin-left: %signalpower%% !important;"></div><b>%signal%</b></div>
+                </center>
+            </form>
+        </fieldset>
+  </body>
+</html>

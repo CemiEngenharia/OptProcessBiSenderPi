@@ -1,0 +1,984 @@
+﻿#define debugMode
+
+using System;
+using TitaniumAS.Opc.Client;
+using TitaniumAS.Opc.Client.Da;
+using TitaniumAS.Opc.Client.Da.Browsing;
+using TitaniumAS.Opc.Client.Common;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using System.IO;
+using System.Xml;
+using System.Xml.Linq;
+using Microsoft.Win32;
+using System.IO.Ports;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading;
+using System.Management;
+using System.Net;
+using System.Net.Sockets;
+using System.Net.NetworkInformation;
+
+namespace OptProccessBI_OPC_Interface
+{
+    class Program
+    {
+        static string currentVersion = "2.0.0";
+        const string configFile = "optsync.cfg";
+        static Dictionary<string, string> configuration;
+        static Dictionary<string,bool> opcTags;
+        static Dictionary<string,string> NetworkHosts;
+        static List<string> opcServers;
+        static opcManagement opcMan;
+        static Thread configTread;
+        static Thread opcReadingThread;
+        static Dictionary<string, string> deviceInfo;
+        static SerialPort _infoSerialPort;
+        static SerialPort _comSerialPort;
+        static bool stopAllThreads;
+        static bool reloadThreadConfig;
+        static int sockNro;
+        static void Main(string[] args)
+        {
+            //inicializa servico opc
+            Bootstrap.Initialize();
+
+            //flag para paras threads
+            stopAllThreads = false;
+            reloadThreadConfig = true;
+
+            //define o opcManagement
+            opcMan = new opcManagement();
+            Dictionary<string,string> tagsOnlineInfo = new Dictionary<string, string>();
+            List<string> tags = new List<string>();
+
+            //inicializa variaveis globais
+            configuration = new Dictionary<string, string>();
+            opcTags = new Dictionary<string,bool>();
+            
+            __findDevice:
+            List<string> _sp = findDevice();
+            Console.WriteLine("portas Serial");
+            foreach(string port in _sp)
+            {
+                Console.WriteLine(port);
+            }
+            if(_sp.Count < 2)
+            {
+                resetDevice();
+                goto __findDevice;
+            }
+            Console.WriteLine("*************************");
+
+            //prepara as portas serial de configuração e comunicação
+            _comSerialPort = new SerialPort(_sp[0], 921600 , Parity.None, 8, StopBits.One);
+            _comSerialPort.Handshake = Handshake.XOnXOff;
+            _comSerialPort.ReadTimeout = 60000;
+            _comSerialPort.DiscardNull = false;
+            _comSerialPort.Open();
+
+            _infoSerialPort = new SerialPort(_sp[1], 921600 , Parity.None, 8, StopBits.One);
+            _infoSerialPort.Handshake = Handshake.XOnXOff;
+            _infoSerialPort.ReadTimeout = 60000;
+            _infoSerialPort.DiscardNull = false;
+            _infoSerialPort.Open();
+            
+            //busca informaçoes do device            
+            //Pega Dados de Informação do Device como Mac e Demais Dados Importantes
+            deviceInfo =  getDeviceData(_infoSerialPort);
+
+            //inicializa a configuração
+            loadConfiguration();
+
+
+            //inicializa contexto de conexao
+            conectionProcedures cp = new conectionProcedures(deviceInfo["imei"], getComputerId(), configuration["apn"], configuration["apnuser"], configuration["apnpass"], _comSerialPort);
+
+            //fecha todas as portas tcp do device
+            cp.closeSocket(-1);
+
+            // Socket que o equipamento vai atrapalhar
+            sockNro = -1;
+
+            _startpdp:
+            if(cp.isConnected())
+            {                
+                Console.WriteLine("Conectado com sucesso");
+
+                //faz request do token
+                Console.WriteLine("Fazendo Request");
+                Dictionary<string,string> response = simpleJsonLoad(cp.httpRequest("GET", "optcemi.com/api/optsyncopc?imei="+deviceInfo["imei"]+"&machine="+getComputerId()+"", 21298));
+
+                foreach(string key in response.Keys)
+                {
+                    Console.Write(key + " => ");
+                    Console.WriteLine(response[key]);
+                }
+
+                /**********************************Le Tags no Servidor OPC******************************************/
+
+                //define um callback de leitura para teste
+                void completed(OpcDaItemValue[] values)
+                {
+                    string dataToWrite = "";
+
+                    Console.WriteLine("Leitura Completa");
+                    
+                    if(!reloadThreadConfig)
+                    {
+                        //navega resultado das tags
+                        foreach(OpcDaItemValue val in values)
+                        {
+                            /*
+                            Console.Write(val.Item.ItemId);
+                            Console.Write(" -- \t");
+                            Console.Write(val.Value);
+                            Console.Write(" -- \t\t\t\t");
+                            Console.Write((int) val.Quality);
+                            Console.Write(" -- \t\t");
+                            Console.Write(val.Timestamp);
+                            Console.Write(" -- \t\t");
+                            Console.WriteLine((int) val.Error);
+                            */
+                            //cria a string para escrever no tcp
+
+                            string formatedValue = "";
+
+                            if(val.Value.GetType().ToString().Contains("[]"))
+                            {
+                                formatedValue += "[";
+
+                                if(val.Value.GetType().ToString().Contains("Double"))
+                                {    
+                                    foreach(double v in (double[]) val.Value)
+                                        formatedValue += formatedValue.Length >= 2? ","+v.ToString(): v.ToString();
+                                }
+                                else if(val.Value.GetType().ToString().Contains("Int"))
+                                {    
+                                    foreach(int v in (int[]) val.Value)
+                                        formatedValue += formatedValue.Length >= 2? ","+v.ToString(): v.ToString();
+                                }
+                                else if(val.Value.GetType().ToString().Contains("String"))
+                                {    
+                                    foreach(string v in (string[]) val.Value)
+                                        formatedValue += formatedValue.Length >= 2? ","+v.ToString(): v.ToString();
+                                }
+                                else if(val.Value.GetType().ToString().Contains("Byte"))
+                                {    
+                                    foreach(byte v in (byte[]) val.Value)
+                                        formatedValue += formatedValue.Length >= 2? ","+v.ToString(): v.ToString();
+                                }                            
+                                else if(val.Value.GetType().ToString().Contains("SByte"))
+                                {    
+                                    foreach(sbyte v in (sbyte[]) val.Value)
+                                        formatedValue += formatedValue.Length >= 2? ","+v.ToString(): v.ToString();
+                                }
+                                formatedValue += "]";
+                            }
+                            else
+                            {
+                                formatedValue = val.Value.ToString();
+                            }
+
+                            dataToWrite += dataToWrite.Length >= 1? ";"+tagsOnlineInfo[val.Item.ItemId] +":"+formatedValue:tagsOnlineInfo[val.Item.ItemId] +":"+formatedValue;
+
+                            
+
+                            Console.WriteLine("___________________________________");
+                            Console.WriteLine(DateTime.UtcNow);
+                            Console.WriteLine(val.Timestamp);
+                            Console.WriteLine("___________________________________");
+                        }
+                        //escreve dados no socket
+                        Int32 unixTimestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+
+
+                        Console.WriteLine(dataToWrite);
+
+                        
+                        int trys = 0;
+
+                        _rewrite:
+                        bool res = cp.writeContinuousSocket(unixTimestamp+"|"+dataToWrite+"\r\n\r\n", "ACK");
+                        Console.WriteLine("Wrote");
+                        Console.WriteLine(res);
+
+                        while(res == false)
+                        {
+                            trys ++;
+                            if(trys >= 2)
+                            {
+                                //Mata todas as threads
+                                cp.fininshContinuousSocket();
+                                stopAllThreads = true;
+                                return;
+                            }
+                            //espera 2 segundos
+                            Thread.Sleep(2000);
+                            goto _rewrite;
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Escrita desabilitada para configuracao");
+                    }
+                }
+                    
+                    
+                //opcMan.readTag(tags.ToArray(), false, completed);
+
+                //cria uma thread para leitura assyncrona do opc de tempos em tempos
+                if((opcReadingThread == null) || (!opcReadingThread.IsAlive))
+                {
+                    Console.WriteLine("Criando Thread");
+
+                    opcReadingThread = new Thread(() => {
+                        while(!stopAllThreads)
+                        {
+                            //verifica se as configuracoes foram mudadas
+                            if(reloadThreadConfig)
+                            {
+                                //desativa conexao atual caso exista
+                                if(sockNro >= 0)
+                                {
+                                    cp.writeContinuousSocket("----------exit----------\r\n\r\n", ".*");  
+                                    //abre novo socket tcp fechando o mesmo caso ja exista                            
+                                    cp.fininshContinuousSocket(sockNro);  
+                                }
+
+                                //adiciona as tags ao banco e recupera os dados 
+                                string postData = "";
+                                foreach(string tag in opcTags.Keys)
+                                {
+                                    //adiciona tag a string
+                                    if(opcTags[tag] == true)
+                                        postData += (postData.Length >= 1)? ";"+tag+":"+tag: tag+":"+tag;
+                                }
+
+                                Console.WriteLine(postData);
+                                //fazer request post para adicionar as tags selecionadas ao banco post data é limitado a 128 bytes
+                                tagsOnlineInfo = simpleJsonLoad(cp.httpRequest("POST", "optcemi.com/api/optsyncopc?imei="+deviceInfo["imei"]+"&machine="+getComputerId()+"&token="+response["token"], 21298, null, postData));
+
+                                //redefine a lista de tags
+                                tags = new List<string>();
+                                foreach(string key in tagsOnlineInfo.Keys)
+                                {
+                                    //adiciona tag a string
+                                    Console.Write(key + " => ");
+                                    Console.WriteLine(tagsOnlineInfo[key]);                   
+                                }
+
+                                foreach(string tag in tagsOnlineInfo.Keys)  tags.Add(tag);
+                                
+
+                                sockNro = cp.startSocket("optcemi.com", "21298");
+                                cp.startContinuousSocket(sockNro);
+
+                                if(sockNro >= 0)
+                                {
+                                    //autentica socket tcp
+                                    cp.writeContinuousSocket( "imei:"+deviceInfo["imei"]+";machine:"+getComputerId()+";token:"+response["token"]+"\r\n\r\n", "ACK");
+                                }
+
+                                //cria o grupo de leitura
+                                opcMan.startrReadingGroup(tags.ToArray());
+
+                                reloadThreadConfig = false;
+                            }
+                            if(stopAllThreads == false)
+                            {
+                                //tenta ler o tempo de ciclo   caso nao consiga define o ciclo de leitura para 1 segundo
+                                string cycle = "10000";
+                                if(!configuration.TryGetValue("cycle", out cycle)) cycle = "10000";
+                                if(int.Parse(cycle) < 10000)   cycle = "10000";
+
+                                Thread.Sleep(int.Parse(cycle));
+
+                                //faz leitura das tags
+                                opcMan.readTag(false, completed);
+                            }
+                        }
+
+                        if(_comSerialPort.IsOpen)  
+                            //fecha socket no device
+                            if(sockNro >= 0)
+                            {
+                                cp.fininshContinuousSocket();
+                                cp.closeSocket(sockNro);  
+                            }
+
+                        reloadThreadConfig = true;
+                        //Environment.Exit(1);
+                        Thread.CurrentThread.Abort();
+                    });
+                }
+
+                //desmarca threads operantes
+                stopAllThreads = false;
+                opcReadingThread.Start();                
+                
+                while(true)
+                {
+                    Thread.Sleep(1000);
+                    if((!_comSerialPort.IsOpen)  || (!opcReadingThread.IsAlive))
+                    {
+                        Console.WriteLine("Serial Port Is Closed");
+                        stopAllThreads = true;
+                        Thread.Sleep(10000);
+                        goto __findDevice;
+                    }
+                }
+
+                Environment.Exit(1);
+            }
+            else
+            {
+                Console.WriteLine("Tentando Conectar na rede");
+                connectNetwork(cp);
+                Thread.Sleep(1000);
+                goto _startpdp;
+            }
+
+            while(true)
+            {
+                Thread.Sleep(5000);
+            }
+            /*
+
+            //C:\Users\Cliente\Projetos\OptProccessBI OPC Interface\matricon config.xml
+//            Console.WriteLine("Config Path");
+//            Console.WriteLine(getMatrikonConfigPath());
+//            Console.WriteLine(setMatrikonConfigPath(@"C:\Users\Cliente\Projetos\OptProccessBI OPC Interface\matricon config.xml"));
+
+//            cria arquivo do matrikon
+//            buildMatrikonConfig(@"C:\CEMI\Mosaic_Catalao 2020.02.20_18h10m25s");
+//            Environment.Exit(1);
+
+            /*****************************Busca Dados Dentro do OPC******************************/
+            // Make an URL of OPC DA server using builder.
+            ///Uri url = UrlBuilder.Build("Matrikon.OPC.Simulation.1");
+            
+            /*
+            Uri url = UrlBuilder.Build("Kepware.KEPServerEX.V6");
+            
+            //tags do opc
+            List<string> opcTags = new List<string>();
+
+            using (var server = new OpcDaServer("Matrikon.OPC.Simulation.1", "127.0.0.1"))
+            {
+                Console.Write(server.ComObject);
+                
+                // Connect to the server first.
+                server.Connect();
+                var browser = new OpcDaBrowserAuto(server);
+
+                //mostra todas as tags presentes
+                opcTags = opcMan.BrowseChildren(browser);
+                
+                foreach(string ot in opcTags)
+                {
+                    *//*
+                    if(ot.Contains("Integra"))
+                    Console.WriteLine(ot);
+                    *//*
+                }
+                
+
+            }
+            */
+            /*****************************Busca Dados Dentro do OptProcess******************************/
+            List<Tags> processTags = opcMan.getProjectTags(@"C:\CEMI\Mosaic_Catalao 2020.02.20_18h10m25s");
+
+            /*****************************Cruza Dados do OptProcess e do OPC******************************/
+            List<Tags> crossTags = new List<Tags>();
+
+            foreach(Tags td in processTags)
+            {
+                
+                //Console.WriteLine(td.TipoTag);
+                //Console.WriteLine(td.NomeTag);
+                
+                if((td.TextoEndereco != null) && (td.TextoEndereco.Length >= 1))
+                {
+                    string address = td.TextoEndereco.Substring(td.TextoEndereco.IndexOf("|")+1);
+                    if(opcTags.ContainsKey(address))
+                    {
+                        crossTags.Add(td);
+                    }
+                }
+            }
+
+            string output = "";
+            //mostra as tags que batem
+            foreach(Tags td in crossTags)
+            {
+                if(output.Length >=1)   output += ",";
+                output += td.NomeTag + ":" + td.TextoEndereco;
+            }
+
+            File.WriteAllText("nodetext.txt", output);
+        }
+
+        static void getHostList()
+        {
+            Dictionary<string, string> ipResponse = new Dictionary<string, string>();
+            
+            string GetLocalIPAddress()
+            {
+                var host = Dns.GetHostEntry(Dns.GetHostName());
+                foreach (var ip in host.AddressList)
+                {
+                    if (ip.AddressFamily == AddressFamily.InterNetwork)
+                    {
+                        Console.WriteLine(ip.ToString());
+                        return ip.ToString();
+                    }
+                }
+
+                return "127.0.0.1";
+            }
+
+            if(System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
+            {
+                NetworkHosts = new Dictionary<string, string>();
+                opcServers = new List<string>();
+
+
+                string ip = GetLocalIPAddress();
+                ip = ip.Substring(0, ip.LastIndexOf("."));
+
+                void addAddressToList(object sender, PingCompletedEventArgs e)
+                {                   
+                    var rep = e.Reply;
+
+                    if (rep.Status == System.Net.NetworkInformation.IPStatus.Success)
+                    {
+                        try{
+                            var host = Dns.GetHostEntry(rep.Address.ToString());
+                            NetworkHosts[rep.Address.ToString()] = host.HostName; 
+
+                            Console.Write(e.Reply.Status + " => ");
+                            Console.Write(e.Reply.Address + " => ");                                  
+                            Console.WriteLine(host.HostName);  
+
+                            Console.WriteLine("Buscando Servidores OPC");
+                            //busca servidores opc na maquina
+                            var enumerator = new OpcServerEnumeratorAuto();                            
+                            var serverDescriptions = enumerator.Enumerate(host.HostName, OpcServerCategory.OpcDaServer30);
+
+                            foreach(OpcServerDescription desc in serverDescriptions)
+                            {
+                                Console.WriteLine(desc.ToString());
+                                if(!opcServers.Contains(desc.ToString()))
+                                    opcServers.Add(desc.ToString());
+                            }                   
+                            Console.WriteLine("Fim da Busca por Servidores OPC");
+
+                        }
+                        catch(Exception)
+                        {
+                            NetworkHosts[rep.Address.ToString()] = rep.Address.ToString();
+                            try{
+                                Console.WriteLine(rep.Address);
+
+                                //busca servidores opc na maquina
+                                var enumerator = new OpcServerEnumeratorAuto();                            
+                                var serverDescriptions = enumerator.Enumerate(rep.Address.ToString(), OpcServerCategory.OpcDaServer30);
+
+                                foreach(OpcServerDescription desc in serverDescriptions)
+                                {
+                                    Console.WriteLine(desc.ToString());
+                                    if(!opcServers.Contains(desc.ToString()))
+                                        opcServers.Add(desc.ToString());
+                                }     
+                            }
+                            catch(Exception ex)
+                            {
+                                Console.WriteLine("N/D");
+                            }
+                        }
+                    }   
+                }
+
+                for(int i=1;i<255;i++)
+                {
+                    PingOptions options = new PingOptions (32, true);
+                    byte[] buffer = Encoding.ASCII.GetBytes("ping");
+                    System.Net.NetworkInformation.Ping p = new System.Net.NetworkInformation.Ping();
+
+                    // the PingCompletedCallback method is called.
+                    p.PingCompleted += new PingCompletedEventHandler(addAddressToList);
+                    p.SendAsync(ip+"."+i.ToString(), 120, buffer,options);
+                }
+            }
+
+        }
+
+        public static Dictionary<string, string> simpleJsonLoad(string json)
+        {
+            Dictionary<string, string> retData = new Dictionary<string, string>();
+
+            json = json.Replace("{", "").Replace("}", "").Replace("\"", "");
+            string[] itens = json.Split(",");
+
+            foreach(string val in itens)
+            {
+                string[] tmp = val.Split(":");
+                if(tmp.Length == 2) 
+                {
+                    //retira espacos em branco do inicio e do fim da string
+                    while(tmp[0].StartsWith(" "))   tmp[0] = tmp[0].Substring(1);
+                    while(tmp[0].EndsWith(" "))   tmp[0] = tmp[0].Substring(0, tmp[0].Length-2);
+                    
+                    //retira espacos em branco do inicio e do fim da string
+                    while(tmp[1].StartsWith(" "))   tmp[1] = tmp[1].Substring(1);
+                    while(tmp[1].EndsWith(" "))   tmp[1] = tmp[1].Substring(0, tmp[1].Length-2);
+
+                    retData[tmp[0]] = tmp[1];
+                }
+            }
+
+            return retData;
+        }
+        public Dictionary<string, bool> getOpcTags()
+        {
+            return opcTags;
+        }
+        public Dictionary<string, string> getNetworkHosts()
+        {
+            return NetworkHosts;
+        }
+        public List<string> getNetworkOpc()
+        {
+            return opcServers;
+        }
+        public Dictionary<string, string> getConfiguration()
+        {
+            return configuration;
+        }
+
+        /*herdados da aplicacao de arquivos de log*/
+        static int loadConfiguration()
+        {
+            //opcServers = new List<string>();
+            //reseta as tags a cara loading
+            opcTags = new Dictionary<string, Dictionary<string, object>>();
+
+            try{
+
+                if(!File.Exists(configFile))
+                {
+                    var cfg = new StreamWriter(File.Open(configFile, FileMode.Create));
+                    cfg.Write(  "apn=timbrasil.br\r\n"+
+                                "apnuser=tim\r\n"+
+                                "apnpass=tim\r\n"+
+                                "projectpath=C:\\CEMI\\OPTPROCESS\r\n"+
+                                "ftpdomain=ftp.optcemi.com\r\n"+
+                                "ftpuser=optcemi01\r\n"+
+                                "ftppass=qazxc123\r\n");
+                    cfg.Close();
+                }
+
+                configuration["apn"] = configuration.ContainsKey("apn") ? configuration["apn"]: "timbrasil.br";
+                configuration["apnuser"] = configuration.ContainsKey("apnuser") ? configuration["apnuser"]: "tim";
+                configuration["apnpass"] = configuration.ContainsKey("apnpass") ? configuration["apnpass"]: "tim";
+                configuration["projectpath"] = configuration.ContainsKey("projectpath") ? configuration["projectpath"]: "";
+                configuration["ftpdomain"] = configuration.ContainsKey("ftpdomain") ? configuration["ftpdomain"]: "ftp.optcemi.com";
+                configuration["ftpuser"] = configuration.ContainsKey("ftpuser") ? configuration["ftpuser"]: "optcemi01";
+                configuration["ftppass"] = configuration.ContainsKey("ftppass") ? configuration["ftppass"]: "qazxc123";
+
+                string configData = File.ReadAllText(configFile);
+                string[] configLines = configData.Split("\r\n");
+                foreach(string line in configLines)
+                {
+                    //ignora linhas comentadas e le configuração separada por :
+                    if(!line.StartsWith('#'))
+                    {
+                        if(!line.StartsWith('$'))
+                        {
+                            string[] temp = line.Split("=");
+                            if(temp[0].Replace(" ","").Length > 0)
+                                configuration[temp[0]] = temp[1];
+                        }
+                        //pega as tags
+                        else
+                        {
+                            string[] temp = line.Split("=");
+                            if(temp[0].Replace(" ","").Length > 0)
+                                opcTags[temp[0].Replace("$","")] = (temp[1]=="on") ? true : false;                            
+                        }
+                    
+                    }
+                }
+
+                Console.WriteLine("Tags carregadas");
+                Console.WriteLine(opcTags.Count);
+
+                //procura maquinas na rede
+                getHostList();
+                
+                Console.WriteLine("Configuração Carregada no Sistema");
+                //busca opcServers em cada maquine
+                /*Console.WriteLine("Buscando Servidores OPC");
+                
+                //busca servidores opc na maquina
+                var enumerator = new OpcServerEnumeratorAuto();                            
+                var serverDescriptions = enumerator.Enumerate(enumerator.Localhost, OpcServerCategory.OpcDaServer30);
+
+                foreach(OpcServerDescription desc in serverDescriptions)
+                {
+                    Console.WriteLine(desc.ToString());
+                    opcServers.Add(desc.ToString());
+                }
+                
+                Console.WriteLine("Fim da Busca por Servidores OPC");*/
+                Console.WriteLine("Carregando tags OPC");
+                
+                //verifica se tem valor default para o nome do opc
+                string opcserver = "";
+                if(!configuration.TryGetValue("opcserver", out opcserver)) configuration["opcserver"] = "Matrikon.OPC.Simulation.1";
+                if(!configuration.TryGetValue("opchost", out opcserver)) configuration["opchost"] = "127.0.0.1";
+            
+                /*****************************Busca Tags Dentro do OPC******************************/
+                opcMan.host = configuration["opchost"];
+                opcMan.name = configuration["opcserver"];
+                opcMan.startClient();
+
+                //busca tags presentes e adiciona a lista
+                List<string> tmp = opcMan.getAllTags();
+
+                Console.WriteLine("Tags carregadas");
+                Console.WriteLine(tmp.Count);
+
+                Dictionary<string, bool> tempOpcTags = new Dictionary<string, bool>();
+
+                //adiciona demais tags do opc a lista
+                foreach(string tag in tmp)
+                {
+                    if(!opcTags.ContainsKey(tag))            tempOpcTags[tag] = false;
+                    if(opcTags.ContainsKey(tag))            tempOpcTags[tag] = true;
+                }
+
+                opcTags = tempOpcTags;
+
+                //finaliza com uma mensagem
+                Console.WriteLine("Configuração Carregada no Sistema");
+                
+                //inplementa configuration thread
+                if(configTread == null)
+                {
+                    configTread = new Thread(() => {
+                            try{
+                            configurationServer cs = new configurationServer(8880, deviceInfo["imei"], getComputerId(), _infoSerialPort, configFile, opcTags, loadConfiguration);
+                            }
+                            catch(Exception e)
+                            {
+                                Console.WriteLine("thread abortada");
+                                Console.WriteLine(e);
+                            }
+                        });
+                } 
+
+
+                
+                //reinicia configuration thread
+                if(!configTread.IsAlive) configTread.Start();
+
+                //recarrega configuração da transferencia
+                reloadThreadConfig = true;
+
+                return 1;
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Configuração Nao Carregada no Sistema");
+                Console.WriteLine(e.Message);
+                return 0;
+            }
+        }
+
+    static Dictionary<string, string> getDeviceData(SerialPort sp)
+        {
+            Dictionary<string, string> info = new Dictionary<string, string>();
+            //recupera imei do dispositivo
+            int errors = 0;
+            int allowedErrors = 10;
+            string incoming = "";
+
+            //desabilita echo
+            echo:
+            if(errors > allowedErrors) throw new OperationCanceledException("Foi Alcançado o numero maximo de tentativas de acesso ao modem");
+            sp.Write("\r\nATE0\r\n");
+            incoming = "";
+            do{incoming += sp.ReadLine().Replace("\r","").Replace("\n","");} while(!incoming.Contains("OK") && !incoming.Contains("ERROR"));
+            if(! incoming.Contains("")){Thread.Sleep(1000); errors++; goto echo;}
+
+            //recupera o imei do device
+            imei:
+            if(errors > allowedErrors) throw new OperationCanceledException("Foi Alcançado o numero maximo de tentativas de acesso ao modem");
+            sp.Write("\r\nAT+CGSN=0\r\n");
+            incoming = "";
+            do{incoming += sp.ReadLine().Replace("\r","").Replace("\n","");} while(!incoming.Contains("OK") && !incoming.Contains("ERROR"));
+            if(! incoming.Contains("")){Thread.Sleep(1000); errors++; goto imei;}
+
+            incoming = incoming.Replace("AT+CGSN=0", "").Replace("OK", "").Replace("+PACSP1", "");
+            
+            info["imei"] = incoming;
+
+            //recupera firmware version
+            firmware:
+            if(errors > allowedErrors) throw new OperationCanceledException("Foi Alcançado o numero maximo de tentativas de acesso ao modem");
+            sp.Write("\r\nAT+GMR\r\n");
+            incoming = "";
+            do{incoming += sp.ReadLine().Replace("\r","").Replace("\n","");} while(!incoming.Contains("OK") && !incoming.Contains("ERROR"));
+            if(! incoming.Contains("")){Thread.Sleep(1000); errors++; goto firmware;}
+
+            incoming = incoming.Replace("AT+CGSN=0", "").Replace("OK", "").Replace("+PACSP1", "");
+            
+            info["firmware"] = incoming;
+
+            //recupera firmware version
+            simCardId:
+            if(errors > allowedErrors) throw new OperationCanceledException("Foi Alcançado o numero maximo de tentativas de acesso ao modem");
+            sp.Write("\r\nAT+CCID\r\n");
+            incoming = "";
+            do{incoming += sp.ReadLine().Replace("\r","").Replace("\n","");} while(!incoming.Contains("OK") && !incoming.Contains("ERROR"));
+            if(! incoming.Contains("")){Thread.Sleep(1000); errors++; goto simCardId;}
+
+            Console.WriteLine(incoming);
+
+            incoming = incoming.Replace("+CME ERROR: ", "").Replace("OK", "").Replace("+CCID: ", "");
+            
+            info["SIMID"] = incoming;
+
+
+            return info;
+        }
+        public List<string> getSignalStatus(SerialPort sp)
+        {
+            List<string> signal = new List<string>();
+
+            
+            //recupera imei do dispositivo
+            int errors = 0;
+            int allowedErrors = 10;
+            string incoming = "";
+
+            //desabilita echo
+            echo:
+            if(errors > allowedErrors) throw new OperationCanceledException("Foi Alcançado o numero maximo de tentativas de acesso ao modem");
+            sp.Write("\r\nAT+CSQ\r\n");
+            incoming = "";
+            do{incoming += sp.ReadLine().Replace("\r","").Replace("\n","");} while(!incoming.Contains("OK") && !incoming.Contains("ERROR"));
+            if(! incoming.Contains("")){Thread.Sleep(1000); errors++; goto echo;}
+
+            incoming = incoming.Replace("+CSQ: ", "").Replace("OK", "").Replace("+CCID: ", "");
+
+            Console.WriteLine("Signal Check");
+            Console.WriteLine(incoming);
+
+            try{
+                if(incoming.Contains("ERROR"))
+                {
+                    signal.Add("-1");
+                    signal.Add("-1");
+                }
+                else
+                {
+                    string[] d = incoming.Split(",");
+
+                    if(d[1].Equals("0"))    d[1] = "5%";
+                    else{
+                        double l = int.Parse(d[1]);
+                        l = (((l-1)*4) +10) * 3.33; //multiplica por 3.33 para ficar de 0 a 100
+                        d[1] = l.ToString().Replace(",",".") + " %";
+                    }
+
+                    switch(d[0])
+                    {
+                        case "0":
+                            d[0] = "-110.5 dBm";
+                            break;
+                        case "2":
+                            d[0] = "-105.5 dBm";
+                            break;
+                        case "4":
+                            d[0] = "-100.5 dBm";
+                            break;
+                        case "7":
+                            d[0] = "-95.5 dBm";
+                            break;
+                        case "10":
+                            d[0] = "-90.5 dBm";
+                            break;
+                        case "11":
+                            d[0] = "-87.5 dBm";
+                            break;
+                        case "12":
+                            d[0] = "-85.5 dBm";
+                            break;
+                        case "13":
+                            d[0] = "-82.5 dBm";
+                            break;
+                        case "14":
+                            d[0] = "-80.5 dBm";
+                            break;
+                        case "17":
+                            d[0] = "-75.5 dBm";
+                            break;
+                        case "19":
+                            d[0] = "-70.5 dBm";
+                            break;
+                        case "22":
+                            d[0] = "-65.5 dBm";
+                            break;
+                        case "24":
+                            d[0] = "-60.5 dBm";
+                            break;
+                        case "27":
+                            d[0] = "-55.5 dBm";
+                            break;
+                        case "30":
+                            d[0] = "-50.5 dBm";
+                            break;
+                        case "31":
+                            d[0] = "-46.5 dBm";
+                            break;
+                    }
+                    signal.Add(d[0]);
+                    signal.Add(d[1]);
+
+                    //processa qualidade
+                }
+            }
+            catch(Exception e)
+            {
+                signal = new List<string>();
+                signal.Add("Error");
+                signal.Add("0");
+            }
+            
+            return signal;
+        }
+
+        static string getComputerId()
+        {            
+            string ComputerId = "000000000-0000-0000-0000-000000000000";
+
+            //recupera id da maquina rodando o software
+            string Key = "Win32_MotherboardDevice";
+            //recupera dados do computador
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("select * from " + Key);
+
+            foreach (ManagementObject share in searcher.Get())
+            {
+                // Some Codes ...
+                ComputerId = share.GetQualifierValue("UUID").ToString();
+            }
+
+            return ComputerId.Replace("{","").Replace("}","");
+        }
+        static void connectNetwork(conectionProcedures cp)
+        {
+            startNetwork:
+            //inicia conexao de rede
+            if(! cp.isConnected())
+            {
+                if(cp.pdpConection()) Console.WriteLine("Sucessfuly connected");
+                else {
+                    Console.WriteLine("Fail to Conect to Network");
+                    //finaliza thread de configuração
+                    configTread.Abort();
+                    cp.resetDevice();
+                    goto startNetwork;
+                }
+            }
+        }
+        static void resetDevice()
+        {
+            List<string> ports = findDevice();
+            foreach(string port in ports)
+            {
+                if(!port.Equals("0"))
+                {
+                    SerialPort sp = new SerialPort(port, 115200);
+                    sp.Open();
+                    Console.WriteLine("Resetando device");
+                    sp.Write("\r\nAT+CFUN=16\r\n");
+                    sp.Close();
+
+                    //apos reset abre a serial atual
+                    Thread.Sleep(60000);
+                    Console.WriteLine("Religando device");
+                }
+            }
+        }
+        static List<string> findDevice()
+        {
+            List<string> devices = new List<string>();
+
+            for(int i=0; i<100; i++)
+            {
+                //declara a porta serial
+                SerialPort sp = new SerialPort("COM"+i.ToString(), 115200);
+                sp.ReadTimeout = 500;
+                sp.Handshake = Handshake.XOnXOff;
+
+                //uma boolean como flag de disconexao
+                bool disconect = true;
+
+                Console.Write("Buscando Device Na Porta -> " + "COM"+i.ToString());
+
+                verifying:
+                try{
+                    sp.Open();
+                    sp.DiscardInBuffer();
+                    sp.DiscardOutBuffer();
+                    sp.Write("\r\nat\r\n");
+                    string result = "";
+                    do{result += sp.ReadLine().Replace("\r", "").Replace("\n", "");} while(!result.Contains("OK") && !result.Contains("ERROR"));
+                    sp.DiscardInBuffer();
+                    sp.Close();
+                    devices.Add("COM"+i.ToString());
+                }
+                catch(TimeoutException)
+                {
+                    if(!disconect)
+                    {
+                        //executa desconexao caso necessario
+                        Console.Write(" -> Enviando comando de desconexao");
+                        Console.Write(" | ");
+                        sp.Write("+");
+                        Thread.Sleep(2500);
+                        Console.Write(" | ");
+                        sp.Write("+");
+                        Thread.Sleep(500);
+                        Console.Write(" | ");
+                        sp.Write("+");
+                        Thread.Sleep(500);
+                        Console.Write(" | ");
+                        sp.Write("+");
+                        Thread.Sleep(2500);
+                        Console.Write(" | ");
+                        sp.Write("+");
+                        sp.Close();
+
+                        disconect = true;
+                        //verifica novamente
+                        goto verifying;
+                    }
+                    sp.Close();
+                }
+                catch(Exception e)
+                {
+                    sp.Close();
+                    Console.Write(" - Device Nao Encontrado em -> "+ "COM"+i.ToString() + " Devido a Exceção -> " + e.Message);
+                }
+                
+                Console.WriteLine("");
+            }
+            return devices;
+        }
+    }
+}
