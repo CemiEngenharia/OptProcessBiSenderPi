@@ -56,6 +56,9 @@ class telemetryCore:
     def __init__(self):
         print("iniciado")
         
+        #registra o ultimo reinicio
+        self.lastStart = datetime.now()
+        
         #define o diretorio de funcionamento
         ppath = "/var/cemi/"
         #define o diretorio de funcionamento do script
@@ -75,8 +78,8 @@ class telemetryCore:
         self.queueFile = ppath+"/.config/queue"
         self.queueSocket = ppath+"/.config/queueSocket"
         self.mobileNetworkConfigFile = "/etc/wvdial.conf"
-        self.wifiNetworkConfigFile = ppath+"/.config/wpa_supplicant"
-        #self.wifiNetworkConfigFile = "/var/run/wpa_supplicant"
+        #self.wifiNetworkConfigFile = ppath+"/.config/wpa_supplicant"
+        self.wifiNetworkConfigFile = "/etc/wpa_supplicant/wpa_supplicant.conf"
         
         #finaliza socket unix
         if(os.path.exists(self.queueSocket)):
@@ -103,25 +106,31 @@ class telemetryCore:
             
         if(not os.path.isfile(self.mobileNetworkConfigFile)):
             tmp = open(self.mobileNetworkConfigFile, "wb")
-            tmp.write('''[default]\n
-                        Init1 = ATZ\n
-                        Init2 = ATQ0 V1 E1 S0=0 &C1 &D2 +FCLASS=0\n
-                        Init3 = AT+CGDCONT=1,"IP","internet"\n
-                        Stupid Mode = 1\n
-                        Modem Type = Analog Modem\n
-                        ISDN = 0\n
-                        Phone = *99#\n
-                        Modem = /dev/ttyUSB0\n
-                        Username = %apnuser%\n
-                        Password = %apnpass%\n
-                        Baud = 460800''')
+            tmp.write('''[Dialer Defaults]\n
+                Init1 = ATZ\n
+                Init2 = ATQ0 V1 E1 S0=0 &C1 &D2 +FCLASS=0\n
+                Init3 = AT+CGDCONT=1,"IP","internet"\n
+                Dial Command = ATD
+                Modem Type = Analog Modem\n
+                Phone = *99#\n
+                ISDN = 0\n
+                Username = %apnuser%\n
+                Password = %apnpass%\n
+                Init1 = ATZ
+                Modem = /dev/ttyUSB0
+                New PPPD = 1
+                Carrier Check = no
+                stupid mode=1
+                Baud = 460800''')
             tmp.close()
             
         if(not os.path.isfile(self.wifiNetworkConfigFile)):
             tmp = open(self.wifiNetworkConfigFile, "wb")
             tmp.write(
-            '''country=BR # Your 2-digit country code
-            ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+            '''ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+            country=BR # Your 2-digit country code
+            ipdate_config=1
+            
             network={
                 ssid="%wifiuser%"
                 psk="%wifipass%"
@@ -132,10 +141,12 @@ class telemetryCore:
 #           define os comaandos aceitos array {"command": "fields separated by colma"}
         self.commandSet = {}
         self.commandSet["setapnname()"] = "data"
-        self.commandSet["setapnpwd()"] = "data"
+        self.commandSet["setapnuser()"] = "data"
+        self.commandSet["setapnpass()"] = "data"
         self.commandSet["setwifissid()"] = "data"
         self.commandSet["setwifipwd()"] = "data"
         self.commandSet["setip()"] = "data"
+        self.commandSet["setnetmask()"] = "data"
         self.commandSet["setgateway()"] = "data"
         self.commandSet["setdns()"] = "data"
         self.commandSet["setproject()"] = "data"
@@ -151,7 +162,9 @@ class telemetryCore:
         self.commandSet["getip()"] = ""
         self.commandSet["getpinginfo()"] = ""        
         self.commandSet["identify()"] = ""
+        self.commandSet["setmode()"] = "data"
         self.commandSet["restart()"] = ""
+        self.commandSet["laststart()"] = ""
         
         #carrega configuracao no inicio da aplicacao
         self.loadConfig(self.configFile)
@@ -344,7 +357,7 @@ class telemetryCore:
                 self.saveConfig(self.configFile)
                 
                 #define endereco ip e mascara de rede do dispositivo
-                self.setipaddress(command["data"], "255.255.255.0" if self.config["netmask"] == None else self.config["netmask"])
+                self.setipaddress(command["data"], "255.255.255.0" if "netmask" not in self.config else self.config["netmask"])
                     
                 return (True, "success")
             else:
@@ -357,7 +370,7 @@ class telemetryCore:
                 self.saveConfig(self.configFile)
                 
                 #define endereco ip e mascara de rede do dispositivo
-                self.setipaddress("192.168.0.1" if self.config["ipaddress"] == None else self.config["ipaddress"], command["data"])
+                self.setipaddress("192.168.0.254" if "ipaddress" not in self.config else self.config["ipaddress"], command["data"])
                     
                 return (True, "success")
             else:
@@ -400,7 +413,7 @@ class telemetryCore:
         
         #define o id da maquina para sincronizar com a nuvem   
         elif(command["command"].lower() == "setmachineid()"):
-            if(len(command["data"]) == 32):
+            if(len(command["data"]) == 64):
                 self.config["machineid"] = command["data"]
                 self.saveConfig(self.configFile)
                 return (True, "success")
@@ -427,6 +440,7 @@ class telemetryCore:
         
         #define todos ids das tags para sincronizar    
         elif(command["command"].lower() == "gettagid()"):
+            print(command["data"])
             print(type(command["data"]) is list)
             
             if(type(command["data"]) is not list):
@@ -444,7 +458,7 @@ class telemetryCore:
         #envia dados de tag para a nuvem    
         elif(command["command"].lower() == "settagdata()"):
             print("settagdata")
-            self.queueMgmtaddToQueue(command["data"])
+            self.queueMgmtaddToQueue(command)
             
             #envia todas as tags da fila
             count = int(self.queueMgmtgetLenght())
@@ -522,6 +536,9 @@ class telemetryCore:
                 return (True, "success")
             else:
                 return (False, "error. invalid mode")
+        
+        elif(command["command"].lower() == "laststart()"):
+            return(True, str(self.lastStart))
         
         #reinicia servico na maquina    
         elif(command["command"].lower() == "restart()"):
@@ -603,9 +620,10 @@ class telemetryCore:
         param = '-n' if platform.system().lower()=='windows' else '-c'
 
         # Building the command. Ex: "ping -c 1 google.com"
+        FNULL = open(os.devnull, 'w')
         command = ['ping', param, '1', host]
 
-        return subprocess.call(command) == 0
+        return subprocess.call(command, stdout=FNULL, stderr=subprocess.STDOUT) == 0
     
     def pingSpeed(self, host):
         """
@@ -635,7 +653,7 @@ class telemetryCore:
         recvData = tcp.recv(1024)
         tcp.close()
         
-        return recvData        
+        return json.loads(recvData)
 
         
     def queueMgmtgetLenght(self):
@@ -671,12 +689,13 @@ class telemetryCore:
         #dados enviados como {'data': ['{tag name}:{tag address}:{tag type}','{tag name}:{tag address}:{tag type}']}
         #dados recebidos como {'data': {'tag':'id','tag','id'}}
         
+        print("sync Tags")
+        
         if (("hostname" not in self.config) and 
                 ("hostport" not in self.config)):
             print("Configuracao incompleta")
             return {}
         
-        print("sync Tags")
         body = {'data': tags}
         
         req = requests.post("http://"+self.config["hostname"]+":"+self.config["hostport"]+"/setuptags", None, body)
@@ -705,8 +724,13 @@ class telemetryCore:
         #    print("requisicao incompleta")
         #    return {}
         
+        #separa data e hora para formatar os dados
+        dt = str(data["date"]).split(" ")[0]
+        hr = str(data["date"]).split(" ")[1]
+        
+        
         print("sync Tags")
-        body = {'project': self.config["project"], 'machineid': self.config["machineid"], 'date': str(datetime.now()), 'deviceimei': self.config["deviceimei"], 'devicenumber': 0, 'data': data}
+        body = {'project': self.config["project"], 'machineid': self.config["machineid"], 'date': dt, 'deviceimei': self.config["deviceimei"], 'devicenumber': 0, 'data': {hr: data["data"]}}
         
         req = requests.post("http://"+self.config["hostname"]+":"+self.config["hostport"]+"/tagdata", None, body)
         
@@ -1054,6 +1078,7 @@ tc = telemetryCore()
 version = "1.0.10"
 
 ser = serial.Serial('/dev/serial0', 115200)  # open serial port
+#ser.set_buffer_size(rx_size = 12800, tx_size = 12800)
 #print(ser.name)         # check which port was really used
 ser.write('Iniciando\r\n'+str(datetime.now())+'\r\n')     # write a string
 ser.write(b'OptProcessBI Sender\r\n')     # write a string
@@ -1062,8 +1087,16 @@ ser.write(b"\r\n")     # write a string
 #ser.close()             # close port
 time.sleep(1)
 
+buffer = ""
+
 while(True):
-    jsonData = tc.messageValidation(ser.readline())
+    
+    while("\n" not in buffer):
+        buffer += ser.read()
+    
+    jsonData = tc.messageValidation(buffer)
+    buffer = ""
+    
     if(jsonData == None):
         continue
     print(jsonData)    
