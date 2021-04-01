@@ -22,6 +22,24 @@ using Newtonsoft.Json;
 
 namespace OptProcessBiSenderService
 {   
+    //|96|{"date": "2021-03-15 12:40:44.663113", "status": true, "version": "1.0.10", "desc": "connected"}
+    public class JsonIsConnected
+    {
+        public string date{ get; set; }
+        public bool status { get; set; }
+        public string version { get; set; }
+        public string desc { get; set; }     //Dictionary<string, int>
+    }
+
+    //|100|{"date": "2021-03-15 12:23:41.387990", "status": true, "version": "1.0.10", "desc": "{'length': 0}"}
+    public class JsonQueueLength
+    {
+        public string date{ get; set; }
+        public bool status { get; set; }
+        public string version { get; set; }
+        public int desc { get; set; }
+    }
+
     class Device{
 
         const string MODE_WIFI = "wifi";
@@ -41,7 +59,7 @@ namespace OptProcessBiSenderService
                 try
                 {
                     sp.PortName = portName+i.ToString();
-                    sp.ReadTimeout = 500;
+                    sp.ReadTimeout = 2000;
                     sp.BaudRate = 115200;
                     if(!sp.IsOpen) sp.Open();
                     sp.WriteLine("\r\n|26|{\"command\":\"identify()\"}\r\n");
@@ -60,6 +78,7 @@ namespace OptProcessBiSenderService
                 finally
                 {
 
+                    sp.ReadTimeout = 10000;
                     //verifica se porta esta aberta e fecha
                     if(sp.IsOpen) 
                         sp.Close();
@@ -89,7 +108,15 @@ namespace OptProcessBiSenderService
             {
                 Console.WriteLine("exceção ao procurar device -> ");
                 Console.WriteLine(e);
-                Environment.Exit(1);
+                //Environment.Exit(1);
+            }
+            finally
+            {
+                sp.ReadTimeout = 10000;
+
+                //verifica se porta esta aberta e fecha
+                if(sp.IsOpen) 
+                    sp.Close();
             }
             return false;
         }
@@ -114,7 +141,15 @@ namespace OptProcessBiSenderService
             {
                 Console.WriteLine("exceção ao procurar device -> ");
                 Console.WriteLine(e);
-                Environment.Exit(1);
+                //Environment.Exit(1);
+            }
+            finally
+            {
+                sp.ReadTimeout = 10000;
+
+                //verifica se porta esta aberta e fecha
+                if(sp.IsOpen) 
+                    sp.Close();
             }
             return false;
         }
@@ -139,7 +174,15 @@ namespace OptProcessBiSenderService
             {
                 Console.WriteLine("exceção ao procurar device -> ");
                 Console.WriteLine(e);
-                Environment.Exit(1);
+                //Environment.Exit(1);
+            }
+            finally
+            {
+                sp.ReadTimeout = 10000;
+
+                //verifica se porta esta aberta e fecha
+                if(sp.IsOpen) 
+                    sp.Close();
             }
             return false;
         }
@@ -164,7 +207,15 @@ namespace OptProcessBiSenderService
             {
                 Console.WriteLine("exceção ao procurar device -> ");
                 Console.WriteLine(e);
-                Environment.Exit(1);
+                //Environment.Exit(1);
+            }
+            finally
+            {
+                sp.ReadTimeout = 10000;
+
+                //verifica se porta esta aberta e fecha
+                if(sp.IsOpen) 
+                    sp.Close();
             }
             return false;
         }
@@ -189,7 +240,15 @@ namespace OptProcessBiSenderService
             {
                 Console.WriteLine("exceção ao procurar device -> ");
                 Console.WriteLine(e);
-                Environment.Exit(1);
+                //Environment.Exit(1);
+            }
+            finally
+            {
+                sp.ReadTimeout = 10000;
+
+                //verifica se porta esta aberta e fecha
+                if(sp.IsOpen) 
+                    sp.Close();
             }
             return false;
         }
@@ -214,7 +273,15 @@ namespace OptProcessBiSenderService
             {
                 Console.WriteLine("exceção ao procurar device -> ");
                 Console.WriteLine(e);
-                Environment.Exit(1);
+                //Environment.Exit(1);
+            }
+            finally
+            {
+                sp.ReadTimeout = 10000;
+
+                //verifica se porta esta aberta e fecha
+                if(sp.IsOpen) 
+                    sp.Close();
             }
             return false;
         }
@@ -239,7 +306,15 @@ namespace OptProcessBiSenderService
             {
                 Console.WriteLine("exceção ao procurar device -> ");
                 Console.WriteLine(e);
-                Environment.Exit(1);
+                //Environment.Exit(1);
+            }
+            finally
+            {
+                sp.ReadTimeout = 10000;
+
+                //verifica se porta esta aberta e fecha
+                if(sp.IsOpen) 
+                    sp.Close();
             }
             return false;
         }
@@ -264,7 +339,15 @@ namespace OptProcessBiSenderService
             {
                 Console.WriteLine("exceção ao procurar device -> ");
                 Console.WriteLine(e);
-                Environment.Exit(1);
+                //Environment.Exit(1);
+            }
+            finally
+            {
+                sp.ReadTimeout = 10000;
+
+                //verifica se porta esta aberta e fecha
+                if(sp.IsOpen) 
+                    sp.Close();
             }
             return false;
         }
@@ -289,7 +372,15 @@ namespace OptProcessBiSenderService
             {
                 Console.WriteLine("exceção ao procurar device -> ");
                 Console.WriteLine(e);
-                Environment.Exit(1);
+                //Environment.Exit(1);
+            }
+            finally
+            {
+                sp.ReadTimeout = 10000;
+
+                //verifica se porta esta aberta e fecha
+                if(sp.IsOpen) 
+                    sp.Close();
             }
             return false;
         }
@@ -314,7 +405,15 @@ namespace OptProcessBiSenderService
             {
                 Console.WriteLine("exceção ao procurar device -> ");
                 Console.WriteLine(e);
-                Environment.Exit(1);
+                //Environment.Exit(1);
+            }
+            finally
+            {
+                sp.ReadTimeout = 10000;
+
+                //verifica se porta esta aberta e fecha
+                if(sp.IsOpen) 
+                    sp.Close();
             }
             return false;
         }
@@ -339,7 +438,15 @@ namespace OptProcessBiSenderService
             {
                 Console.WriteLine("exceção ao procurar device -> ");
                 Console.WriteLine(e);
-                Environment.Exit(1);
+                //Environment.Exit(1);
+            }
+            finally
+            {
+                sp.ReadTimeout = 10000;
+
+                //verifica se porta esta aberta e fecha
+                if(sp.IsOpen) 
+                    sp.Close();
             }
             return false;
         }        
@@ -364,7 +471,15 @@ namespace OptProcessBiSenderService
             {
                 Console.WriteLine("exceção ao procurar device -> ");
                 Console.WriteLine(e);
-                Environment.Exit(1);
+                //Environment.Exit(1);
+            }
+            finally
+            {
+                sp.ReadTimeout = 10000;
+
+                //verifica se porta esta aberta e fecha
+                if(sp.IsOpen) 
+                    sp.Close();
             }
             return false;
         }
@@ -376,7 +491,7 @@ namespace OptProcessBiSenderService
             /// <value></value>
             try
             {
-                string command = "{\"date\":\""+DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")+"\", \"data\" : \""+port+"\", \"command\":\"sethostname()\"}";
+                string command = "{\"date\":\""+DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")+"\", \"data\" : \""+port+"\", \"command\":\"sethostport()\"}";
                 if(!sp.IsOpen) sp.Open();
                 sp.WriteLine("\r\n|"+(command.Length+2).ToString()+"|"+command+"\r\n");
                 Console.WriteLine("|"+(command.Length+2).ToString()+"|"+command+"\r\n");
@@ -389,7 +504,15 @@ namespace OptProcessBiSenderService
             {
                 Console.WriteLine("exceção ao procurar device -> ");
                 Console.WriteLine(e);
-                Environment.Exit(1);
+                //Environment.Exit(1);
+            }
+            finally
+            {
+                sp.ReadTimeout = 10000;
+
+                //verifica se porta esta aberta e fecha
+                if(sp.IsOpen) 
+                    sp.Close();
             }
             return false;
         }
@@ -406,7 +529,7 @@ namespace OptProcessBiSenderService
             /// <value></value>
             try
             {
-                sp.ReadTimeout = 10000;
+                sp.ReadTimeout = 60000;
 
                 string command = "{\"date\":\""+DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")+"\", \"data\" : "+JsonConvert.SerializeObject(tagsList)+", \"command\":\"gettagid()\"}";
                 if(!sp.IsOpen) sp.Open();
@@ -418,7 +541,7 @@ namespace OptProcessBiSenderService
                 string response = sp.ReadLine();
                 sp.Close();
 
-                sp.ReadTimeout = 500;
+                sp.ReadTimeout = 10000;
 
                 return response;
             }
@@ -426,7 +549,15 @@ namespace OptProcessBiSenderService
             {
                 Console.WriteLine("exceção ao procurar device -> ");
                 Console.WriteLine(e);
-                Environment.Exit(1);
+                //Environment.Exit(1);
+            }
+            finally
+            {
+                sp.ReadTimeout = 10000;
+
+                //verifica se porta esta aberta e fecha
+                if(sp.IsOpen) 
+                    sp.Close();
             }
             return null;
         }
@@ -434,7 +565,7 @@ namespace OptProcessBiSenderService
         //
         //|86|{"date":"2021-02-11 16:33:15", "data" : {"itfunfs":"yep"}, "command":"settagdata()"}
         //
-        public string setTagData(string readdatetime, List<string> tagsData, SerialPort sp)
+        public string setTagData(string readdatetime, List<Dictionary<int, string>> tagsData, SerialPort sp)
         {
             /// <summary>
             /// envia dados da Tag para o device na seguinte estrutura
@@ -443,7 +574,7 @@ namespace OptProcessBiSenderService
             /// <value></value>
             try
             {
-                sp.ReadTimeout = 10000;
+                sp.ReadTimeout = 60000;
                 
                 string command = "{\"date\":\""+readdatetime+"\", \"data\" : "+JsonConvert.SerializeObject(tagsData)+", \"command\":\"settagdata()\"}";
                 if(!sp.IsOpen) sp.Open();
@@ -455,7 +586,7 @@ namespace OptProcessBiSenderService
                 Console.WriteLine(response);
                 sp.Close();
 
-                sp.ReadTimeout = 500;
+                sp.ReadTimeout = 10000;
 
                 return response;
             }
@@ -463,7 +594,15 @@ namespace OptProcessBiSenderService
             {
                 Console.WriteLine("exceção ao procurar device -> ");
                 Console.WriteLine(e);
-                Environment.Exit(1);
+                //Environment.Exit(1);
+            }
+            finally
+            {
+                sp.ReadTimeout = 10000;
+
+                //verifica se porta esta aberta e fecha
+                if(sp.IsOpen) 
+                    sp.Close();
             }
             return null;
         }
@@ -475,6 +614,8 @@ namespace OptProcessBiSenderService
             /// <value></value>
             try
             {
+                sp.ReadTimeout = 10000;
+
                 string command = "{\"date\":\""+DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")+"\", \"command\":\"getsignal()\"}";
                 if(!sp.IsOpen) sp.Open();
                 sp.WriteLine("\r\n|"+(command.Length+2).ToString()+"|"+command+"\r\n");
@@ -487,7 +628,13 @@ namespace OptProcessBiSenderService
             {
                 Console.WriteLine("exceção ao procurar device -> ");
                 Console.WriteLine(e);
-                Environment.Exit(1);
+                //Environment.Exit(1);
+            }
+            finally
+            {
+                //verifica se porta esta aberta e fecha
+                if(sp.IsOpen) 
+                    sp.Close();
             }
             return true;
         }
@@ -499,6 +646,8 @@ namespace OptProcessBiSenderService
             /// <value></value>
             try
             {
+                sp.ReadTimeout = 10000;
+
                 string command = "{\"date\":\""+DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")+"\", \"command\":\"getconnectionstatus()\"}";
                 if(!sp.IsOpen) sp.Open();
                 sp.WriteLine("\r\n|"+(command.Length+2).ToString()+"|"+command+"\r\n");
@@ -506,17 +655,27 @@ namespace OptProcessBiSenderService
                 string response = sp.ReadLine();
                 Console.WriteLine(response);
                 sp.Close();
-                if(response.Contains("connected"))  return true;
+
+                response = Regex.Replace(response, @"\|\d+\|", "");
+                JsonIsConnected status = JsonConvert.DeserializeObject<JsonIsConnected>(response);
+                
+                if(status.desc == "connected")  return true;
             }
             catch(Exception e)
             {
                 Console.WriteLine("exceção ao procurar device -> ");
                 Console.WriteLine(e);
-                Environment.Exit(1);
+                //Environment.Exit(1);
+            }
+            finally
+            {
+                //verifica se porta esta aberta e fecha
+                if(sp.IsOpen) 
+                    sp.Close();
             }
             return false;
         }
-        public bool getQueueLength(SerialPort sp)
+        public int getQueueLength(SerialPort sp)
         {
             /// <summary>
             /// Recupera o tamanho atual da fila de envio
@@ -524,6 +683,8 @@ namespace OptProcessBiSenderService
             /// <value></value>
             try
             {
+                sp.ReadTimeout = 10000;
+
                 string command = "{\"date\":\""+DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")+"\", \"command\":\"getqueue()\"}";
                 if(!sp.IsOpen) sp.Open();
                 sp.WriteLine("\r\n|"+(command.Length+2).ToString()+"|"+command+"\r\n");
@@ -531,17 +692,25 @@ namespace OptProcessBiSenderService
                 string response = sp.ReadLine();
                 Console.WriteLine(response);
                 sp.Close();
-                var jsonResponse = Newtonsoft.Json.JsonConvert.DeserializeObject(response);
+
+                response = Regex.Replace(response, @"\|\d+\|", "");
+                var jsonResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<JsonQueueLength>(response);
                 //deve verificar desc.length por um numero
-                
+                return jsonResponse.desc;
             }
             catch(Exception e)
             {
                 Console.WriteLine("exceção ao procurar device -> ");
                 Console.WriteLine(e);
-                Environment.Exit(1);
+                //Environment.Exit(1);
             }
-            return true;
+            finally
+            {
+                //verifica se porta esta aberta e fecha
+                if(sp.IsOpen) 
+                    sp.Close();
+            }
+            return 0;
         }
         public bool cleanQueue(SerialPort sp)
         {
@@ -551,6 +720,8 @@ namespace OptProcessBiSenderService
             /// <value></value>
             try
             {
+                sp.ReadTimeout = 10000;
+
                 string command = "{\"date\":\""+DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")+"\", \"command\":\"cleanqueue()\"}";
                 if(!sp.IsOpen) sp.Open();
                 sp.WriteLine("\r\n|"+(command.Length+2).ToString()+"|"+command+"\r\n");
@@ -564,7 +735,13 @@ namespace OptProcessBiSenderService
             {
                 Console.WriteLine("exceção ao procurar device -> ");
                 Console.WriteLine(e);
-                Environment.Exit(1);
+                //Environment.Exit(1);
+            }
+            finally
+            {
+                //verifica se porta esta aberta e fecha
+                if(sp.IsOpen) 
+                    sp.Close();
             }
             return false;
         }
@@ -576,6 +753,8 @@ namespace OptProcessBiSenderService
             /// <value></value>
             try
             {
+                sp.ReadTimeout = 10000;
+
                 string command = "{\"date\":\""+DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")+"\", \"command\":\"getip()\"}";
                 if(!sp.IsOpen) sp.Open();
                 sp.WriteLine("\r\n|"+(command.Length+2).ToString()+"|"+command+"\r\n");
@@ -588,7 +767,13 @@ namespace OptProcessBiSenderService
             {
                 Console.WriteLine("exceção ao procurar device -> ");
                 Console.WriteLine(e);
-                Environment.Exit(1);
+                //Environment.Exit(1);
+            }
+            finally
+            {
+                //verifica se porta esta aberta e fecha
+                if(sp.IsOpen) 
+                    sp.Close();
             }
             return true;
         }
@@ -600,6 +785,8 @@ namespace OptProcessBiSenderService
             /// <value></value>
             try
             {
+                sp.ReadTimeout = 10000;
+
                 string command = "{\"date\":\""+DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")+"\", \"command\":\"getpinginfo()\"}";
                 if(!sp.IsOpen) sp.Open();
                 sp.WriteLine("\r\n|"+(command.Length+2).ToString()+"|"+command+"\r\n");
@@ -612,7 +799,13 @@ namespace OptProcessBiSenderService
             {
                 Console.WriteLine("exceção ao procurar device -> ");
                 Console.WriteLine(e);
-                Environment.Exit(1);
+                //Environment.Exit(1);
+            }
+            finally
+            {
+                //verifica se porta esta aberta e fecha
+                if(sp.IsOpen) 
+                    sp.Close();
             }
             return true;
         }
@@ -624,6 +817,8 @@ namespace OptProcessBiSenderService
             /// <value>Modos Disponiveis : wifi, mobile</value>
             try
             {
+                sp.ReadTimeout = 10000;
+
                 string command = "{\"date\":\""+DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")+"\", \"data\": \""+mode+"\",\"command\":\"setmode()\"}";
                 if(!sp.IsOpen) sp.Open();
                 sp.WriteLine("\r\n|"+(command.Length+2).ToString()+"|"+command+"\r\n");
@@ -637,7 +832,13 @@ namespace OptProcessBiSenderService
             {
                 Console.WriteLine("exceção ao procurar device -> ");
                 Console.WriteLine(e);
-                Environment.Exit(1);
+                //Environment.Exit(1);
+            }
+            finally
+            {
+                //verifica se porta esta aberta e fecha
+                if(sp.IsOpen) 
+                    sp.Close();
             }
             return false;
         }
@@ -649,6 +850,8 @@ namespace OptProcessBiSenderService
             /// <value></value>
             try
             {
+                sp.ReadTimeout = 10000;
+
                 string command = "{\"date\":\""+DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")+"\", \"command\":\"laststart()\"}";
                 if(!sp.IsOpen) sp.Open();
                 sp.WriteLine("\r\n|"+(command.Length+2).ToString()+"|"+command+"\r\n");
@@ -661,7 +864,13 @@ namespace OptProcessBiSenderService
             {
                 Console.WriteLine("exceção ao procurar device -> ");
                 Console.WriteLine(e);
-                Environment.Exit(1);
+                //Environment.Exit(1);
+            }
+            finally
+            {
+                //verifica se porta esta aberta e fecha
+                if(sp.IsOpen) 
+                    sp.Close();
             }
             return true;
         }

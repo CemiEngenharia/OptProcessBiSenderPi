@@ -13,3 +13,5 @@
 
 |67|{"date":"2021-02-11 16:33:15", "command":"getconnectionstatus()"}
 |26|{"command":"getqueue()"}
+
+|70|{"date":"2021-02-11 16:33:15", "command":"setmode()", "data":"wifi"}

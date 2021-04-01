@@ -37,10 +37,16 @@ _http_port = 21032;
 const BASIC_AUTH_KEY = "Basic RENERTNENDc1MTQ2RDU0MkFEOTBGQUFFNkMzMzQxNkY6MEUzNDU2MDhCMkRFQzVEMTI1NTJDN0Q3RkNBRDY2MEY=";
 
 //configura mongo
-const mongoUrl = 'mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false&authSource=optcemi01';
+//const mongoUrl = 'mongodb://localhost:27017/?readPreference=primary&appname=OptProcessBISender&ssl=false&authSource=optcemi01&keepAlive=false&poolSize=5';
+
+const mongoUrl = 'mongodb://localhost:27017/?readPreference=primary&appname=OptProcessBISender&ssl=false&authSource=optcemi01&keepAlive=false&poolSize=5&agent=false';
+
+//const mongoUrl = 'mongodb://optcemi01:c3m1t3ch@mongodb.optcemi.com:27017/?readPreference=primary&appname=OptProcessBISender&ssl=false&authSource=optcemi01&keepAlive=false&poolSize=5';
+
+
 //const mongoUrl = 'mongodb://optcemi01:c3m1t3ch@processbisync.optcemi.com:27017?authMechanism=DEFAULT&authSource=optcemi01';
 //const mongoUrl = 'mongodb://mongodb.optcemi.com:27017';
-const mongoDBName = 'sample';
+const mongoDBName = 'optcemi01';
 
 const ERROR_INVALIDDB = {"code": 500, "error": "Invalid Database", "data": null};
 const ERROR_NOT_IMPLEMENTED = {"code": 500, "error": "Function Nor Implemented", "data": null};
@@ -178,11 +184,11 @@ http.createServer(function (req, res) {
                 {
                     print("has data");
                     //adiciona device ao banco de dados caso nao exista
-                    MongoClient.connect(mongoUrl, { "useUnifiedTopology": true },   async function(err, client) {
+                    MongoClient.connect(mongoUrl, { "useUnifiedTopology": true, /*directConnection :true,*/ keepAlive: false, maxPoolSize:20},   async function(err, client) {
                         if(err) throw err
     
                         // entra na base de dados      
-                        const database = client.db(mongoDBName);  
+                        var database = client.db(mongoDBName);  
                         findAndModifyTags(__postBody['data'], database, 0, res, null);
                     });
                 }
@@ -239,11 +245,11 @@ http.createServer(function (req, res) {
                 {
                     print("has data");
                     //adiciona device ao banco de dados caso nao exista
-                    MongoClient.connect(mongoUrl, { "useUnifiedTopology": true },   async function(err, client) {
+                    MongoClient.connect(mongoUrl, { "useUnifiedTopology": true, /*directConnection :true,*/ keepAlive: false, maxPoolSize:20 },   async function(err, client) {
                         if(err) throw err
     
                         // entra na base de dados      
-                        const database = client.db(mongoDBName);  
+                        var database = client.db(mongoDBName);  
                         addTagData(__postBody, database, 0, res, null);
                     });
                 }
@@ -287,11 +293,19 @@ async function addTagData(data, database, counter=0, res=null, client=null)
 
     //cria registro das tags ou substitui
     value = {};
+    
+    data["data"][time].forEach(element => {
+        value[path+"."+Object.keys(element)[0]] = element[Object.keys(element)[0]];
+    });
+
     //value[path] = data["data"][time];
-    value[path] = {"$each": data["data"][time]};
+    //value[path] = {"$each": data["data"][time]}; funciona para array
+    //value[path] = data["data"][time]; //funciona para array
+    //value[path] = data["data"][time];
     update = {};
-    //update["$set"] = value;
-    update["$push"] = value;
+    //update["$push"] = value;   funciona para array
+
+    update["$set"] = value;
 
     console.log("update")
     console.log(update)
@@ -301,15 +315,16 @@ async function addTagData(data, database, counter=0, res=null, client=null)
     tagCollection = database.collection('values');
 
     //procura e atualiza registro
-    tagCollection.findOneAndUpdate(query, update,{returnNewDocument: true, upsert: true, new: true}, (error, doc) => 
+    tagCollection.updateOne(query, update,{returnNewDocument: false, upsert: true, new: true}, (error) => 
     {
         if(!error) {
-            console.log(`Successfully updated document: ${JSON.stringify(doc)}.`)
+            console.log(`Successfully updated document`)
+            //console.log(`Successfully updated document: ${JSON.stringify(doc)}.`)
         } else {
             console.log("No document matches the provided query.")
             console.log(error)
         }
-
+        
         //resposta positiva    
         res.write("{'status': 'ok'}");
         res.end();

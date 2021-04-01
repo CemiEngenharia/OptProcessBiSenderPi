@@ -25,7 +25,7 @@ namespace OptProcessBiSenderService
         public string date{ get; set; }
         public bool status { get; set; }
         public string version { get; set; }
-        public Dictionary<string, int> desc { get; set; }
+        public Dictionary<string, int> desc { get; set; }     //Dictionary<string, int>
     }
 
     public class Worker : BackgroundService
@@ -179,8 +179,12 @@ namespace OptProcessBiSenderService
                 optdevice.setWifiGateway(configuration["gateway"], _comSerialPort);
                 optdevice.setWifiNetmask(configuration["netmask"], _comSerialPort);
 
+                
+                optdevice.setCloudHost(configuration["server"], _comSerialPort);
+                optdevice.setCloudPort(configuration["serverport"], _comSerialPort);
+
                 //faz conexao e verifica se esta conectado
-//                optdevice.setMode(configuration["mode"], _comSerialPort);
+                optdevice.setMode(configuration["mode"], _comSerialPort);
 
                 //verifica conexao e inicia os procedimentos
                 __verifyNetwork:
@@ -231,10 +235,10 @@ namespace OptProcessBiSenderService
                 {
                     alreadySent = false;
 
-                    List<string> dataToWrite = new List<string>();
+                    List<Dictionary<int, string>> dataToWrite = new List<Dictionary<int, string>>();
                     int dataToWriteLen = 0;
                     //pega data da ultima leitura
-                    string readedDateTime = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+                    string readedDateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                     
                     /*************************************************/
                     try{
@@ -347,12 +351,16 @@ namespace OptProcessBiSenderService
                                 {
                                     Console.WriteLine("------ Problema ao pegar dado da tag linha 345");
                                     Console.WriteLine(e.ToString());
+                                    
                                 }
 
                                 try
                                 {
                                     //dataToWrite += dataToWrite.Length >= 1? "^"+tagsOnlineInfo[val.Item.ItemId] +"`"+formatedValue+"`"+((int) val.Quality).ToString() : tagsOnlineInfo[val.Item.ItemId] +"`"+formatedValue+"`"+((int) val.Quality).ToString();
-                                    dataToWrite.Add(tagsOnlineInfo[val.Item.ItemId] +"`"+formatedValue+"`"+((int) val.Quality).ToString());
+                                    Dictionary<int, string> tmp = new Dictionary<int, string>();
+                                    tmp[int.Parse(tagsOnlineInfo[val.Item.ItemId])] = formatedValue+"`"+((int) val.Quality).ToString();
+                                    dataToWrite.Add(tmp);
+                                    tmp = null;
                                 }
                                 catch(Exception e)
                                 {
@@ -423,7 +431,7 @@ namespace OptProcessBiSenderService
                                     }
 
                                     //reseta marcadores
-                                    dataToWrite = new List<string>();
+                                    dataToWrite = new List<Dictionary<int, string>>();
                                     dataToWriteLen = 0;
                                 }
                             }
@@ -479,10 +487,10 @@ namespace OptProcessBiSenderService
                                 }
 
                                 //reseta marcadores
-                                dataToWrite = new List<string>();
+                                dataToWrite = new List<Dictionary<int, string>>();
                                 dataToWriteLen = 0;
 
-                                Environment.Exit(1);
+                                //Environment.Exit(1);
                             }
 
                             //marca que os dados foram enviados
@@ -539,7 +547,7 @@ namespace OptProcessBiSenderService
                                                 //postData += (postData.Length >= 1)? ",\""+tag+":"+tag+":"+opcTags[tag]["type"]+"\"": "\""+tag+":"+tag+":"+opcTags[tag]["type"]+"\"";
                                                 postData.Add((tag+":"+tag+":"+opcTags[tag]["type"]).Replace("\r", "").Replace("\n", ""));
 
-                                                //adiciona ao contador
+                                                //adiciona ao contadorremote
                                                 postLenCount ++;
                                                 if(postLenCount == int.Parse(configuration["tagsperrequest"]))
                                                 {
@@ -589,10 +597,18 @@ namespace OptProcessBiSenderService
                                                         goto __tryToPost;
                                                     }
                                                     
-                                                    //recupera dados retornados da ferramenta online
-                                                    JsonWebResponse receivedTemp = JsonConvert.DeserializeObject<JsonWebResponse>(postResponse);                                           
-                                                    var received = receivedTemp.desc;
                                                     
+                                                    //recupera dados retornados da ferramenta online
+                                                    Dictionary<string, int> received;
+                                                    try{
+                                                        JsonWebResponse receivedTemp = JsonConvert.DeserializeObject<JsonWebResponse>(postResponse);         
+                                                        received = receivedTemp.desc; 
+                                                    }catch(Exception e)
+                                                    {
+                                                        Console.WriteLine("Falha ao convertex resultado do post");
+                                                        postTrys --;
+                                                        goto __tryToPost;
+                                                    }
                                                     //var received = simpleJsonLoad("{" + receivedTemp.data + "}");
 
                                                     //concatena valores
@@ -629,7 +645,7 @@ namespace OptProcessBiSenderService
                                             Console.WriteLine("response");
                                             Console.WriteLine(postResponse);
 
-                                            //Environment.Exit(1);
+                                            ////Environment.Exit(1);
 
                                             //verifica se conexão ainda esta de pé
  //                                           if(!cp.isConnected()){stopAllThreads = true; return; }
@@ -690,9 +706,17 @@ namespace OptProcessBiSenderService
                                             */
 
                                             //recupera dados retornados da ferramenta online
-                                            JsonWebResponse receivedTemp = JsonConvert.DeserializeObject<JsonWebResponse>(postResponse);                                           
-                                            var received = receivedTemp.desc;
-                                            
+                                            Dictionary<string, int> received;
+                                            try{
+                                                JsonWebResponse receivedTemp = JsonConvert.DeserializeObject<JsonWebResponse>(postResponse);         
+                                                received = receivedTemp.desc; 
+                                            }catch(Exception e)
+                                            {
+                                                Console.WriteLine("Falha ao convertex resultado do post");
+                                                postTrys --;
+                                                goto __tryToPost;
+                                            }
+                                    
                                             //var received = simpleJsonLoad("{" + receivedTemp.data + "}");
 
                                             //concatena valores
@@ -799,7 +823,7 @@ namespace OptProcessBiSenderService
                             //Console.WriteLine("Finalizadno Thread");    
 				            //Console.Write(("Finalizadno Thread"));
                             reloadThreadConfig = true;
-                            //Environment.Exit(1);
+                            ////Environment.Exit(1);
                             //Thread.CurrentThread.Abort();
 
                             return;
@@ -1014,6 +1038,7 @@ namespace OptProcessBiSenderService
                                 "projectpath=C:\\CEMI\\OPTPROCESS\r\n"+
                                 "ftpdomain=ftp.optcemi.com\r\n"+
                                 "server=optcemi.com\r\n"+
+                                "serverport=21032\r\n"+
                                 "ftpuser=ftpuser\r\n"+
                                 "ftppass=ftppass\r\n"+
                                 "opcserver=Matrikon.OPC.Simulation.1\r\n"+
@@ -1039,6 +1064,7 @@ namespace OptProcessBiSenderService
                 configuration["projectpath"] = configuration.ContainsKey("projectpath") ? configuration["projectpath"]: "";
                 configuration["ftpdomain"] = configuration.ContainsKey("ftpdomain") ? configuration["ftpdomain"]: "ftp.optcemi.com";
                 configuration["server"] = configuration.ContainsKey("server") ? configuration["server"]: "optcemi.com";
+                configuration["serverport"] = configuration.ContainsKey("serverport") ? configuration["serverport"]: "21032";
                 configuration["ftpuser"] = configuration.ContainsKey("ftpuser") ? configuration["ftpuser"]: "optcemi01";
                 configuration["ftppass"] = configuration.ContainsKey("ftppass") ? configuration["ftppass"]: "qazxc123";
                 configuration["tagsperrequest"] = configuration.ContainsKey("tagsperrequest") ? configuration["tagsperrequest"]: "100";
@@ -1050,7 +1076,7 @@ namespace OptProcessBiSenderService
                 //wifi model
                 configuration["ssid"] = configuration.ContainsKey("ssid") ? configuration["ssid"]: "CEMI Network";
                 configuration["password"] = configuration.ContainsKey("password") ? configuration["password"]: "c3m1t3ch";
-                configuration["ip"] = configuration.ContainsKey("ip") ? configuration["ip"]: "192.168.1.222";
+                configuration["ip"] = configuration.ContainsKey("ip") ? configuration["ip"]: "0.0.0.0";
                 configuration["gateway"] = configuration.ContainsKey("gateway") ? configuration["gateway"]: "192.168.1.1";
                 configuration["netmask"] = configuration.ContainsKey("netmask") ? configuration["netmask"]: "255.255.255.0";
 
@@ -1464,6 +1490,7 @@ namespace OptProcessBiSenderService
         }
         static void resetDevice()
         {
+            /*
             List<string> ports = findDevice();
 
             if(_comSerialPort != null)
@@ -1493,6 +1520,7 @@ namespace OptProcessBiSenderService
                     break;
                 }
             }
+            */
         }
         static List<string> findDevice()
         {
