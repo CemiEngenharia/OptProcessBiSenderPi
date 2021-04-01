@@ -56,6 +56,9 @@ class telemetryCore:
     def __init__(self):
         print("iniciado")
         
+        #registra o ultimo reinicio
+        self.lastStart = datetime.now()
+        
         #define o diretorio de funcionamento
         ppath = "/var/cemi/"
         #define o diretorio de funcionamento do script
@@ -75,8 +78,8 @@ class telemetryCore:
         self.queueFile = ppath+"/.config/queue"
         self.queueSocket = ppath+"/.config/queueSocket"
         self.mobileNetworkConfigFile = "/etc/wvdial.conf"
-        self.wifiNetworkConfigFile = ppath+"/.config/wpa_supplicant"
-        #self.wifiNetworkConfigFile = "/var/run/wpa_supplicant"
+        #self.wifiNetworkConfigFile = ppath+"/.config/wpa_supplicant"
+        self.wifiNetworkConfigFile = "/etc/wpa_supplicant/wpa_supplicant.conf"
         
         #finaliza socket unix
         if(os.path.exists(self.queueSocket)):
@@ -88,7 +91,7 @@ class telemetryCore:
             
         if(not os.path.isfile(self.configFile)):
             tmp = open(self.configFile, "wb")
-            tmp.write("{}")
+            tmp.write("{\"cycle\":60}")
             tmp.close()
             
         if(not os.path.isfile(self.tagDictFile)):
@@ -100,28 +103,34 @@ class telemetryCore:
             tmp = open(self.queueFile, "wb")
             tmp.write("[]")
             tmp.close()
-            
+        
         if(not os.path.isfile(self.mobileNetworkConfigFile)):
             tmp = open(self.mobileNetworkConfigFile, "wb")
-            tmp.write('''[default]\n
-                        Init1 = ATZ\n
-                        Init2 = ATQ0 V1 E1 S0=0 &C1 &D2 +FCLASS=0\n
-                        Init3 = AT+CGDCONT=1,"IP","internet"\n
-                        Stupid Mode = 1\n
-                        Modem Type = Analog Modem\n
-                        ISDN = 0\n
-                        Phone = *99#\n
-                        Modem = /dev/ttyUSB0\n
-                        Username = %apnuser%\n
-                        Password = %apnpass%\n
-                        Baud = 460800''')
+            tmp.write('''[Dialer Defaults]\n
+                Init1 = ATZ\n
+                Init2 = ATQ0 V1 E1 S0=0 &C1 &D2 +FCLASS=0\n
+                Init3 = AT+CGDCONT=1,"IP","internet"\n
+                Dial Command = ATD
+                Modem Type = Analog Modem\n
+                Phone = *99#\n
+                ISDN = 0\n
+                Username = %apnuser%\n
+                Password = %apnpass%\n
+                Init1 = ATZ
+                Modem = /dev/ttyUSB0
+                New PPPD = 1
+                Carrier Check = no
+                stupid mode=1
+                Baud = 460800''')
             tmp.close()
             
         if(not os.path.isfile(self.wifiNetworkConfigFile)):
             tmp = open(self.wifiNetworkConfigFile, "wb")
             tmp.write(
-            '''country=BR # Your 2-digit country code
-            ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+            '''ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+            country=BR # Your 2-digit country code
+            ipdate_config=1
+            
             network={
                 ssid="%wifiuser%"
                 psk="%wifipass%"
@@ -129,19 +138,65 @@ class telemetryCore:
             }''')
             tmp.close()
         
+        #verifica integridade dos arquivos necessarios evitando corrupcao
+        try:
+            with open(self.configFile, "rb") as tmp:
+                json.loads(tmp.read())
+                tmp.close()
+                print("config integro")
+                
+        except Exception as e:
+            print("config corrompido")
+            print(e)
+            tmp = open(self.configFile, "wb")
+            tmp.write("{\"cycle\":60}")
+            tmp.close()
+            
+        try:
+            with open(self.tagDictFile, "rb") as tmp:
+                json.loads(tmp.read())
+                tmp.close()
+                print("tagfile integro")
+        except Exception as e:
+            print("tagfile corrompido")
+            print(e)
+            tmp = open(self.tagDictFile, "wb")
+            tmp.write("{}")
+            tmp.close()
+            
+        try:
+            with open(self.queueFile, "rb") as tmp:
+                json.loads(tmp.read())
+                tmp.close()
+                print("queue integro")
+        except Exception as e:
+            print("queue file corrompido")
+            print(e)
+            tmp = open(self.queueFile, "wb")
+            tmp.write("[]")
+            tmp.close()
+                    
+        
+        
 #           define os comaandos aceitos array {"command": "fields separated by colma"}
         self.commandSet = {}
+        self.commandSet["setpertoperreceiver()"] = "data"
+        self.commandSet["setpertopersender()"] = "data"
+        self.commandSet["setpertopertag()"] = "data"
         self.commandSet["setapnname()"] = "data"
-        self.commandSet["setapnpwd()"] = "data"
+        self.commandSet["setapnuser()"] = "data"
+        self.commandSet["setapnpass()"] = "data"
         self.commandSet["setwifissid()"] = "data"
         self.commandSet["setwifipwd()"] = "data"
         self.commandSet["setip()"] = "data"
+        self.commandSet["setnetmask()"] = "data"
         self.commandSet["setgateway()"] = "data"
         self.commandSet["setdns()"] = "data"
         self.commandSet["setproject()"] = "data"
         self.commandSet["setmachineid()"] = "data"
         self.commandSet["sethostname()"] = "data"
         self.commandSet["sethostport()"] = "data"
+        self.commandSet["setcycle()"] = "data"
         self.commandSet["gettagid()"] = "data"
         self.commandSet["settagdata()"] = "data,date"
         self.commandSet["getsignal()"] = ""
@@ -151,7 +206,10 @@ class telemetryCore:
         self.commandSet["getip()"] = ""
         self.commandSet["getpinginfo()"] = ""        
         self.commandSet["identify()"] = ""
+        self.commandSet["setmode()"] = "data"
         self.commandSet["restart()"] = ""
+        self.commandSet["laststart()"] = ""
+        self.commandSet["help()"] = ""
         
         #carrega configuracao no inicio da aplicacao
         self.loadConfig(self.configFile)
@@ -176,18 +234,61 @@ class telemetryCore:
         thread.start_new_thread(statusIndication.networkStatus, ())
         thread.start_new_thread(statusIndication.scriptStatus, ())
         
-        print("Started")
-                
+        #inicia thread de envio de dados
+        thread.start_new_thread(self.sendDataThread, ())    
+
+                    
     def loadConfig(self, configFile):
         tmp = open(self.configFile, "rb")
         self.config = json.loads(tmp.read())
         tmp.close()
+        
+        #campos obrigatorios
+        if("deviceimei" not in self.config):
+            self.config["deviceimei"] = "00000000000000"
     
     def saveConfig(self, configFile):
         tmp = open(self.configFile, "wb")
         tmp.write(json.dumps(self.config))
         tmp.close()
-        
+    
+    def sendDataThread(self):
+        while(True):
+            try:
+                print("****************************************************************************")
+                print("*************************Enviando dados para nuvem**************************")
+                print("****************************************************************************")
+                #envia todas as tags da fila
+                count = int(self.queueMgmtgetLenght())
+                print("count -> ", count)
+                response = "{}"
+                
+                for i in range(count):
+                    #tenta fazer o envio
+                    nextMessage = self.queueMgmtgetNext()
+                    response = self.sendTagData(nextMessage)
+                    
+                    print("webresponse")
+                    print(response)
+                    print("_____________________")
+                    
+                    #caso de erro adiciona novamente a fila
+                    if(response == None):
+                        #Erro ao Enviar Realocando em fila
+                        self.queueMgmtaddToQueue(nextMessage)
+                                        
+            except Exception as e:
+                #salva buffer no disco
+                self.queueMgmtSaveBuffer()
+                print(e)
+                
+            finally:        
+                #aguarda o ciclo definido para enviar os dados
+                if("cycle" in self.config):
+                    time.sleep(self.config["cycle"])
+                else:
+                    time.sleep(10)
+                
     def messageValidation(self, message):
 #       Predeclara Variaveis para evitar valores nulos ou flutuantes            
         length = 0
@@ -344,7 +445,7 @@ class telemetryCore:
                 self.saveConfig(self.configFile)
                 
                 #define endereco ip e mascara de rede do dispositivo
-                self.setipaddress(command["data"], "255.255.255.0" if self.config["netmask"] == None else self.config["netmask"])
+                self.setipaddress(command["data"], "255.255.255.0" if "netmask" not in self.config else self.config["netmask"])
                     
                 return (True, "success")
             else:
@@ -357,7 +458,7 @@ class telemetryCore:
                 self.saveConfig(self.configFile)
                 
                 #define endereco ip e mascara de rede do dispositivo
-                self.setipaddress("192.168.0.1" if self.config["ipaddress"] == None else self.config["ipaddress"], command["data"])
+                self.setipaddress("192.168.0.254" if "ipaddress" not in self.config else self.config["ipaddress"], command["data"])
                     
                 return (True, "success")
             else:
@@ -390,6 +491,15 @@ class telemetryCore:
                 return (False, "fail")
         
         #define o nome do projeto para sincronizar com a nuvem    
+        elif(command["command"].lower() == "setcycle()"):
+            if(len(command["data"]) >= 3):
+                self.config["cycle"] = int(command["data"])
+                self.saveConfig(self.configFile)
+                return (True, "success")
+            else:
+                return (False, "fail")
+        
+        #define o nome do projeto para sincronizar com a nuvem    
         elif(command["command"].lower() == "setproject()"):
             if(len(command["data"]) >= 3):
                 self.config["project"] = command["data"]
@@ -400,7 +510,7 @@ class telemetryCore:
         
         #define o id da maquina para sincronizar com a nuvem   
         elif(command["command"].lower() == "setmachineid()"):
-            if(len(command["data"]) == 32):
+            if(len(command["data"]) == 64):
                 self.config["machineid"] = command["data"]
                 self.saveConfig(self.configFile)
                 return (True, "success")
@@ -427,6 +537,7 @@ class telemetryCore:
         
         #define todos ids das tags para sincronizar    
         elif(command["command"].lower() == "gettagid()"):
+            print(command["data"])
             print(type(command["data"]) is list)
             
             if(type(command["data"]) is not list):
@@ -434,6 +545,10 @@ class telemetryCore:
                 return (False, "fail")
             
             response = tc.syncTags(command["data"])
+            
+            if(response == None):
+                print("something went wrong with connection command data")
+                return (False, "fail")
             
             #adiciona ao arquivo de tags
             self.tagsmgmt.updateTags(response)
@@ -443,19 +558,25 @@ class telemetryCore:
         
         #envia dados de tag para a nuvem    
         elif(command["command"].lower() == "settagdata()"):
-            print("settagdata")
-            self.queueMgmtaddToQueue(command["data"])
+            print("settagdata")    
+            self.config["ready"] = True
+            self.queueMgmtaddToQueue(command)
             
-            #envia todas as tags da fila
+#            #envia todas as tags da fila
             count = int(self.queueMgmtgetLenght())
             print("count -> ", count)
-            response = "{}"
-            
-            for i in range(count):
-                #tenta fazer o envio
-                response = self.sendTagData(self.queueMgmtgetNext())
-            
-            return (True, response)
+#            response = "{}"
+#            
+#            for i in range(count):
+#                #tenta fazer o envio
+#                nextMessage = self.queueMgmtgetNext()
+#                response = self.sendTagData(nextMessage)
+#                #caso de erro adiciona novamente a fila
+#                if(response == None):
+#                    #Erro ao Enviar Realocando em fila
+#                    self.queueMgmtaddToQueue(nextMessage)
+#            
+            return (True, "success")
         
         #faz leitura do sinal de rede    
         elif(command["command"].lower() == "getsignal()"):
@@ -473,7 +594,7 @@ class telemetryCore:
         elif(command["command"].lower() == "getqueue()"):
             print(self.queueMgmtgetLenght())
             #print(self.queueMgmtgetNext())
-            return (True, "{'length': "+str(self.queueMgmtgetLenght() + "}"))
+            return (True, int(self.queueMgmtgetLenght()))
         
         #limpa fila de envio    
         elif(command["command"].lower() == "cleanqueue()"):
@@ -510,18 +631,25 @@ class telemetryCore:
         
         #reinicia servico na maquina    
         elif(command["command"].lower() == "setmode()"):
-            if(command["data"] == "wifi"):
-                self.setWifiMode()
-                self.config["mode"] = command["data"]
-                self.saveConfig()
-                return (True, "success")
-            elif(command["data"] == "mobile"):
-                self.config["mode"] = command["data"]
-                self.setMobileMode()
-                self.saveConfig()
-                return (True, "success")
-            else:
-                return (False, "error. invalid mode")
+            try:
+                if(command["data"] == "wifi"):
+                    self.setWifiMode()
+                    self.config["mode"] = command["data"]
+                    self.saveConfig(self.configFile)
+                    return (True, "success")
+                elif(command["data"] == "mobile"):
+                    self.config["mode"] = command["data"]
+                    self.setMobileMode()
+                    self.saveConfig(self.configFile)
+                    return (True, "success")
+            except Exception as e:    
+                return (False, "error")
+        
+        elif(command["command"].lower() == "laststart()"):
+            return(True, str(self.lastStart))
+        
+        elif(command["command"].lower() == "help()"):
+            return(True, json.dumps(self.commandSet))
         
         #reinicia servico na maquina    
         elif(command["command"].lower() == "restart()"):
@@ -535,7 +663,7 @@ class telemetryCore:
         command = ["ifconfig","wlan0",ip,"netmask",netmask,"up"]
         
         if(ip == "0.0.0.0"):
-                command = ['dhclient','eth0','-v']
+                command = ['dhclient','wlan0','-v']
                 
         return subprocess.call(command) == 0
         
@@ -591,6 +719,11 @@ class telemetryCore:
             tmp = open(self.wifiNetworkConfigFile, "wb")
             tmp.write(data)
             tmp.close()
+            
+            #reinicia conexao wifi
+            os.system("ifconfig wlan0 down")
+            time.sleep(2)
+            os.system("ifconfig wlan0 up")
 
 
     def ping(self, host):
@@ -603,9 +736,10 @@ class telemetryCore:
         param = '-n' if platform.system().lower()=='windows' else '-c'
 
         # Building the command. Ex: "ping -c 1 google.com"
+        FNULL = open(os.devnull, 'w')
         command = ['ping', param, '1', host]
 
-        return subprocess.call(command) == 0
+        return subprocess.call(command, stdout=FNULL, stderr=subprocess.STDOUT) == 0
     
     def pingSpeed(self, host):
         """
@@ -635,7 +769,7 @@ class telemetryCore:
         recvData = tcp.recv(1024)
         tcp.close()
         
-        return recvData        
+        return json.loads(recvData)
 
         
     def queueMgmtgetLenght(self):
@@ -664,58 +798,138 @@ class telemetryCore:
         recvData = tcp.recv(1024)
         tcp.close()    
         
+        return True      
+    
+    def queueMgmtSaveBuffer(self):
+        tcp = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+        tcp.connect(self.queueSocket)
+        tcp.send('{"command": "savebuffer"}')
+        recvData = tcp.recv(1024)
+        tcp.close()    
+        
         return True        
     
     def syncTags(self, tags):
-        #post em /setuptags
-        #dados enviados como {'data': ['{tag name}:{tag address}:{tag type}','{tag name}:{tag address}:{tag type}']}
-        #dados recebidos como {'data': {'tag':'id','tag','id'}}
-        
-        if (("hostname" not in self.config) and 
-                ("hostport" not in self.config)):
-            print("Configuracao incompleta")
-            return {}
-        
-        print("sync Tags")
-        body = {'data': tags}
-        
-        req = requests.post("http://"+self.config["hostname"]+":"+self.config["hostport"]+"/setuptags", None, body)
-        
-        if(req.ok):
-            resp = json.loads(req.text)
-            return resp
-        else:
-            return {}
+        try:
+            #post em /setuptags
+            #dados enviados como {'data': ['{tag name}:{tag address}:{tag type}','{tag name}:{tag address}:{tag type}']}
+            #dados recebidos como {'data': {'tag':'id','tag','id'}}
+            
+            print("sync Tags")
+            
+            if (("hostname" not in self.config) and 
+                    ("hostport" not in self.config)):
+                print("Configuracao incompleta")
+                return {}
+            
+            body = {'data': tags}
+            
+            req = requests.post("http://"+self.config["hostname"]+":"+self.config["hostport"]+"/setuptags", None, body)
+            
+            if(req.ok):
+                resp = json.loads(req.text)
+                return resp
+            else:
+                return None
+        except:
+            print("falha ao enviar registro")
+            return None
         
     def sendTagData(self, data):
-        #post em /setuptags
-        #dados para processar
-        #project machineid date devicenumber deviceimei data(na requisicao)
-        if(("project" not in self.config) or 
-            ("machineid" not in self.config) or 
-                ("deviceimei" not in self.config) or
-                    ("hostname" not in self.config) or 
-                        ("hostport" not in self.config)):
+        try:
+            #post em /setuptags
+            #dados para processar
+            #project machineid date devicenumber deviceimei data(na requisicao)
+            if(("project" not in self.config) or 
+                ("machineid" not in self.config) or 
+#                    ("deviceimei" not in self.config) or
+                        ("hostname" not in self.config) or 
+                            ("hostport" not in self.config)):
+                
+                print("configuracao incompleta")
+                return None
             
-            print("configuracao incompleta")
-            return {}
+            #if(("data" not in data) and 
+            #    ("date" not in data)):
+            #    print("requisicao incompleta")
+            #    return {}
+            
+            #separa data e hora para formatar os dados
+            dt = str(data["date"]).split(" ")[0]
+            hr = str(data["date"]).split(" ")[1]
+            
+            
+            print("sync Tags")
+            body = {'project': self.config["project"], 'machineid': self.config["machineid"], 'date': dt, 'deviceimei': self.config["deviceimei"], 'devicenumber': 0, 'data': {hr: data["data"]}}
+            
+            req = requests.post("http://"+self.config["hostname"]+":"+self.config["hostport"]+"/tagdata", None, body)
+            
+            if(req.ok):
+                print(req.text)                
+                resp = json.loads(req.text.replace("\'", "\""))
+                return resp
+            else:
+                return None
+        except:
+            print("falha ao enviar dados ao servidor")       
+            return None
+    
+    ##executa em modo p2p para envio e recebimento de dados
+    def sendPerTagData(self, data):
+        try:
+            #post em /setuptags
+            #dados para processar
+            #project machineid date devicenumber deviceimei data(na requisicao)
+            if(("pertoperreceiver" not in self.config) or 
+                ("pertopersender" not in self.config) or
+                        ("hostname" not in self.config) or 
+                            ("hostport" not in self.config) or
+                                (data is not None)):
+                
+                print("configuracao incompleta")
+                return None
+            
+            body = {'tagdata': data}
+            
+            req = requests.post("http://"+self.config["hostname"]+":"+self.config["hostport"]+"/pertoper/"+self.config["pertopersender"]+"/"+self.config["pertoperreceiver"], None, body)
+            
+            if(req.ok):
+                print(req.text)                
+                resp = json.loads(req.text.replace("\'", "\""))
+                return resp
+            else:
+                return None
+        except:
+            print("falha ao enviar dados ao servidor")       
+            return None
         
-        #if(("data" not in data) and 
-        #    ("date" not in data)):
-        #    print("requisicao incompleta")
-        #    return {}
-        
-        print("sync Tags")
-        body = {'project': self.config["project"], 'machineid': self.config["machineid"], 'date': str(datetime.now()), 'deviceimei': self.config["deviceimei"], 'devicenumber': 0, 'data': data}
-        
-        req = requests.post("http://"+self.config["hostname"]+":"+self.config["hostport"]+"/tagdata", None, body)
-        
-        if(req.ok):
-            print(req.text)                
-            resp = json.loads(req.text.replace("\'", "\""))
-            return resp
-        else:
-            return {}
+    def receivePerTagData(self):
+        try:
+            #post em /setuptags
+            #dados para processar
+            #project machineid date devicenumber deviceimei data(na requisicao)
+            if(("pertoperreceiver" not in self.config) or 
+                ("pertopersender" not in self.config) or
+                        ("hostname" not in self.config) or 
+                            ("hostport" not in self.config)):
+                
+                print("configuracao incompleta")
+                return None
+            
+            print("sync Tags")
+            #body = body = {'senderid': self.config["pertopersender"], 'receiverid': self.config["pertoperreceiver"]}
+            
+            req = requests.get("http://"+self.config["hostname"]+":"+self.config["hostport"]+"/pertoper/"+self.config["pertopersender"]+"/"+self.config["pertoperreceiver"], None, None)
+            
+            if(req.ok):
+                print(req.text)                
+                resp = json.loads(req.text.replace("\'", "\""))
+                return resp
+            else:
+                return None
+        except:
+            print("falha ao enviar dados ao servidor")       
+            return None
         
         #connection.request("POST", '/setuptags', body=json.dumps(body))
     def setWifiMode(self):
@@ -740,6 +954,7 @@ class queueMgmt:
         self.lastWrite = None   
         self.socket = None
         self.next = {}
+        self.buffer = []
         
         #verifica se existem as pastar principais
         if(not os.path.isdir(self.home)):
@@ -772,6 +987,8 @@ class queueMgmt:
                     con.sendall(self.queueMgmtgetLenght())
                 elif(loadedMsg["command"] == u"clean"):
                     con.sendall(str(self.queueMgmtclean()))
+                elif(loadedMsg["command"] == u"savebuffer"):
+                    con.sendall(str(self.queueMgmtSaveBuffer()))
                 elif(loadedMsg["command"] == u"write"):
                     con.sendall(str(self.queueMgmtaddToQueue(loadedMsg["data"])))
                     
@@ -799,87 +1016,128 @@ class queueMgmt:
                 
     #recupera proximo do aquivo de fila
     def queueMgmtgetNext(self):
-        while(self.lock):
-            print("data is locked")
-            time.sleep(1000)
+        try:
+                                
+            if(len(self.buffer) > 0):
+                nextData = self.buffer.pop(0)
+                
+            elif(self.lock == True):
+                print(">>>>>>>>>>>>>>>>>>>data is locked")
+                return json.dumps({})
+                
+                
+            elif(len(self.buffer) == 0):
+                #bloqueia o arquivo para escrita e leitura
+                self.lock = True
+                
+                tmp = open(self.queueFile, "rb")
+                self.buffer = json.loads(tmp.read())
+                tmp.close()
+                
+                #remove dados ja carregados em buffer (pode ser prejudicial por perder dados no caminho - verificar opcoes)
+                tmp = open(self.queueFile, "wb")
+                tmp.write("[]")
+                #self.buffer = json.loads(tmp.read())
+                tmp.close()
             
-        #bloqueia o arquivo para escrita e leitura
-        self.lock = True
+                #desbloqueia o arquivo para escrita e leitura
+                self.lock = False
+                                
+                if(len(self.buffer) > 0):
+                    nextData = self.buffer.pop(0)
+                
+                else:
+                    nextData = {}
+                
+            else:
+                nextData = {}
+                
+            '''
+            tmp = open(self.queueFile, "wb")
+            tmp.write(json.dumps(loaded))
+            tmp.close()
+            '''
             
-        tmp = open(self.queueFile, "rb")
-        loaded = json.loads(tmp.read())
-        tmp.close()
-        
-        if(len(loaded) > 0):
-            nextData = loaded.pop(0)
-        else:
-            nextData = ""
-        
-        tmp = open(self.queueFile, "wb")
-        tmp.write(json.dumps(loaded))
-        tmp.close()
-        
-        del loaded
-            
-        #desbloqueia o arquivo para escrita e leitura
-        self.lock = False
-        
-        return json.dumps(nextData)
+            return json.dumps(nextData)
+        except Exception as e:
+            print(">>>>>>>>>>>>>>>>>>>falha ao add dado a fila")
+            print(e)
+            self.lock = False
+            return json.dumps("")
         
     #recupera tamanho da fila
     def queueMgmtgetLenght(self):
-        while(self.lock):
-            print("data is locked")
-            time.sleep(1000)
+        try:
+            #inicializa l em 0
+            l = "0"
             
-        #bloqueia o arquivo para escrita e leitura
-        self.lock = True
+            if(len(self.buffer) > 0):
+                l = len(self.buffer)
             
-        tmp = open(self.queueFile, "rb")
-        loaded = json.loads(tmp.read())
-        tmp.close()
-        
-        l = len(loaded)
-        
-        del loaded
+            elif(self.lock == True):
+                print(">>>>>>>>>>>>>>>>>>>data is locked")
             
-        #desbloqueia o arquivo para escrita e leitura
-        self.lock = False
+            else:
+                #bloqueia o arquivo para escrita e leitura
+                self.lock = True
+                
+                tmp = open(self.queueFile, "rb")
+                loaded = json.loads(tmp.read())
+                tmp.close()
+            
+                #desbloqueia o arquivo para escrita e leitura
+                self.lock = False
+            
+                l = len(loaded)
+                
+                del loaded
+            
+            return str(l)
         
-        return str(l)
+        except Exception as e:
+            print(">>>>>>>>>>>>>>>>>>>falha ao add dado a fila")
+            print(e)
+            self.lock = False
+            return "0"
         
         
     #adiciona os dados ao aquivo de fila
     def queueMgmtaddToQueue(self, data):
-        while(self.lock):
-            print("data is locked")
-            time.sleep(1000)
+        try:
+            if(self.lock == True):
+                print(">>>>>>>>>>>>>>>>>>>data is locked")
+                return False
+                
+            #bloqueia o arquivo para escrita e leitura
+            self.lock = True
             
-        #bloqueia o arquivo para escrita e leitura
-        self.lock = True
-        
-        tmp = open(self.queueFile, "rb")
-        loaded = json.loads(tmp.read())
-        tmp.close()
-        
-        loaded.append(data)
-        
-        tmp = open(self.queueFile, "wb")
-        tmp.write(json.dumps(loaded))
-        tmp.close()
-        
-        del loaded
-        
-        #desbloqueia o arquivo para escrita e leitura
-        self.lock = False
-        
-        return True    
+            tmp = open(self.queueFile, "rb")
+            loaded = json.loads(tmp.read())
+            tmp.close()
+            
+            loaded.append(data)
+            
+            tmp = open(self.queueFile, "wb")
+            tmp.write(json.dumps(loaded))
+            tmp.close()
+            
+            del loaded
+            
+            #desbloqueia o arquivo para escrita e leitura
+            self.lock = False
+            
+            return True    
+        except Exception as e:
+            print(">>>>>>>>>>>>>>>>>>>falha ao add dado a fila")
+            print(e)
+            self.lock = False
+            return True    
         
     #limpa aquivo de fila
     def queueMgmtclean(self):
-        while(self.lock):
-            print("data is locked")
-            time.sleep(1000)
+        if(self.lock == True):
+            print(">>>>>>>>>>>>>>>>>>>data is locked")
+            return False
         
         #bloqueia o arquivo para escrita e leitura
         self.lock = True
@@ -892,6 +1150,43 @@ class queueMgmt:
         self.lock = False
         
         return True   
+        
+    #salva buffer de fila
+    def queueMgmtSaveBuffer(self):
+        
+        try:
+            if(self.lock == True):
+                print(">>>>>>>>>>>>>>>>>>>data is locked")
+                return False
+                
+            #bloqueia o arquivo para escrita e leitura
+            self.lock = True
+            
+            tmp = open(self.queueFile, "rb")
+            loaded = json.loads(tmp.read())
+            tmp.close()
+            
+            
+            for i in range(len(self.buffer)):
+                loaded.append(self.buffer[i])
+            
+            tmp = open(self.queueFile, "wb")
+            tmp.write(json.dumps(loaded))
+            tmp.close()
+            
+            del loaded
+            self.buffer = []
+            
+            #desbloqueia o arquivo para escrita e leitura
+            self.lock = False
+            
+            return True    
+        
+        except Exception as e:
+            print(">>>>>>>>>>>>>>>>>>>falha ao add dado a fila")
+            print(e)
+            self.lock = False
+            return True    
     
 class tagsMgmt:
     def __init__(self, tagfile):
@@ -1054,6 +1349,7 @@ tc = telemetryCore()
 version = "1.0.10"
 
 ser = serial.Serial('/dev/serial0', 115200)  # open serial port
+#ser.set_buffer_size(rx_size = 12800, tx_size = 12800)
 #print(ser.name)         # check which port was really used
 ser.write('Iniciando\r\n'+str(datetime.now())+'\r\n')     # write a string
 ser.write(b'OptProcessBI Sender\r\n')     # write a string
@@ -1062,16 +1358,38 @@ ser.write(b"\r\n")     # write a string
 #ser.close()             # close port
 time.sleep(1)
 
+buffer = ""
+
 while(True):
-    jsonData = tc.messageValidation(ser.readline())
-    if(jsonData == None):
-        continue
-    print(jsonData)    
-    
-    #captura resposta
-    response = tc.processCommand(jsonData)
-    
-    #jsonData = tc.messageValidation("|79|{\"command\":\"settagdata()\", \"data\":\"settagdata()\", \"date\":\"2021-01-29 16:54:55\"}")
+    try:
+        if(not ser.isOpen()):
+            ser = serial.Serial('/dev/serial0', 115200)  # open serial port
+            
+#       while("\n" not in buffer):
+#           buffer += ser.read()
+        
+#       jsonData = tc.messageValidation(buffer)
+        message = ser.readline()
+        jsonData = tc.messageValidation(message)
+        message = ""
+        
+        print("**********************Mensagem recebida********************************")
+#       buffer = ""
+        
+        if(jsonData == None):
+            continue
+        print(jsonData)    
+        
+        #captura resposta
+        response = tc.processCommand(jsonData)
+        
+        #jsonData = tc.messageValidation("|79|{\"command\":\"settagdata()\", \"data\":\"settagdata()\", \"date\":\"2021-01-29 16:54:55\"}")
 
-    ser.write(tc.sendResponse(json.dumps({'date' : str(datetime.now()), 'status': response[0], 'version': version, 'desc': response[1]})) + "\r\n")
-
+        ser.write(tc.sendResponse(json.dumps({'date' : str(datetime.now()), 'status': response[0], 'version': version, 'desc': response[1]})) + "\r\n")
+    except Exception as e:
+        print("******************Erro ao receber Mensagem***************************")
+        print(e)
+        print("*********************************************************************")
+        if(ser.isOpen()):
+            ser.close()
+        
