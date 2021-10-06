@@ -1,0 +1,561 @@
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\appsettings.Development.json
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\appsettings.json
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\OptProcessBiSenderService.exe
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\OptProcessBiSenderService.deps.json
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\OptProcessBiSenderService.runtimeconfig.json
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\OptProcessBiSenderService.runtimeconfig.dev.json
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\OptProcessBiSenderService.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\OptProcessBiSenderService.pdb
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\Common.Logging.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\Common.Logging.Core.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Web.Razor.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Web.Helpers.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Web.WebPages.Deployment.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Web.WebPages.Razor.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Web.WebPages.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Configuration.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Configuration.Abstractions.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Configuration.Binder.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Configuration.CommandLine.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Configuration.EnvironmentVariables.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Configuration.FileExtensions.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Configuration.Json.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Configuration.UserSecrets.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.DependencyInjection.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.FileProviders.Abstractions.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.FileProviders.Physical.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.FileSystemGlobbing.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Hosting.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Hosting.Abstractions.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Hosting.WindowsServices.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Logging.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Logging.Abstractions.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Logging.Configuration.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Logging.Console.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Logging.Debug.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Logging.EventLog.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Logging.EventSource.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Options.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Options.ConfigurationExtensions.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Primitives.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Web.Infrastructure.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Win32.Registry.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\Newtonsoft.Json.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.CodeDom.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Diagnostics.EventLog.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.IO.Ports.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Management.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Security.AccessControl.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Security.Principal.Windows.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.ServiceProcess.ServiceController.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\TitaniumAS.Opc.Client.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.CSharp.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.VisualBasic.Core.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.VisualBasic.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Win32.Primitives.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.AppContext.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Buffers.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Collections.Concurrent.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Collections.Immutable.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Collections.NonGeneric.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Collections.Specialized.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Collections.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.ComponentModel.Annotations.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.ComponentModel.DataAnnotations.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.ComponentModel.EventBasedAsync.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.ComponentModel.Primitives.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.ComponentModel.TypeConverter.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.ComponentModel.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Configuration.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Console.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Core.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Data.Common.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Data.DataSetExtensions.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Data.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Diagnostics.Contracts.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Diagnostics.Debug.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Diagnostics.DiagnosticSource.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Diagnostics.FileVersionInfo.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Diagnostics.Process.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Diagnostics.StackTrace.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Diagnostics.TextWriterTraceListener.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Diagnostics.Tools.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Diagnostics.TraceSource.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Diagnostics.Tracing.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Drawing.Primitives.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Drawing.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Dynamic.Runtime.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Globalization.Calendars.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Globalization.Extensions.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Globalization.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.IO.Compression.Brotli.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.IO.Compression.FileSystem.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.IO.Compression.ZipFile.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.IO.Compression.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.IO.FileSystem.AccessControl.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.IO.FileSystem.DriveInfo.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.IO.FileSystem.Primitives.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.IO.FileSystem.Watcher.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.IO.FileSystem.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.IO.IsolatedStorage.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.IO.MemoryMappedFiles.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.IO.Pipes.AccessControl.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.IO.Pipes.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.IO.UnmanagedMemoryStream.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.IO.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Linq.Expressions.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Linq.Parallel.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Linq.Queryable.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Linq.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Memory.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Net.Http.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Net.HttpListener.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Net.Mail.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Net.NameResolution.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Net.NetworkInformation.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Net.Ping.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Net.Primitives.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Net.Requests.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Net.Security.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Net.ServicePoint.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Net.Sockets.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Net.WebClient.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Net.WebHeaderCollection.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Net.WebProxy.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Net.WebSockets.Client.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Net.WebSockets.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Net.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Numerics.Vectors.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Numerics.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.ObjectModel.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Private.DataContractSerialization.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Private.Uri.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Private.Xml.Linq.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Private.Xml.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Reflection.DispatchProxy.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Reflection.Emit.ILGeneration.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Reflection.Emit.Lightweight.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Reflection.Emit.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Reflection.Extensions.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Reflection.Metadata.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Reflection.Primitives.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Reflection.TypeExtensions.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Reflection.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Resources.Reader.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Resources.ResourceManager.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Resources.Writer.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Runtime.CompilerServices.Unsafe.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Runtime.CompilerServices.VisualC.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Runtime.Extensions.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Runtime.Handles.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Runtime.InteropServices.RuntimeInformation.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Runtime.InteropServices.WindowsRuntime.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Runtime.InteropServices.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Runtime.Intrinsics.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Runtime.Loader.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Runtime.Numerics.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Runtime.Serialization.Formatters.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Runtime.Serialization.Json.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Runtime.Serialization.Primitives.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Runtime.Serialization.Xml.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Runtime.Serialization.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Runtime.WindowsRuntime.UI.Xaml.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Runtime.WindowsRuntime.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Runtime.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Security.Claims.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Security.Cryptography.Algorithms.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Security.Cryptography.Cng.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Security.Cryptography.Csp.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Security.Cryptography.Encoding.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Security.Cryptography.OpenSsl.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Security.Cryptography.Primitives.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Security.Cryptography.X509Certificates.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Security.Principal.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Security.SecureString.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Security.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.ServiceModel.Web.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.ServiceProcess.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Text.Encoding.CodePages.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Text.Encoding.Extensions.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Text.Encoding.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Text.Encodings.Web.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Text.Json.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Text.RegularExpressions.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Threading.Channels.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Threading.Overlapped.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Threading.Tasks.Dataflow.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Threading.Tasks.Extensions.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Threading.Tasks.Parallel.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Threading.Tasks.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Threading.Thread.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Threading.ThreadPool.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Threading.Timer.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Threading.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Transactions.Local.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Transactions.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.ValueTuple.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Web.HttpUtility.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Web.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Windows.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Xml.Linq.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Xml.ReaderWriter.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Xml.Serialization.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Xml.XDocument.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Xml.XPath.XDocument.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Xml.XPath.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Xml.XmlDocument.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Xml.XmlSerializer.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Xml.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\WindowsBase.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\mscorlib.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\netstandard.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\API-MS-Win-core-xstate-l2-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.DiaSymReader.Native.x86.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\SOS_README.md
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\System.Private.CoreLib.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-console-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-datetime-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-debug-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-errorhandling-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-file-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-file-l1-2-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-file-l2-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-handle-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-heap-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-interlocked-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-libraryloader-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-localization-l1-2-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-memory-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-namedpipe-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-processenvironment-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-processthreads-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-processthreads-l1-1-1.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-profile-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-rtlsupport-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-string-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-synch-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-synch-l1-2-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-sysinfo-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-timezone-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-util-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-crt-conio-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-crt-convert-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-crt-environment-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-crt-filesystem-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-crt-heap-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-crt-locale-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-crt-math-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-crt-multibyte-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-crt-private-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-crt-process-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-crt-runtime-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-crt-stdio-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-crt-string-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-crt-time-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-crt-utility-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\clrcompression.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\clretwrc.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\clrjit.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\coreclr.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\dbgshim.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\hostfxr.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\hostpolicy.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\mscordaccore.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\mscordaccore_x86_x86_5.0.20.12005.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\mscordbi.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\mscorrc.debug.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\mscorrc.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\bin\Debug\netcoreapp5.0\win10-x86\ucrtbase.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\obj\Debug\netcoreapp5.0\win10-x86\OptProcessBiSenderService.csprojAssemblyReference.cache
+E:\Projetos\Telemetria Raspberry Zero\DotNet\obj\Debug\netcoreapp5.0\win10-x86\OptProcessBiSenderService.AssemblyInfoInputs.cache
+E:\Projetos\Telemetria Raspberry Zero\DotNet\obj\Debug\netcoreapp5.0\win10-x86\OptProcessBiSenderService.AssemblyInfo.cs
+E:\Projetos\Telemetria Raspberry Zero\DotNet\obj\Debug\netcoreapp5.0\win10-x86\OptProcessBiSenderService.csproj.CoreCompileInputs.cache
+E:\Projetos\Telemetria Raspberry Zero\DotNet\obj\Debug\netcoreapp5.0\win10-x86\OptProcessBiSenderService.csproj.CopyComplete
+E:\Projetos\Telemetria Raspberry Zero\DotNet\obj\Debug\netcoreapp5.0\win10-x86\OptProcessBiSenderService.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\obj\Debug\netcoreapp5.0\win10-x86\OptProcessBiSenderService.pdb
+E:\Projetos\Telemetria Raspberry Zero\DotNet\obj\Debug\netcoreapp5.0\win10-x86\OptProcessBiSenderService.genruntimeconfig.cache
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\appsettings.Development.json
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\appsettings.json
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\OptProcessBiSenderService.exe
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\OptProcessBiSenderService.deps.json
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\OptProcessBiSenderService.runtimeconfig.json
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\OptProcessBiSenderService.runtimeconfig.dev.json
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\OptProcessBiSenderService.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\OptProcessBiSenderService.pdb
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Common.Logging.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Common.Logging.Core.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Web.Razor.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Web.Helpers.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Web.WebPages.Deployment.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Web.WebPages.Razor.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Web.WebPages.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Configuration.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Configuration.Abstractions.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Configuration.Binder.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Configuration.CommandLine.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Configuration.EnvironmentVariables.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Configuration.FileExtensions.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Configuration.Json.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Configuration.UserSecrets.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.DependencyInjection.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.FileProviders.Abstractions.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.FileProviders.Physical.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.FileSystemGlobbing.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Hosting.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Hosting.Abstractions.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Hosting.WindowsServices.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Logging.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Logging.Abstractions.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Logging.Configuration.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Logging.Console.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Logging.Debug.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Logging.EventLog.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Logging.EventSource.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Options.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Options.ConfigurationExtensions.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Extensions.Primitives.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Web.Infrastructure.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Win32.Registry.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Newtonsoft.Json.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.CodeDom.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Diagnostics.EventLog.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.IO.Ports.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Management.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Security.AccessControl.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Security.Principal.Windows.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.ServiceProcess.ServiceController.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\TitaniumAS.Opc.Client.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.CSharp.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.VisualBasic.Core.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.VisualBasic.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Win32.Primitives.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.AppContext.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Buffers.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Collections.Concurrent.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Collections.Immutable.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Collections.NonGeneric.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Collections.Specialized.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Collections.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.ComponentModel.Annotations.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.ComponentModel.DataAnnotations.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.ComponentModel.EventBasedAsync.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.ComponentModel.Primitives.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.ComponentModel.TypeConverter.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.ComponentModel.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Configuration.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Console.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Core.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Data.Common.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Data.DataSetExtensions.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Data.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Diagnostics.Contracts.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Diagnostics.Debug.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Diagnostics.DiagnosticSource.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Diagnostics.FileVersionInfo.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Diagnostics.Process.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Diagnostics.StackTrace.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Diagnostics.TextWriterTraceListener.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Diagnostics.Tools.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Diagnostics.TraceSource.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Diagnostics.Tracing.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Drawing.Primitives.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Drawing.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Dynamic.Runtime.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Globalization.Calendars.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Globalization.Extensions.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Globalization.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.IO.Compression.Brotli.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.IO.Compression.FileSystem.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.IO.Compression.ZipFile.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.IO.Compression.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.IO.FileSystem.AccessControl.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.IO.FileSystem.DriveInfo.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.IO.FileSystem.Primitives.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.IO.FileSystem.Watcher.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.IO.FileSystem.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.IO.IsolatedStorage.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.IO.MemoryMappedFiles.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.IO.Pipes.AccessControl.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.IO.Pipes.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.IO.UnmanagedMemoryStream.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.IO.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Linq.Expressions.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Linq.Parallel.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Linq.Queryable.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Linq.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Memory.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Net.Http.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Net.HttpListener.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Net.Mail.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Net.NameResolution.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Net.NetworkInformation.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Net.Ping.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Net.Primitives.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Net.Requests.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Net.Security.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Net.ServicePoint.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Net.Sockets.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Net.WebClient.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Net.WebHeaderCollection.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Net.WebProxy.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Net.WebSockets.Client.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Net.WebSockets.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Net.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Numerics.Vectors.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Numerics.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.ObjectModel.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Private.DataContractSerialization.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Private.Uri.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Private.Xml.Linq.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Private.Xml.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Reflection.DispatchProxy.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Reflection.Emit.ILGeneration.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Reflection.Emit.Lightweight.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Reflection.Emit.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Reflection.Extensions.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Reflection.Metadata.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Reflection.Primitives.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Reflection.TypeExtensions.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Reflection.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Resources.Reader.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Resources.ResourceManager.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Resources.Writer.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Runtime.CompilerServices.Unsafe.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Runtime.CompilerServices.VisualC.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Runtime.Extensions.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Runtime.Handles.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Runtime.InteropServices.RuntimeInformation.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Runtime.InteropServices.WindowsRuntime.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Runtime.InteropServices.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Runtime.Intrinsics.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Runtime.Loader.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Runtime.Numerics.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Runtime.Serialization.Formatters.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Runtime.Serialization.Json.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Runtime.Serialization.Primitives.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Runtime.Serialization.Xml.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Runtime.Serialization.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Runtime.WindowsRuntime.UI.Xaml.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Runtime.WindowsRuntime.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Runtime.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Security.Claims.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Security.Cryptography.Algorithms.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Security.Cryptography.Cng.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Security.Cryptography.Csp.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Security.Cryptography.Encoding.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Security.Cryptography.OpenSsl.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Security.Cryptography.Primitives.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Security.Cryptography.X509Certificates.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Security.Principal.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Security.SecureString.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Security.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.ServiceModel.Web.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.ServiceProcess.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Text.Encoding.CodePages.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Text.Encoding.Extensions.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Text.Encoding.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Text.Encodings.Web.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Text.Json.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Text.RegularExpressions.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Threading.Channels.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Threading.Overlapped.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Threading.Tasks.Dataflow.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Threading.Tasks.Extensions.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Threading.Tasks.Parallel.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Threading.Tasks.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Threading.Thread.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Threading.ThreadPool.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Threading.Timer.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Threading.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Transactions.Local.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Transactions.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.ValueTuple.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Web.HttpUtility.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Web.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Windows.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Xml.Linq.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Xml.ReaderWriter.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Xml.Serialization.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Xml.XDocument.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Xml.XPath.XDocument.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Xml.XPath.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Xml.XmlDocument.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Xml.XmlSerializer.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Xml.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\WindowsBase.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\mscorlib.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\netstandard.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\API-MS-Win-core-xstate-l2-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.DiaSymReader.Native.x86.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\SOS_README.md
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\System.Private.CoreLib.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-console-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-datetime-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-debug-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-errorhandling-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-file-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-file-l1-2-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-file-l2-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-handle-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-heap-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-interlocked-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-libraryloader-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-localization-l1-2-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-memory-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-namedpipe-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-processenvironment-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-processthreads-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-processthreads-l1-1-1.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-profile-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-rtlsupport-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-string-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-synch-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-synch-l1-2-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-sysinfo-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-timezone-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-core-util-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-crt-conio-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-crt-convert-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-crt-environment-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-crt-filesystem-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-crt-heap-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-crt-locale-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-crt-math-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-crt-multibyte-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-crt-private-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-crt-process-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-crt-runtime-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-crt-stdio-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-crt-string-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-crt-time-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\api-ms-win-crt-utility-l1-1-0.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\clrcompression.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\clretwrc.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\clrjit.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\coreclr.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\dbgshim.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\hostfxr.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\hostpolicy.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\mscordaccore.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\mscordaccore_x86_x86_5.0.20.12005.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\mscordbi.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\mscorrc.debug.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\mscorrc.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\ucrtbase.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\obj\Debug\netcoreapp5.0\win10-x86\OptProcessBiSenderService.csprojAssemblyReference.cache
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\obj\Debug\netcoreapp5.0\win10-x86\OptProcessBiSenderService.AssemblyInfoInputs.cache
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\obj\Debug\netcoreapp5.0\win10-x86\OptProcessBiSenderService.AssemblyInfo.cs
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\obj\Debug\netcoreapp5.0\win10-x86\OptProcessBiSenderService.csproj.CoreCompileInputs.cache
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\obj\Debug\netcoreapp5.0\win10-x86\OptProcessBiSenderService.csproj.CopyComplete
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\obj\Debug\netcoreapp5.0\win10-x86\OptProcessBiSenderService.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\obj\Debug\netcoreapp5.0\win10-x86\OptProcessBiSenderService.pdb
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\obj\Debug\netcoreapp5.0\win10-x86\OptProcessBiSenderService.genruntimeconfig.cache
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Management.Infrastructure.Native.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Management.Infrastructure.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\Microsoft.Management.Infrastructure.Native.Unmanaged.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\mi.dll
+E:\Projetos\Telemetria Raspberry Zero\DotNet\Common Usage\bin\Debug\netcoreapp5.0\win10-x86\miutils.dll

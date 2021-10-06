@@ -1,0 +1,122 @@
+{
+  "format": 1,
+  "restore": {
+    "E:\\Projetos\\Telemetria Raspberry Zero\\DotNet\\Common Usage\\OptProcessBiSenderService.csproj": {}
+  },
+  "projects": {
+    "E:\\Projetos\\Telemetria Raspberry Zero\\DotNet\\Common Usage\\OptProcessBiSenderService.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\Projetos\\Telemetria Raspberry Zero\\DotNet\\Common Usage\\OptProcessBiSenderService.csproj",
+        "projectName": "OptProcessBiSenderService",
+        "projectPath": "E:\\Projetos\\Telemetria Raspberry Zero\\DotNet\\Common Usage\\OptProcessBiSenderService.csproj",
+        "packagesPath": "C:\\Users\\Cliente\\.nuget\\packages\\",
+        "outputPath": "E:\\Projetos\\Telemetria Raspberry Zero\\DotNet\\Common Usage\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Cliente\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp5.0": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp5.0": {
+          "dependencies": {
+            "Common.Logging": {
+              "target": "Package",
+              "version": "[3.4.1, )"
+            },
+            "Microsoft.AspNet.WebPages": {
+              "target": "Package",
+              "version": "[3.2.6, )"
+            },
+            "Microsoft.Extensions.Hosting": {
+              "target": "Package",
+              "version": "[5.0.0-preview.2.20160.6, )"
+            },
+            "Microsoft.Extensions.Hosting.WindowsServices": {
+              "target": "Package",
+              "version": "[3.1.3, )"
+            },
+            "Microsoft.Management.Infrastructure": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
+            "Microsoft.Win32.Registry": {
+              "target": "Package",
+              "version": "[5.0.0-preview.3.20214.6, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
+            },
+            "System.IO.Ports": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
+            "System.Management": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
+            "TitaniumAS.Opc.Client": {
+              "target": "Package",
+              "version": "[1.0.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Runtime.win-x86",
+              "version": "[5.0.0-preview.1.20124.5, 5.0.0-preview.1.20124.5]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Runtime.win-x86",
+              "version": "[5.0.0-preview.1.20120.5, 5.0.0-preview.1.20120.5]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Runtime.win-x86",
+              "version": "[5.0.0-preview.1.20127.5, 5.0.0-preview.1.20127.5]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100-preview.1.20155.7\\RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "win10-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}

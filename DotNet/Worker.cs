@@ -17,6 +17,7 @@ using System.Net.NetworkInformation;
 using System.Security.Cryptography;
 //using System.Web.Helpers;
 using Newtonsoft.Json;
+using Microsoft.Management.Infrastructure;
 
 namespace OptProcessBiSenderService
 {
@@ -26,6 +27,13 @@ namespace OptProcessBiSenderService
         public bool status { get; set; }
         public string version { get; set; }
         public Dictionary<string, int> desc { get; set; }     //Dictionary<string, int>
+    }
+    public class JsonWebErrorResponse
+    {
+        public string date{ get; set; }
+        public bool status { get; set; }
+        public string version { get; set; }
+        public string desc { get; set; }     //Dictionary<string, int>
     }
 
     public class Worker : BackgroundService
@@ -164,6 +172,7 @@ namespace OptProcessBiSenderService
                     Console.WriteLine("Tags Nao Configuradas, Acesse a Pagina de Configuração");
                 }
 
+                __setDeviceConfig:
                 //caso a thread tenha sido cancelada
                 if(stoppingToken.IsCancellationRequested)   return;
 
@@ -174,10 +183,20 @@ namespace OptProcessBiSenderService
 
                 //configura dados do wifi
                 optdevice.setWifiSSID(configuration["ssid"], _comSerialPort);
+                Console.WriteLine("Aguardando 1 minuto para reestabelecer a rede");
+                //Thread.Sleep(5000);
                 optdevice.setWifiPass(configuration["password"], _comSerialPort);
+                Console.WriteLine("Aguardando 1 minuto para reestabelecer a rede");
+                //Thread.Sleep(5000);
                 optdevice.setWifiIp(configuration["ip"], _comSerialPort);
+                Console.WriteLine("Aguardando 1 minuto para reestabelecer a rede");
+                //Thread.Sleep(5000);
                 optdevice.setWifiGateway(configuration["gateway"], _comSerialPort);
+                Console.WriteLine("Aguardando 1 minuto para reestabelecer a rede");
+                //Thread.Sleep(5000);
                 optdevice.setWifiNetmask(configuration["netmask"], _comSerialPort);
+                Console.WriteLine("Aguardando 1 minuto para reestabelecer a rede");
+                //Thread.Sleep(5000);
 
                 
                 optdevice.setCloudHost(configuration["server"], _comSerialPort);
@@ -197,6 +216,7 @@ namespace OptProcessBiSenderService
                 }
                 else
                 {
+                    if(stoppingToken.IsCancellationRequested)   return; 
                     Console.WriteLine("Dispositivo nao esta conectado a rede");
                     goto __verifyNetwork;
                 }
@@ -213,15 +233,18 @@ namespace OptProcessBiSenderService
                 Console.WriteLine("Iniciando conexao");
 
                 //inicializa processo de envio dos dados
-                
+/*                
                 //pega posicao global do device
                 if(deviceType == 1) deviceLocation = getLocation(_infoSerialPort);
 
                 //converte para base 64
                 deviceLocation = Convert.ToBase64String(Encoding.ASCII.GetBytes(deviceLocation));
-
+*/
                 //Define dados importantes no device
-                optdevice.setMachineId(getComputerId(), _comSerialPort);
+                FingerPrint fp = new FingerPrint();
+
+                //optdevice.setMachineId(getComputerId(), _comSerialPort);
+                optdevice.setMachineId(fp.Value(), _comSerialPort);
                 optdevice.setProjectName(configuration["projectalias"], _comSerialPort);
 
                 /**********************************Le Tags no Servidor OPC******************************************/
@@ -235,7 +258,7 @@ namespace OptProcessBiSenderService
                 {
                     alreadySent = false;
 
-                    List<Dictionary<int, string>> dataToWrite = new List<Dictionary<int, string>>();
+                    List<Dictionary<string, string>> dataToWrite = new List<Dictionary<string, string>>();
                     int dataToWriteLen = 0;
                     //pega data da ultima leitura
                     string readedDateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
@@ -356,9 +379,12 @@ namespace OptProcessBiSenderService
 
                                 try
                                 {
+                                    //analizar retirada do tagonline info, usando so a id no matrikon
+                                    
                                     //dataToWrite += dataToWrite.Length >= 1? "^"+tagsOnlineInfo[val.Item.ItemId] +"`"+formatedValue+"`"+((int) val.Quality).ToString() : tagsOnlineInfo[val.Item.ItemId] +"`"+formatedValue+"`"+((int) val.Quality).ToString();
-                                    Dictionary<int, string> tmp = new Dictionary<int, string>();
-                                    tmp[int.Parse(tagsOnlineInfo[val.Item.ItemId])] = formatedValue+"`"+((int) val.Quality).ToString();
+                                    Dictionary<string, string> tmp = new Dictionary<string, string>();
+                                    //tmp[int.Parse(tagsOnlineInfo[val.Item.ItemId])] = formatedValue+"`"+((int) val.Quality).ToString();
+                                    tmp[val.Item.ItemId] = formatedValue+"`"+((int) val.Quality).ToString();
                                     dataToWrite.Add(tmp);
                                     tmp = null;
                                 }
@@ -431,7 +457,7 @@ namespace OptProcessBiSenderService
                                     }
 
                                     //reseta marcadores
-                                    dataToWrite = new List<Dictionary<int, string>>();
+                                    dataToWrite = new List<Dictionary<string, string>>();
                                     dataToWriteLen = 0;
                                 }
                             }
@@ -487,7 +513,7 @@ namespace OptProcessBiSenderService
                                 }
 
                                 //reseta marcadores
-                                dataToWrite = new List<Dictionary<int, string>>();
+                                dataToWrite = new List<Dictionary<string, string>>();
                                 dataToWriteLen = 0;
 
                                 //Environment.Exit(1);
@@ -503,6 +529,8 @@ namespace OptProcessBiSenderService
 
                             //marca que os dados foram enviados
                             alreadySent = true;
+
+                            
                         }
                     }
                     catch(Exception e)
@@ -544,213 +572,9 @@ namespace OptProcessBiSenderService
                                             //adiciona tag a string
                                             if((bool) opcTags[tag]["active"] == true)
                                             {
-                                                //postData += (postData.Length >= 1)? ",\""+tag+":"+tag+":"+opcTags[tag]["type"]+"\"": "\""+tag+":"+tag+":"+opcTags[tag]["type"]+"\"";
-                                                postData.Add((tag+":"+tag+":"+opcTags[tag]["type"]).Replace("\r", "").Replace("\n", ""));
-
-                                                //adiciona ao contadorremote
-                                                postLenCount ++;
-                                                if(postLenCount == int.Parse(configuration["tagsperrequest"]))
-                                                {
-                                                    //verifica se conexão ainda esta de pé
-//                                                    if(!cp.isConnected()){Console.WriteLine("cp is not connected"); stopAllThreads = true; return; }
-
-                                                    //fazer request post para adicionar as tags selecionadas ao banco post data é limitado a 128 bytes
-                                                    int postTrys = 3;
-                                                    __tryToPost:
-                                                    //string postResponse = cp.httpRequest("POST", "optcemi.com/api/optsyncopc?imei="+deviceInfo["imei"]+"&machine="+getComputerId()+"&token="+response["token"], 21509, null, postData);
-                                                    
-                                                    Console.WriteLine(JsonConvert.SerializeObject(postData));
-
-                                                    Console.WriteLine("____________________________________________");
-
-                                                    string postResponse = optdevice.setTagId(postData, _comSerialPort);
-
-                                                    postResponse = Regex.Replace(postResponse, @"\|\d+\|", "");
-
-                                                    Console.WriteLine("response");
-                                                    Console.WriteLine(postResponse);
-
-//                                                    string postResponse = cp.writeContinuousSocket("{\"type\":\"writetags\",\"data\":\""+postData+"\" , \"imei\": \""+deviceInfo["imei"]+"\", \"machine\":\""+getComputerId()+"\", \"token\":\""+response["token"]+"\"}\r\n\r\n", "(.*)\r\n\r\n", response["token"], int.Parse(configuration["timeout"]), sockNro);
-                                                    Console.WriteLine("post response -> "+postResponse);
-
-                                                    if(postResponse == null)
-                                                    {
-                                                        //Console.WriteLine("Falha ao Registrar Tags, Resposta do Post Invalida, Verifique seu saldo de telefonia");
-                                                        
-                                                        Console.Write("Falha ao Registrar Tags, Resposta do Post Invalida, Verifique seu saldo de telefonia");
-                                                        if(postTrys <= 0)
-                                                        {
-                                                            //Console.WriteLine("Reiniciando Contexto de Conexao PDP");
-                                                            Console.Write("Reiniciando Contexto de Conexao PDP");
-                                                            stopAllThreads = true;
-                                                            reloadThreadConfig = true;
-                                                            alreadySent = true;
-                                                            return;
-                                                        }
-                                                        postTrys --;                                                    
-                                                        //Console.WriteLine("Falha ao Registrar Tags, Tentando Novamente em 3 Segundos");
-                                                        
-                                                        Console.Write("Falha ao Registrar Tags, Tentando Novamente em 3 Segundos");
-                                                        
-                                                        Thread.Sleep(3000);
-
-                                                        goto __tryToPost;
-                                                    }
-                                                    
-                                                    
-                                                    //recupera dados retornados da ferramenta online
-                                                    Dictionary<string, int> received;
-                                                    try{
-                                                        JsonWebResponse receivedTemp = JsonConvert.DeserializeObject<JsonWebResponse>(postResponse);         
-                                                        received = receivedTemp.desc; 
-                                                    }catch(Exception e)
-                                                    {
-                                                        Console.WriteLine("Falha ao convertex resultado do post");
-                                                        postTrys --;
-                                                        goto __tryToPost;
-                                                    }
-                                                    //var received = simpleJsonLoad("{" + receivedTemp.data + "}");
-
-                                                    //concatena valores
-                                                    foreach (var x in received) 
-                                                    {
-                                                        var k = x.Key.Replace("\r","").Replace("\n","");
-                                                        //var v = x.Value.Replace("\r","").Replace("\n","");
-                                                        var v = x.Value.ToString();
-
-                                                        if(!tagsOnlineInfo.ContainsKey(k))
-                                                            tagsOnlineInfo.Add(k, v);
-                                                    }
-                                                    //reseta post data
-                                                    postData = new List<string>();                                               
-                                                    postLenCount = 0;
-                                                }
+                                                if(tags.IndexOf(tag) < 0)   tags.Add(tag);
                                             }
                                         }
-                                        if(postLenCount > 0)
-                                        {
-                                            
-                                            //EnvironmentName tags ao banco de dados como cabeçalho
-                                            //estrutura ["{tag name}:{tag address}:{tag type}","{tag name}:{tag address}:{tag type}"]
-
-                                            
-                                            Console.WriteLine(JsonConvert.SerializeObject(postData));
-
-                                            Console.WriteLine("____________________________________________");
-
-                                            string postResponse = optdevice.setTagId(postData, _comSerialPort);
-
-                                            postResponse = Regex.Replace(postResponse, @"\|\d+\|", "");
-
-                                            Console.WriteLine("response");
-                                            Console.WriteLine(postResponse);
-
-                                            ////Environment.Exit(1);
-
-                                            //verifica se conexão ainda esta de pé
- //                                           if(!cp.isConnected()){stopAllThreads = true; return; }
-                                            
-                                            //fazer request post para adicionar as tags selecionadas ao banco post data é limitado a 128 bytes
-                                            int postTrys = 3;
-                                            __tryToPost:
-                                            
-                                            //string postResponse = cp.httpRequest("POST", "optcemi.com/api/optsyncopc?imei="+deviceInfo["imei"]+"&machine="+getComputerId()+"&token="+response["token"], 21509, null, postData);
-//                                            string postResponse = cp.writeContinuousSocket("{\"type\":\"writetags\",\"data\":\""+postData+"\" , \"imei\": \""+deviceInfo["imei"]+"\", \"machine\":\""+getComputerId()+"\", \"token\":\""+response["token"]+"\"}\r\n\r\n", "(.*)\r\n\r\n", response["token"], int.Parse(configuration["timeout"]), sockNro);
-                                            Console.WriteLine("post response -> "+postResponse);
-
-                                            if(postResponse == null)
-                                            {
-                                                //Console.WriteLine("Falha ao Registrar Tags, Resposta do Post Invalida, Verifique seu saldo de telefonia");
-                                                
-                                                Console.Write("Falha ao Registrar Tags, Resposta do Post Invalida, Verifique seu saldo de telefonia");
-                                                if(postTrys <= 0)
-                                                {
-                                                    //Console.WriteLine("Reiniciando Contexto de Conexao PDP");
-                                                    
-                                                    Console.Write("Reiniciando Contexto de Conexao PDP");
-                                                    stopAllThreads = true;
-                                                    reloadThreadConfig = true;
-                                                    alreadySent = true;
-                                                    return;
-                                                    
-                                                }
-                                                postTrys --;                                                    
-                                                //Console.WriteLine("Falha ao Registrar Tags, Tentando Novamente em 3 Segundos");
-                                                
-                                                Console.Write("Falha ao Registrar Tags, Tentando Novamente em 3 Segundos");
-                                                
-                                                Thread.Sleep(3000);
-
-                                                goto __tryToPost;
-                                            }                                            
-                                            
-
-                                            /* Versão antiga do codigo
-                                            //recupera dados retornados da ferramenta online
-                                            var receivedTemp = JsonConvert.DeserializeObject<JsonWebResponse>(postResponse);                                            
-                                            var received = simpleJsonLoad("{" + receivedTemp.data + "}");
-                                        //Console.WriteLine(received);
-
-                                            //concatena valores
-                                            foreach (var x in received) 
-                                            {
-                                                var k = x.Key.Replace("\r","").Replace("\n","");
-                                                var v = x.Value.Replace("\r","").Replace("\n","");
-                                                if(!tagsOnlineInfo.ContainsKey(k))
-                                                    tagsOnlineInfo.Add(k, v);
-                                            }
-
-                                            //reseta post data
-                                            postData = new List<string>();                                         
-                                            postLenCount = 0;
-                                            */
-
-                                            //recupera dados retornados da ferramenta online
-                                            Dictionary<string, int> received;
-                                            try{
-                                                JsonWebResponse receivedTemp = JsonConvert.DeserializeObject<JsonWebResponse>(postResponse);         
-                                                received = receivedTemp.desc; 
-                                            }catch(Exception e)
-                                            {
-                                                Console.WriteLine("Falha ao convertex resultado do post");
-                                                postTrys --;
-                                                goto __tryToPost;
-                                            }
-                                    
-                                            //var received = simpleJsonLoad("{" + receivedTemp.data + "}");
-
-                                            //concatena valores
-                                            foreach (var x in received) 
-                                            {
-                                                var k = x.Key.Replace("\r","").Replace("\n","");
-                                                //var v = x.Value.Replace("\r","").Replace("\n","");
-                                                var v = x.Value.ToString();
-                                                
-                                                if(!tagsOnlineInfo.ContainsKey(k))
-                                                    tagsOnlineInfo.Add(k, v);
-                                            }
-                                            //reseta post data
-                                            postData = new List<string>();                                               
-                                            postLenCount = 0;
-                                        }
-    /*
-                                        //Console.WriteLine(postData);    
-                                        //Console.Write((postData));
-                                        //fazer request post para adicionar as tags selecionadas ao banco post data é limitado a 128 bytes
-                                        tagsOnlineInfo = simpleJsonLoad(cp.httpRequest("POST", "optcemi.com/api/optsyncopc?imei="+deviceInfo["imei"]+"&machine="+getComputerId()+"&token="+response["token"], 21509, null, postData));
-    */
-                                        //redefine a lista de tags
-                                        tags = new List<string>();
-                                        foreach(string key in tagsOnlineInfo.Keys)
-                                        {
-                                            //adiciona tag a string
-                                            Console.Write(key + " => ");
-                                            Console.WriteLine(tagsOnlineInfo[key]);    
-                                            //Console.Write((tagsOnlineInfo[key]));                   
-                                        }
-
-                                        foreach(string tag in tagsOnlineInfo.Keys)  
-                                            if(tags.IndexOf(tag) < 0)   tags.Add(tag);
                                             
                                         //cria o grupo de leitura
                                         opcMan.startReadingGroup(tags.ToArray());
@@ -799,8 +623,8 @@ namespace OptProcessBiSenderService
                                         Thread.Sleep(int.Parse(cycle));
                                     }
                                 }
-                                
                             }
+
                             catch(Exception e)
                             {
                                 Console.WriteLine("Uma Exceção foi encontrada em opcReadingThread " + e.ToString());
@@ -1047,11 +871,12 @@ namespace OptProcessBiSenderService
                                 "cycle=30000\r\n"+
                                 "timeout=30000\r\n"+
                                 "tagsperrequest=100\r\n"+
-                                "ssid=CEMI Network\r\n"+
+                                "ssid=CEMI_AP\r\n"+
                                 "password=c3m1t3ch\r\n"+
                                 "ip=192.168.1.222\r\n"+
                                 "gateway=192.168.1.1\r\n"+
                                 "mode=mobile\r\n"+
+                                "project=null\r\n"+
                                 "netmask=255.255.255.0\r\n");
                     cfg.Close();
                 }
@@ -1344,12 +1169,24 @@ namespace OptProcessBiSenderService
 
         static string identifier(string key, string value)
         {
+/*
             ManagementObjectSearcher searcher = new ManagementObjectSearcher("select * from " + key);
             foreach (ManagementObject share in searcher.Get())
             {
                 if(share[value] != null)
                     return share[value].ToString();
             }
+*/
+            var query =  CimSession.Create(null) // null instead of localhost which would otherwise require certain MMI services running
+                .QueryInstances(@"root\cimv2", "WQL", "SELECT * FROM " + key);
+                
+                foreach (var share in query)
+                {
+                    if(share.CimInstanceProperties != null)
+                        return share.CimInstanceProperties[value].ToString();
+                }
+                //.FirstOrDefault().CimInstanceProperties[value].Value.ToString();
+
             return "";
         }
 
