@@ -1,0 +1,30 @@
+$(document).ready(function(){
+    console.log("teste");
+
+    setInterval(() => {
+        $.ajax({
+            url: "http://optcemi.com:21509/simulation/Vale_Viga",
+            type: "GET",
+            crossDomain: true,
+            //data: JSON.stringify(somejson),
+            dataType: "json",
+            success: function (response){
+                console.log(response);
+
+                for(i=0; i<response.desc.length; i++){
+                    tagdata = response.desc[i];
+                    tagname =tagdata.tag.replace(/\./g,"-").replace(/ /g,"_");
+                    try{
+                        $("input[name="+tagname+"]").val(tagdata.value);
+                    }catch(e){
+                        console.log("erro to attribute tag value",e);
+                    }
+                    console.log(tagname);
+                }
+            },
+            error: function (xhr, status){
+                console.log("error", xhr,status);
+            }
+        });
+    }, 5000);
+});

@@ -1,0 +1,29 @@
+#Vale{ 
+  height: 8vh;
+  left: 89vw;
+  overflow-y: none;
+  position: absolute !important;
+  top: 0vh;
+  width: 10vw;
+  z-index: 2; 
+}
+
+#LogoCemi{ 
+  height: 8vh;
+  left: 0vw;
+  overflow-y: none;
+  position: absolute !important;
+  top: 0vh;
+  width: 11vw;
+  z-index: 2; 
+}
+
+#divmyChart{
+  left: 0vw;
+  top: 15vh;
+  width: 98vw;
+  height: 85vh;  
+  overflow-y: none;
+  position: absolute !important;
+  z-index: 2;
+}

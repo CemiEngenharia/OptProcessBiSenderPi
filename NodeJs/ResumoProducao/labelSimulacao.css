@@ -1,0 +1,51 @@
+#SimulacaoDeIndicadores{
+    color: #782327;
+    font-size: 1.8vw;
+    left: 32.5vw;
+    position:absolute;
+    top: 3vh;  
+    z-index: 2;
+}
+
+#SalaDeControle{
+    color: #BFBFBF;
+    font-size: 1.5vw;
+    left: 37vw;
+    position:absolute;
+    top: 8vh;  
+    z-index: 2;
+}
+
+#Lamas{
+    color: #000000;
+    font-size: 1vw;
+    left: 95.5vw;
+    position:absolute;
+    top: 16vh;  
+    z-index: 1;
+}
+
+#Flotacao{
+    color: #000000;
+    font-size: 1vw;
+    left: 91vw;
+    position:absolute;
+    top: 75.2vh;  
+    z-index: 1;
+}
+
+
+#Vale{ 
+    z-index: 2;
+    width: 10vw;
+    height: 8vh;
+ }
+ 
+#LogoCemi{ 
+    left: 89.5vw;
+    top: 0vh;
+    width: 10.4vw;
+    height: 8vh;  
+    position: absolute !important;
+    z-index: 2;
+}

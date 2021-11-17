@@ -1,0 +1,201 @@
+<?php
+
+    if(isset($_COOKIE["session"]) == true){
+        if(strlen($_COOKIE["session"]) !=  32){
+            header("Location:  ../index.php");
+        }
+    }	
+    else{
+        header("Location: ../index.php");
+    }
+?>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+	<title>Simulador Dinâmico</title>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link href='https://fonts.googleapis.com/css?family=RobotoDraft' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src= "https://github.com/google/gson.git"></script>
+        <link href='https://icons8.com.br/icons'>
+
+        <script src="../values.js"> </script>
+        
+        <link rel="stylesheet" href="./bodySimulacaoIndicadores.css">
+        <link rel="stylesheet" href="./labelSimulacao.css">
+        <link rel="stylesheet" href="./menuSimulacao.css">
+        <link rel="stylesheet" href="./table1.css">
+        <link rel="stylesheet" href="./table5.css">
+        <link rel="stylesheet" href="./table6.css">
+
+    </head>
+
+	<body>
+        
+        <div> <img id="LogoCemi"    src="../ImagensHMI/Cemi.jpeg">   </div> <!--LOGO CEMI--> 
+        <div> <img id="Vale"        src="../ImagensHMI/Vale1.jpg">    </div> <!--LOGO VALE-->                                                                                                                                             
+             
+        <nav class="dropdown">
+            <a class="menu">MENU</a>
+            <div class="dropdown-content">
+                <li>
+                    <a> HMI </a>
+                    <ul>
+                        <li>    <a href="../HMI/Britagem/Britagem.php">                                                 Britagem                            </a></li>
+                        <li>    <a href="../HMI/Espessador/Espessador.php">                                             Espessador                          </a></li>
+                        <li>    <a href="../HMI/Flotacao/Flotacao.php">                                                 Flotação                            </a></li>
+                        <li>    <a href="../HMI/MoagemLinha01/MoagemLinha01.php">                                       Moagem - Linha 01                   </a></li>
+                        <li>    <a href="../HMI/MoagemLinha02/MoagemLinha02.php">                                       Moagem - Linha 02                   </a></li>
+                        <li>    <a href="../HMI/SeparacaoMagneticaAltaFrequencia/SeparacaoMagneticaAltaFrequencia.php"> Separação Magnética Alta Frequência </a></li>
+                        <li>    <a href="../HMI/SeparacaoMagneticaTambor/SeparacaoMagneticaTambor.php">                 Separação Magnética Tambor          </a></li>
+                    </ul>
+                </li>   
+                <a href="../global.php">                                     Global                  </a>
+                <li>
+                    <a> Gráfico </a>
+                    <ul>
+                        <li>    <a href="../Graficos/GraficoCmai/GraficoCmai.php">                  CMAI            </a></li>  
+                        <li>    <a href="../Graficos/GraficoEspessamento/GraficoEspessamento.php">  Espessamento    </a></li>  
+                        <li>    <a href="../Graficos/GraficoFlotacao/GraficoFlotacao.php">          Flotação        </a></li>
+                        <li>    <a href="../Graficos/GraficoMoinho1/GraficoMoinho1.php">            Moinho 01       </a></li>
+                        <li>    <a href="../Graficos/GraficoMoinho2/GraficoMoinho2.php">            Moinho 02       </a></li>
+                    </ul>
+                </li> 
+                <li>
+                    <a> Simulação Dinâmica </a>
+                    <ul>
+                        <li>    <a href="../SimulacaoDinamica/SimulacaoDinamicaBritagem/SimulacaoDinamicaBritagem.php">          Britagem           </a></li>
+                        <li>    <a href="../SimulacaoDinamica/SimulacaoDinamicaCmai1/SimulacaoDinamicaCmai1.php">                CMAI               </a></li>
+                        <li>    <a href="../SimulacaoDinamica/SimulacaoDinamicaDeslamagem/SimulacaoDinamicaDeslamagem.php">      Deslamagem         </a></li>
+                        <li>    <a href="../SimulacaoDinamica/SimulacaoDinamicaEspessamento/SimulacaoDinamicaEspessamento.php">  Espessamento       </a></li>
+                        <li>    <a href="../SimulacaoDinamica/SimulacaoDinamicaFlotacao/SimulacaoDinamicaFlotacao.php">          Flotação           </a></li>
+                        <li>    <a href="../SimulacaoDinamica/SimulacaoDinamicaMoagem/SimulacaoDinamicaMoagem.php">              Moagem             </a></li>
+                        <li>    <a href="../SimulacaoDinamica/SimulacaoDinamicaRom/SimulacaoDinamicaRom.php">                    ROM                </a></li>
+                    </ul>
+                </li>   
+                <a href="./SimulacaoIndicadores.php"> Simulação Indicadores   </a>
+            </div>
+        </nav>
+        
+        <!--TITULO-->           
+        <label id="SimulacaoDeIndicadores"  type="text" name="SimulacaoDeIndicadores"> Simulação de Indicadores  </label>
+        <label id="SalaDeControle"          type="text" name="SalaDeControle">         KPI'S - Página 2          </label>
+
+        <!--LABEL-->
+        <label id="Pagina"         type="text" name="Pagina">        Páginas     </label>
+
+        <!--LINK--> 
+        <a id="LinkPagina1"     href="../SimulacaoIndicadores/SimulacaoIndicadores.php">  1   </a>
+        <a id="LinkPagina2"     href="./SimulacaoIndicadores2.php">                       2   </a>
+                    
+            <!-------------------------------------------------------------------------------------------------------------------------------------------->
+            <table id="table1">
+                
+                <caption> QUALIDADE</caption> <!-- TÍTULO-->
+
+                <tr><!-- CABEÇALHO-->
+                    <th> FLOTAÇÃO </th>
+                    <th> Fe (%)   </th>
+                    <th> SiO2 (%) </th>
+                    <th> t/h      </th>   
+                </tr>  
+               
+                <tr> <!-- LINHA 1-->
+                    <td> Rejeito Scavenger </td>
+                    <td> <input class="input1" type="text" id="Flotacao_Scavenger_Rejeito_Teor_Fe_OptSim"       name="Flotacao_Scavenger_Rejeito_Teor_Fe_OptSim"        value="0.00" disabled> %</td>
+                    <td> <input class="input1" type="text" id="Flotacao_Scavenger_Rejeito_Teor_SiO2_OptSim"     name="Flotacao_Scavenger_Rejeito_Teor_SiO2_OptSim"      value="0.00" disabled> %</td>
+                    <td> <input class="input1" type="text" id="Flotacao_Scavenger_Rejeito_Taxa_BaseSeca_OptSim" name="Flotacao_Scavenger_Rejeito_Taxa_BaseSeca_OptSim"  value="0.00" disabled>  </td>
+                </tr> 
+                
+                <tr>  <!-- LINHA 2-->
+                    <td> Concentrado Cleaner </td>
+                    <td> <input class="input2" type="text" id="Flotacao_Cleaner_Concentrado_Teor_Fe_OptSim"         name="Flotacao_Cleaner_Concentrado_Teor_Fe_OptSim"          value="0.00" disabled> %</td>
+                    <td> <input class="input2" type="text" id="Flotacao_Cleaner_Concentrado_Teor_SiO2_OptSim"       name="Flotacao_Cleaner_Concentrado_Teor_SiO2_OptSim"        value="0.00" disabled> %</td>
+                    <td> <input class="input2" type="text" id="Flotacao_Cleaner_Concentrado_Taxa_BaseSeca_OptSim"   name="Flotacao_Cleaner_Concentrado_Taxa_BaseSeca_OptSim"    value="0.00" disabled>  </td>
+                    
+                </tr> 
+    
+                <tr> <!-- LINHA 3 -->   
+                    <td> Alimentação Flotação </td>
+                    <td> <input class="input1" type="text" id="Flotacao_Rougher_Alimentacao_Teor_Fe_OptSim"         name="Flotacao_Rougher_Alimentacao_Teor_Fe_OptSim"          value="0.00" disabled> %</td>
+                    <td> <input class="input1" type="text" id="Flotacao_Rougher_Alimentacao_Teor_SiO2_OptSim"       name="Flotacao_Rougher_Alimentacao_Teor_SiO2_OptSim"        value="0.00" disabled> %</td>
+                    <td> <input class="input1" type="text" id="Deslamagem_CI0102_UF_Taxa_BaseSeca_OptSim"           name="Deslamagem_CI0102_UF_Taxa_BaseSeca_OptSim"            value="0.00" disabled>  </td>
+                </tr> 
+            </table>
+  
+
+
+            <!-------------------------------------------------------------------------------------------------------------------------------------------->
+            <table id="table5">
+                
+                <caption> QUALIDADE</caption> <!-- TÍTULO-->
+
+                <tr><!-- CABEÇALHO-->
+                    <th> SEPARAÇÃO MAGNÉTICA </th>
+                    <th> Fe (%)              </th>
+                    <th> SiO2 (%)            </th>
+                    <th> t/h                 </th>   
+                </tr>  
+               
+                <tr> <!-- LINHA 1-->
+                    <td> PCVI (TC-05)</td>
+                    <td> <input class="input1" type="text" id="CMAI_Cleaner_Tambor_Concentrado_PCVI_Teor_Fe_OptSim" name="CMAI_Cleaner_Tambor_Concentrado_PCVI_Teor_Fe_OptSim" value="0.00" disabled> %</td>
+                    <td> <input class="input1" type="text" id="CMAI_Cleaner_Tambor_Concentrado_PCVI_Teor_SiO2_OptSim" name="CMAI_Cleaner_Tambor_Concentrado_PCVI_Teor_SiO2_OptSim" value="0.00" disabled> %</td>
+                    <td> <input class="input1" type="text" id="CMAI_Cleaner_Tambor_Concentrado_PCVI_Taxa_BaseSeca_OptSim" name="CMAI_Cleaner_Tambor_Concentrado_PCVI_Taxa_BaseSeca_OptSim" value="0.00" disabled> </td>
+                </tr> 
+                
+                <tr>  <!-- LINHA 2-->
+                    <td> Rejeito Grosso (TC-06) </td>
+                    <td> <input class="input2" type="text" id="CMAI_Rejeito_TC06_Teor_Fe_OptSim" name="CMAI_Rejeito_TC06_Teor_Fe_OptSim" value="0.00" disabled> %</td>
+                    <td> <input class="input2" type="text" id="CMAI_Rejeito_TC06_Teor_SiO2_OptSim" name="CMAI_Rejeito_TC06_Teor_SiO2_OptSim" value="0.00" disabled> %</td>
+                    <td> <input class="input2" type="text" id="CMAI_Rejeito_TC06_Taxa_OptSim" name="CMAI_Rejeito_TC06_Taxa_OptSim" value="0.00" disabled> </td>
+                </tr> 
+            </table>
+            <!-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <table id="table6">
+                
+                <caption> QUALIDADE</caption> <!-- TÍTULO-->
+
+                <tr><!-- CABEÇALHO-->
+                    <th> LAMAS (Overflow) </th>
+                    <th> Fe (%) </th>
+                    <th> SiO2 (%) </th>
+                    <th> t/h </th>   
+                </tr>  
+               
+                <tr> <!-- LINHA 1-->
+                    <td> VPT-2037-CI-04 </td>
+                    <td> <input class="input1" type="text" id="CMAI_Cleaner_CI04_OF_Teor_Fe_OptSim" name="CMAI_Cleaner_CI04_OF_Teor_Fe_OptSim" value="0.00" disabled> %</td>
+                    <td> <input class="input1" type="text" id="CMAI_Cleaner_CI04_OF_Teor_SiO2_OptSim" name="CMAI_Cleaner_CI04_OF_Teor_SiO2_OptSim" value="0.00" disabled> %</td>
+                    <td> <input class="input1" type="text" id="CMAI_Cleaner_CI04_OF_Taxa_OptSim" name="CMAI_Cleaner_CI04_OF_Taxa_OptSim" value="0.00" disabled> </td>
+                </tr> 
+                
+                <tr>  <!-- LINHA 2-->
+                    <td> VPT-2037-CI-05 </td>
+                    <td> <input class="input2" type="text" id="Deslamagem_CI05_OF_Teor_Fe_OptSim" name="Deslamagem_CI05_OF_Teor_Fe_OptSim" value="0.00" disabled> %</td>
+                    <td> <input class="input2" type="text" id="Deslamagem_CI05_OF_Teor_SiO2_OptSim" name="Deslamagem_CI05_OF_Teor_SiO2_OptSim" value="0.00" disabled> %</td>
+                    <td> <input class="input2" type="text" id="Deslamagem_CI05_OF_Taxa_OptSim" name="Deslamagem_CI05_OF_Taxa_OptSim" value="0.00" disabled> </td>
+                </tr> 
+    
+                <tr> <!-- LINHA 3 -->
+                    <td> VPT-2037-CI-03 </td>
+                    <td> <input class="input1" type="text" id="CMAI_Scavenger_CI03_OF_Teor_Fe_OptSim" name="CMAI_Scavenger_CI03_OF_Teor_Fe_OptSim" value="0.00" disabled> %</td>
+                    <td> <input class="input1" type="text" id="CMAI_Scavenger_CI03_OF_Teor_SiO2_OptSim" name="CMAI_Scavenger_CI03_OF_Teor_SiO2_OptSim" value="0.00" disabled> %</td>
+                    <td> <input class="input1" type="text" id="CMAI_Scavenger_CI03_OF_Taxa_OptSim" name="CMAI_Scavenger_CI03_OF_Taxa_OptSim" value="0.00" disabled> </td>
+                </tr> 
+
+                <tr> <!-- LINHA 4 -->
+                    <td> VPT-2040-CI-01/02 </td>
+                    <td> <input class="input2" type="text" id="Deslamagem_CI0102_OF_Teor_Fe_OptSim" name="Deslamagem_CI0102_OF_Teor_Fe_OptSim" value="0.00" disabled> %</td>
+                    <td> <input class="input2" type="text" id="Deslamagem_CI0102_OF_Teor_SiO2_OptSim" name="Deslamagem_CI0102_OF_Teor_SiO2_OptSim" value="0.00" disabled> %</td>
+                    <td> <input class="input2" type="text" id="Deslamagem_CI0102_OF_Taxa_OptSim" name="Deslamagem_CI0102_OF_Taxa_OptSim" value="0.00" disabled> </td>
+                </tr> 
+            </table>
+
+        </div>
+    </body>
+</html> 

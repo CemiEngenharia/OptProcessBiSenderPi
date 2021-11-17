@@ -1,0 +1,165 @@
+#EspessadorCaixa01{
+    background-color:#99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 17vw;
+    position: absolute;
+    text-align: center;
+    top: 37vh;  
+    z-index: 1;     
+}
+
+#EspessadorCaixa02{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 37vw;
+    position: absolute;
+    text-align: center ;
+    top: 27.5vh;  
+    z-index: 1; 
+}
+
+#EspessadorCaixa03{ 
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 45vw;
+    position: absolute;
+    text-align: center ;
+    top: 27.6vh;  
+    z-index: 1; 
+}
+
+#EspessadorCaixa04{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color:#000000;
+    font-size: 0.5vw;
+    left: 59.3vw;
+    position: absolute;
+    text-align: center;
+    top: 42vh;  
+    z-index: 1; 
+}
+
+#EspessadorCaixa05{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 51.6vw;
+    position: absolute;
+    text-align: center;
+    top: 51.5vh;  
+    z-index: 1; 
+}
+
+#EspessadorCaixa06{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 69.1vw;
+    position: absolute;
+    text-align: center;
+    top: 35.5vh;
+    width: 3.4vw;  
+    z-index: 1; 
+}
+
+#EspessadorCaixa07{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    height: 3.3vh;
+    left: 78.7vw;
+    position: absolute;
+    text-align: center ;
+    top: 35vh;   
+    width: 3.4vw;
+    word-wrap: break-word;
+    z-index: 1; 
+}
+
+#EspessadorCaixa08{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 74.3vw;
+    position: absolute;
+    text-align: center;
+    top: 40.5vh;   
+    width: 4vw;
+    z-index: 1;
+}
+
+#EspessadorCaixa09{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color:#000000;
+    font-size: 0.5vw;
+    left: 83.7vw;
+    position: absolute;
+    text-align: center;
+    top: 40.5vh;   
+    width: 4vw;
+    z-index: 1; 
+}
+
+#EspessadorCaixa10{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color :#000000;
+    font-size: 0.5vw;
+    left: 48.3vw;
+    position: absolute;
+    text-align: center;
+    top: 60.5vh;  
+    width: 4vw;
+    z-index: 1; 
+}
+
+#EspessadorCaixa11{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 38.5vw;
+    position: absolute;
+    text-align: center;
+    top: 94vh;  
+    width: 4vw;
+    z-index: 1;    
+}
+
+#EspessadorCaixa12{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 58.5vw;
+    position: absolute;
+    text-align: center;
+    top: 94vh;  
+    width: 4vw;;
+    z-index: 1; 
+}
+
+#EspessadorCaixa13{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 81.7vw;
+    position: absolute;
+    text-align: center;
+    top: 79vh;  
+    width: 4vw;
+    z-index: 1; 
+}

@@ -1,0 +1,92 @@
+#ControleAvancadoDeProcessos{
+    color: #782327;
+    font-size: 1.8vw;
+    left: 36vw;
+    position:absolute;
+    top: 3vh;  
+    z-index: 2;
+}
+
+#FlotacaoSupervisaoGeral{
+    color: #BFBFBF;
+    font-size: 1.5vw;
+    left: 39vw;;
+    position:absolute;
+    top: 8vh;  
+    z-index: 2;
+}
+
+#Rougher{
+    color: #000000;
+    font-size: 1vw;
+    left: 39vw;
+    position:absolute;
+    top: 49.5vh;  
+    z-index: 2; 
+}
+
+#Cleaner{
+    color: #000000;
+    font-size: 1vw;
+    left: 73vw;
+    position:absolute;
+    top: 34vh;  
+    z-index: 2; 
+}
+
+#Scavenger{
+    color: #000000;
+    font-size: 1vw;
+    left: 38vw;
+    position:absolute;
+    top: 82vh;  
+    z-index: 2; 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#AlimentacaoFlotacao{
+    color: #000000;
+    font-size: 0.6vw;
+    left: 7vw;
+    position:absolute;
+    top: 35.5vh;  
+    z-index: 2; 
+}
+
+#ConcentracaoFlotacao{
+    color: #000000;
+    font-size: 0.6vw;
+    left: 90vw;
+    position:absolute;
+    top: 54.5vh;  
+    z-index: 2; 
+}
+
+#Rejeita{
+    color: #000000;
+    font-size: 0.6vw;
+    left: 70vw;
+    position:absolute;
+    top: 88.5vh;  
+   z-index: 2; 
+}
+
+
+
+
+
+
+

@@ -1,0 +1,250 @@
+<?php
+
+    if(isset($_COOKIE["session"]) == true){
+        if(strlen($_COOKIE["session"]) !=  32){
+            header("Location:  ../../index.php");
+        }
+    }	
+    else{
+        header("Location: ../../index.php");
+    }
+?>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+	<title>Simulador Dinâmico</title>
+	<title>SITE</title>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link href='https://fonts.googleapis.com/css?family=RobotoDraft' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="./visual.css">
+        <script src= "https://github.com/google/gson.git"></script>
+        <link href='https://icons8.com.br/icons'>
+
+        <script src="../../values.js"> </script>
+        <link rel="stylesheet" href="./bodySimulacaoDinamicaCmai3.css">
+        <link rel="stylesheet" href="./labelSimulacao.css">
+        <link rel="stylesheet" href="./menuSimulacao.css">
+        <link rel="stylesheet" href="./table1.css">
+        <link rel="stylesheet" href="./table2.css">
+        <link rel="stylesheet" href="./table3.css">
+
+    </head>
+
+	<body>
+        <div>
+            <div> <img id="LogoCemi"        src="../../ImagensHMI/Cemi.jpeg">      </div> <!--LOGO CEMI--> 
+            <div> <img id="Vale"            src="../../ImagensHMI/Vale1.jpg">      </div> <!--LOGO VALE-->                                                                                                                                       
+                 
+            <nav class="dropdown">
+                <a class="menu">MENU</a>
+                <div class="dropdown-content">
+                    <li>
+                        <a> HMI </a>
+                        <ul>
+                            <li>    <a href="../../HMI/Britagem/Britagem.php">                                                 Britagem                            </a></li>
+                            <li>    <a href="../../HMI/Espessador/Espessador.php">                                             Espessador                          </a></li>
+                            <li>    <a href="../../HMI/Flotacao/Flotacao.php">                                                 Flotação                            </a></li>
+                            <li>    <a href="../../HMI/MoagemLinha01/MoagemLinha01.php">                                       Moagem - Linha 01                   </a></li>
+                            <li>    <a href="../../HMI/MoagemLinha02/MoagemLinha02.php">                                       Moagem - Linha 02                   </a></li>
+                            <li>    <a href="../../HMI/SeparacaoMagneticaAltaFrequencia/SeparacaoMagneticaAltaFrequencia.php"> Separação Magnética Alta Frequência </a></li>
+                            <li>    <a href="../../HMI/SeparacaoMagneticaTambor/SeparacaoMagneticaTambor.php">                 Separação Magnética Tambor          </a></li>
+                        </ul>
+                    </li>   
+                    <a href="../../global.php">                                     Global                  </a>
+                    <li>
+                        <a> Gráfico </a>
+                        <ul>
+                            <li>    <a href="../../Graficos/GraficoCmai/GraficoCmai.php">            CMAI            </a></li>  
+                            <li>    <a href="../../Graficos/GraficoEspessamento/GraficoEspessamento.php">    Espessamento    </a></li>  
+                            <li>    <a href="../../Graficos/GraficoFlotacao/GraficoFlotacao.php">        Flotação        </a></li>
+                            <li>    <a href="../../Graficos/GraficoMoinho1/GraficoMoinho1.php">         Moinho 01       </a></li>
+                            <li>    <a href="../../Graficos/GraficoMoinho2/GraficoMoinho2.php">         Moinho 02       </a></li>
+                        </ul>
+                    </li>  
+                    <li>
+                        <a> Simulação Dinâmica </a>
+                        <ul>
+                            <li>    <a href="../SimulacaoDinamicaBritagem/SimulacaoDinamicaBritagem.php">          Britagem           </a></li>
+                            <li>    <a href="../SimulacaoDinamicaCmai1/SimulacaoDinamicaCmai1.php">                CMAI               </a></li>
+                            <li>    <a href="../SimulacaoDinamicaDeslamagem/SimulacaoDinamicaDeslamagem.php">      Deslamagem         </a></li>
+                            <li>    <a href="../SimulacaoDinamicaEspessamento/SimulacaoDinamicaEspessamento.php">  Espessamento       </a></li>
+                            <li>    <a href="../SimulacaoDinamicaFlotacao/SimulacaoDinamicaFlotacao.php">          Flotação           </a></li>
+                            <li>    <a href="../SimulacaoDinamicaMoagem/SimulacaoDinamicaMoagem.php">              Moagem             </a></li>
+                            <li>    <a href="../SimulacaoDinamicaRom/SimulacaoDinamicaRom.php">                    ROM                </a></li>
+                        </ul>
+                    </li>   
+                    <a href="../../SimulacaoIndicadores/SimulacaoIndicadores.php"> Simulação Indicadores   </a>
+                </div>
+            </nav>
+            
+            
+            <!--TITULO-->
+            <label id="SimulacaoDeIndicadores"  type="text" name="SimulacaoDeIndicadores"> Simulação Dinâmica   </label>
+            <label id="SalaDeControle"          type="text" name="SalaDeControle">         CMAI - Página 3      </label> 
+            
+            <!--LABEL-->
+            <label id="Pagina"         type="text" name="Pagina">        Página     </label>
+
+            <!--LINK--> 
+            <a id="LinkPagina1"     href="../SimulacaoDinamicaCmai1/SimulacaoDinamicaCmai1.php">   1   </a>
+            <a id="LinkPagina2"     href="../SimulacaoDinamicaCmai2/SimulacaoDinamicaCmai2.php">   2   </a>
+            <a id="LinkPagina3"     href="./SimulacaoDinamicaCmai3.php">                           3   </a>  
+         
+
+            <!-------------------------------------------------------------------------------------------------------------------------------------------->
+            <table id="table2">
+                <th rowspan="25"> CMAI </th><!-- TÍTULO COLUNA--> 
+
+                <tr class="tr1"><!-- LINHA 89-->
+                    <td> 10 </td>
+                    <td> CMAI_Rougher_Tambor_Rejeito_PercSol_OptSim  </td>
+                    <td class="teste"><input  class="input1" type="text" id="CMAI_Rougher_Tambor_Rejeito_PercSol_OptSim" name="CMAI_Rougher_Tambor_Rejeito_PercSol_OptSim" value="0.00" disabled> %</td>
+                </tr> 
+                <!---------------------------------------->   
+                <tr class="tr2"><!-- LINHA 90-->
+                    <td> 10 </td>
+                    <td> CMAI_Rougher_Tambor_Rejeito_Taxa_BaseSeca_OptSim</td>
+                    <td class="teste"><input  class="input2" type="text" id="CMAI_Rougher_Tambor_Rejeito_Taxa_BaseSeca_OptSim" name="CMAI_Rougher_Tambor_Rejeito_Taxa_BaseSeca_OptSim" value="0.00" disabled> t/h</td>
+                </tr>
+                <!---------------------------------------->
+                <tr class="tr1"><!-- LINHA 91-->
+                    <td> 10 </td>
+                    <td> CMAI_Rougher_Tambor_Rejeito_Taxa_BaseUmida_OptSim  </td>
+                    <td class="teste"><input  class="input1" type="text" id="CMAI_Rougher_Tambor_Rejeito_Taxa_BaseUmida_OptSim" name="CMAI_Rougher_Tambor_Rejeito_Taxa_BaseUmida_OptSim" value="0.00" disabled> t/h</td>
+                </tr>
+                <!---------------------------------------->
+                <tr class="tr2"><!-- LINHA 92-->
+                    <td> 10 </td>
+                    <td> CMAI_Rougher_Tambor_Rejeito_Vazao_OptSim</td>
+                   <td class="teste"><input  class="input2" type="text" id="CMAI_Rougher_Tambor_Rejeito_Vazao_OptSim" name="CMAI_Rougher_Tambor_Rejeito_Vazao_OptSim" value="0.00" disabled> m&#x00B3/h</td>
+                </tr>
+                <!---------------------------------------->
+                <tr class="tr1"><!-- LINHA 93-->
+                    <td> 32 </td>
+                    <td> CMAI_Scavenger_AltoCampo_Alimentacao_PercSol_OptSim  </td>
+                    <td class="teste"><input  class="input1" type="text" id="CMAI_Scavenger_AltoCampo_Alimentacao_PercSol_OptSim" name="CMAI_Scavenger_AltoCampo_Alimentacao_PercSol_OptSim" value="0.00" disabled> %</td>
+                </tr> 
+                <!---------------------------------------->
+                <tr class="tr2"><!-- LINHA 94-->
+                    <td> 32 </td>
+                    <td> CMAI_Scavenger_AltoCampo_Alimentacao_Taxa_OptSim </td>
+                    <td class="teste"><input  class="input2" type="text" id="CMAI_Scavenger_AltoCampo_Alimentacao_Taxa_OptSim" name="CMAI_Scavenger_AltoCampo_Alimentacao_Taxa_OptSim" value="0.00" disabled> t/h</td>
+                </tr> 
+                <!---------------------------------------->
+                <tr class="tr1"><!-- LINHA 95 -->
+                    <td> 32 </td>
+                    <td> CMAI_Scavenger_AltoCampo_Alimentacao_Teor_Fe_OptSim</td>
+                    <td class="teste"><input  class="input1" type="text" id="CMAI_Scavenger_AltoCampo_Alimentacao_Teor_Fe_OptSim" name="CMAI_Scavenger_AltoCampo_Alimentacao_Teor_Fe_OptSim" value="0.00" disabled> %</td>
+                </tr> 
+                <!---------------------------------------->
+                <tr class="tr2"><!-- LINHA 96-->
+                    <td> 32 </td>
+                    <td> CMAI_Scavenger_AltoCampo_Alimentacao_Teor_SiO2_OptSim </td>
+                    <td class="teste"><input  class="input2" type="text" id="CMAI_Scavenger_AltoCampo_Alimentacao_Teor_SiO2_OptSim" name="CMAI_Scavenger_AltoCampo_Alimentacao_Teor_SiO2_OptSim" value="0.00" disabled> %</td>
+                </tr> 
+                <!---------------------------------------->
+                <tr class="tr1"><!-- LINHA 97 -->
+                    <td> 32 </td>
+                    <td> CMAI_Scavenger_AltoCampo_Alimentacao_Vazao_OptSim </td>
+                    <td class="teste"><input  class="input1" type="text" id="CMAI_Scavenger_AltoCampo_Alimentacao_Vazao_OptSim" name="CMAI_Scavenger_AltoCampo_Alimentacao_Vazao_OptSim" value="0.00" disabled> m&#x00B3/h</td>
+                </tr>
+                <!---------------------------------------->               
+                <tr class="tr2"><!-- LINHA 98 -->
+                    <td> 34 </td>
+                    <td> CMAI_Scavenger_AltoCampo_Concentrado_PercSol_OptSim </td>
+                   <td class="teste"><input  class="input2" type="text" id="CMAI_Scavenger_AltoCampo_Concentrado_PercSol_OptSim" name="CMAI_Scavenger_AltoCampo_Concentrado_PercSol_OptSim" value="0.00" disabled> %</td>
+                </tr> 
+                <!---------------------------------------->
+                <tr class="tr1"><!-- LINHA 99-->
+                    <td> 34 </td>
+                    <td> CMAI_Scavenger_AltoCampo_Concentrado_Taxa_OptSim  </td>
+                   <td class="teste"><input  class="input1" type="text" id="CMAI_Scavenger_AltoCampo_Concentrado_Taxa_OptSim" name="CMAI_Scavenger_AltoCampo_Concentrado_Taxa_OptSim" value="0.00" disabled> t/h</td>
+                </tr> 
+                <!---------------------------------------->
+                <tr class="tr2"><!-- LINHA 100-->
+                    <td> 34 </td>
+                    <td> CMAI_Scavenger_AltoCampo_Concentrado_Teor_Fe_OptSim </td>
+                   <td class="teste"><input  class="input2" type="text" id="CMAI_Scavenger_AltoCampo_Concentrado_Teor_Fe_OptSim" name="CMAI_Scavenger_AltoCampo_Concentrado_Teor_Fe_OptSim" value="0.00" disabled> %</td>
+                </tr>
+                <!---------------------------------------->
+                <tr class="tr1"><!-- LINHA 101 -->
+                    <td> 34 </td>
+                    <td> CMAI_Scavenger_AltoCampo_Concentrado_Teor_SiO2_OptSim </td>
+                   <td class="teste"><input  class="input1" type="text" id="CMAI_Scavenger_AltoCampo_Concentrado_Teor_SiO2_OptSim" name="CMAI_Scavenger_AltoCampo_Concentrado_Teor_SiO2_OptSim" value="0.00" disabled> %</td>
+                </tr>
+                <!---------------------------------------->
+                <tr class="tr2"><!-- LINHA 102 -->
+                    <td> 34 </td>
+                    <td> CMAI_Scavenger_AltoCampo_Concentrado_Vazao_OptSim </td>
+                   <td class="teste"><input  class="input2" type="text" id="CMAI_Scavenger_AltoCampo_Concentrado_Vazao_OptSim" name="CMAI_Scavenger_AltoCampo_Concentrado_Vazao_OptSim" value="0.00" disabled> m&#x00B3/h</td>
+                </tr>
+                <!---------------------------------------->
+                <tr class="tr1"><!-- LINHA 103-->
+                    <td> 35 </td>
+                    <td> CMAI_Scavenger_AltoCampo_Rejeito_PercSol_OptSim  </td>
+                   <td class="teste"><input  class="input1" type="text" id="CMAI_Scavenger_AltoCampo_Rejeito_PercSol_OptSim" name="CMAI_Scavenger_AltoCampo_Rejeito_PercSol_OptSim" value="0.00" disabled >%</td>
+                </tr> 
+                <!---------------------------------------->
+                <tr class="tr2"><!-- LINHA 104-->
+                    <td> 35 </td>
+                    <td> CMAI_Scavenger_AltoCampo_Rejeito_Taxa_OptSim </td>
+                   <td class="teste"><input  class="input2" type="text" id="CMAI_Scavenger_AltoCampo_Rejeito_Taxa_OptSim" name="CMAI_Scavenger_AltoCampo_Rejeito_Taxa_OptSim" value="0.00" disabled> t/h</td>
+                </tr>
+                <!---------------------------------------->
+                <tr class="tr1"><!-- LINHA 105-->
+                    <td> 35 </td>
+                    <td> CMAI_Scavenger_AltoCampo_Rejeito_Teor_Fe_OptSim  </td>
+                   <td class="teste"><input  class="input1" type="text" id="CMAI_Scavenger_AltoCampo_Rejeito_Teor_Fe_OptSim" name="CMAI_Scavenger_AltoCampo_Rejeito_Teor_Fe_OptSim" value="0.00" disabled> %</td>
+                </tr> 
+                <!---------------------------------------->
+                <tr class="tr2"><!-- LINHA 106-->
+                    <td> 35 </td>
+                    <td> CMAI_Scavenger_AltoCampo_Rejeito_Teor_SiO2_OptSim </td>
+                   <td class="teste"><input  class="input2" type="text" id="CMAI_Scavenger_AltoCampo_Rejeito_Teor_SiO2_OptSim" name="CMAI_Scavenger_AltoCampo_Rejeito_Teor_SiO2_OptSim" value="0.00" disabled> %</td>
+                </tr>
+                <!---------------------------------------->
+                <tr class="tr1"><!-- LINHA 107-->
+                    <td> 35 </td>
+                    <td> CMAI_Scavenger_AltoCampo_Rejeito_Vazao_OptSim  </td>
+                   <td class="teste"><input  class="input1" type="text" id="CMAI_Scavenger_AltoCampo_Rejeito_Vazao_OptSim" name="CMAI_Scavenger_AltoCampo_Rejeito_Vazao_OptSim" value="0.00" disabled> m&#x00B3/h</td>
+                </tr>
+                <!---------------------------------------->
+                <tr class="tr2"><!-- LINHA 108-->
+                    <td> 31 </td>
+                    <td> CMAI_Scavenger_CI03_OF_PercSol_OptSim </td>
+                   <td class="teste"><input  class="input2" type="text" id="CMAI_Scavenger_CI03_OF_PercSol_OptSim" name="CMAI_Scavenger_CI03_OF_PercSol_OptSim" value="0.00" disabled> %</td>
+                </tr>
+                <!---------------------------------------->
+                <tr class="tr1"><!-- LINHA 109-->
+                    <td> 31 </td>
+                    <td> CMAI_Scavenger_CI03_OF_Taxa_OptSim  </td>
+                   <td class="teste"><input  class="input1" type="text" id="CMAI_Scavenger_CI03_OF_Taxa_OptSim" name="CMAI_Scavenger_CI03_OF_Taxa_OptSim" value="0.00" disabled> t/h</td>
+                </tr> 
+                <!---------------------------------------->
+                <tr class="tr2"><!-- LINHA 110-->
+                    <td> 31 </td>
+                    <td> CMAI_Scavenger_CI03_OF_Teor_Fe_OptSim</td>
+                   <td class="teste"><input  class="input2" type="text" id="CMAI_Scavenger_CI03_OF_Teor_Fe_OptSim" name="CMAI_Scavenger_CI03_OF_Teor_Fe_OptSim" value="0.00" disabled> %</td>
+                </tr>
+                <!---------------------------------------->
+                <tr class="tr1"><!-- LINHA 111-->
+                    <td> 31 </td>
+                    <td> CMAI_Scavenger_CI03_OF_Teor_SiO2_OptSim  </td>
+                   <td class="teste"><input  class="input1" type="text" id="CMAI_Scavenger_CI03_OF_Teor_SiO2_OptSim" name="CMAI_Scavenger_CI03_OF_Teor_SiO2_OptSim" value="0.00" disabled> %</td>
+                </tr> 
+                <!---------------------------------------->
+                <tr class="tr2"><!-- LINHA 112-->
+                    <td> 31 </td>
+                    <td> CMAI_Scavenger_CI03_OF_Vazao_OptSim</td>
+                   <td class="teste"><input  class="input2" type="text" id="CMAI_Scavenger_CI03_OF_Vazao_OptSim" name="CMAI_Scavenger_CI03_OF_Vazao_OptSim" value="0.00" disabled> m&#x00B3/h</td>
+                </tr> 
+            </table>
+         
+        </div>
+    </body>
+</html> 

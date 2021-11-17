@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<title>Simulador Dinâmico</title>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <head>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- <script src= "https://github.com/google/gson.git"></script>-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="./Global/bodyGlobal.css">
+        <link rel="stylesheet" href="./Global/labelGlobal.css">
+        <link rel="stylesheet" href="./Global/menuGlobal.css">
+        <link rel="stylesheet" href="./Global/table1.css">
+        <link rel="stylesheet" href="./Global/table5.css">
+        <script src="./values.js"></script>
+    </head>
+
+	<body>
+       <div>       
+            <div> <img id="bodyGlobal"  src="./ImagensHMI/Global.png">  </div> 
+            <div> <img id="LogoCemi"    src="./ImagensHMI/Cemi.jpeg">    </div> <!--LOGO CEMI-->  
+            <div> <img id="Vale"        src="./ImagensHMI/Vale1.jpg">    </div> <!--LOGO VALE-->                                                                                                                                                  
+             
+            <nav class="dropdown">
+                <a class="menu">MENU</a>
+                <div class="dropdown-content">
+                    <li>
+                        <a> HMI </a>
+                        <ul>
+                            <li>    <a href="./HMI/Britagem/Britagem.php">                                                  Britagem                            </a></li>
+                            <li>    <a href="./HMI/Espessador/Espessador.php">                                              Espessador                          </a></li>
+                            <li>    <a href="./HMI/Flotacao/Flotacao.php">                                                  Flotação                            </a></li>
+                            <li>    <a href="./HMI/MoagemLinha01/MoagemLinha01.php">                                       Moagem - Linha 01                   </a></li>
+                            <li>    <a href="./HMI/MoagemLinha02/MoagemLinha02.html">                                       Moagem - Linha 02                   </a></li>
+                            <li>    <a href="./HMI/SeparacaoMagneticaAltaFrequencia/SeparacaoMagneticaAltaFrequencia.php"> Separação Magnética Alta Frequência </a></li>
+                            <li>    <a href="./HMI/SeparacaoMagneticaTambor/SeparacaoMagneticaTambor.html">                 Separação Magnética Tambor          </a></li>
+                        </ul>
+                    </li>   
+                    <a href="./inicio.html"> Global  </a>
+                    <li>
+                        <a> Gráfico </a>
+                        <ul>
+                            <li>    <a href="./Graficos/GraficoCmai/GraficoCmai.php">            CMAI            </a></li>  
+                            <li>    <a href="./Graficos/GraficoEspessamento/GraficoEspessamento.php">    Espessamento    </a></li>  
+                            <li>    <a href="./Graficos/GraficoFlotacao/GraficoFlotacao.php">        Flotação        </a></li>
+                            <li>    <a href="./Graficos/GraficoMoinho1/GraficoMoinho1.php">         Moinho 01       </a></li>
+                            <li>    <a href="./Graficos/GraficoMoinho2/GraficoMoinho2.php">         Moinho 02       </a></li>
+                        </ul>
+                    </li>   
+                    <li>
+                        <a> Simulação Dinâmica </a>
+                        <ul>
+                            <li>    <a href="./SimulacaoDinamica/SimulacaoDinamicaBritagem/SimulacaoDinamicaBritagem.php">          Britagem           </a></li>
+                            <li>    <a href="./SimulacaoDinamica/SimulacaoDinamicaCmai1/SimulacaoDinamicaCmai1.php">                CMAI               </a></li>
+                            <li>    <a href="./SimulacaoDinamica/SimulacaoDinamicaDeslamagem/SimulacaoDinamicaDeslamagem.php">      Deslamagem         </a></li>
+                            <li>    <a href="./SimulacaoDinamica/SimulacaoDinamicaEspessamento/SimulacaoDinamicaEspessamento.php">  Espessamento       </a></li>
+                            <li>    <a href="./SimulacaoDinamica/SimulacaoDinamicaFlotacao/SimulacaoDinamicaFlotacao.php">          Flotação           </a></li>
+                            <li>    <a href="./SimulacaoDinamica/SimulacaoDinamicaMoagem/SimulacaoDinamicaMoagem.php">              Moagem             </a></li>
+                            <li>    <a href="./SimulacaoDinamica/SimulacaoDinamicaRom/SimulacaoDinamicaRom.php">                    ROM                </a></li>
+                        </ul>
+                    </li>   
+                    <a href="./SimulacaoIndicadores/SimulacaoIndicadores.html">                             Simulação Indicadores                   </a>
+                </div>
+            </nav>
+
+            <!--TITULO-->      
+            <label id="ControleAvancadoDeProcessos" type="text" name="ControleAvancadoDeProcessos"> Controle Avançado de Processos      </label>
+            <label id="SupervisaoGeral"             type="text" name="SupervisaoGeral">             Usina de Viga - Supervisão Geral    </label>
+
+            <!-------------------------------------------------------------------------------------------------------------------------------------------->
+            <table id="table1">
+                
+              <!--  <caption> QUALIDADE</caption>  TÍTULO-->
+
+                <tr><!-- CABEÇALHO-->
+                    <th>  </th>
+                    <th> Taxa  </th>   
+                    <th> Fe    </th>
+                    <th> SiO2  </th>
+                </tr>  
+
+                <tr> <!-- LINHA 1-->
+                    <td> ROM  </td>
+                    <td> <input class="input1" type="text"  id="ROM_Taxa_BaseSeca_OptSim"   name="ROM_Taxa_BaseSeca_OptSim"      value="0.00" disabled> t/h  </td>
+                    <td> <input class="input1" type="text"  id="ROM_Teor_Fe_OptSim"         name="ROM_Teor_Fe_OptSim"   value="0.00" disabled> %</td>
+                    <td> <input class="input1" type="text"  id="ROM_Teor_SiO2_OptSim"       name="ROM_Teor_SiO2_OptSim" value="0.00" disabled> %</td>
+                </tr> 
+               
+                <tr> <!-- LINHA 2-->
+                    <td> Pallet Feed  </td>
+                    <td> <input class="input2" type="text" id="Espessamento_Concentrado_UF_Taxa_BaseSeca_Final_OptSim"  name="Espessamento_Concentrado_UF_Taxa_BaseSeca_Final_OptSim"   value="0.00" disabled> t/h</td>
+                    <td> <input class="input2" type="text" id="Espessamento_Concentrado_UF_Teor_Fe_Final_OptSim"        name="Espessamento_Concentrado_UF_Teor_Fe_Final_OptSim"         value="0.00" disabled>   %</td>
+                    <td> <input class="input2" type="text" id="Espessamento_Concentrado_UF_Teor_SiO2_Final_OptSim"      name="Espessamento_Concentrado_UF_Teor_SiO2_Final_OptSim"       value="0.00" disabled>   %</td>
+                </tr> 
+                
+                <tr>  <!-- LINHA 3-->
+                    <td> Pallet Grosso  </td>
+                    <td> <input class="input1" type="text" id="CMAI_Cleaner_Tambor_Concentrado_PCVI_Taxa_BaseSeca_OptSim"   name="CMAI_Cleaner_Tambor_Concentrado_PCVI_Taxa_BaseSeca_OptSim"  value="0.00" disabled> t/h</td>
+                    <td> <input class="input1" type="text" id="CMAI_Cleaner_Tambor_Concentrado_PCVI_Teor_Fe_OptSim"         name="CMAI_Cleaner_Tambor_Concentrado_PCVI_Teor_Fe_OptSim"        value="0.00" disabled>   %</td>
+                    <td> <input class="input1" type="text" id="CMAI_Cleaner_Tambor_Concentrado_PCVI_Teor_SiO2_OptSim"       name="CMAI_Cleaner_Tambor_Concentrado_PCVI_Teor_SiO2_OptSim"      value="0.00" disabled>   %</td>
+                </tr> 
+    
+                <tr> <!-- LINHA 4 -->   
+                    <td> Rejeito Final </td>
+                    <td> <input class="input2" type="text" id="Espessamento_Rejeito_UF_Taxa_BaseSeca_Final_OptSim"  name="Espessamento_Rejeito_UF_Taxa_BaseSeca_Final_OptSim"  value="0.00" disabled> t/h</td>
+                    <td> <input class="input2" type="text" id="Espessamento_Rejeito_UF_Teor_Fe_Final_OptSim"        name="Espessamento_Rejeito_UF_Teor_Fe_Final_OptSim"        value="0.00" disabled>   %</td>
+                    <td> <input class="input2" type="text" id="Espessamento_Rejeito_UF_Teor_SiO2_Final_OptSim"      name="Espessamento_Rejeito_UF_Teor_SiO2_Final_OptSim"      value="0.00" disabled>   %</td>
+                </tr>
+
+                 <tr>  <!-- LINHA 5-->
+                    <td> Rejeito Grosso  </td>
+                    <td> <input class="input1" type="text" id="CMAI_Rejeito_TC06_Taxa_OptSim"       name="CMAI_Rejeito_TC06_Taxa_OptSim"         value="0.00" disabled> t/h</td>
+                    <td> <input class="input1" type="text" id="CMAI_Rejeito_TC06_Teor_Fe_OptSim"    name="CMAI_Rejeito_TC06_Teor_Fe_OptSim"      value="0.00" disabled>   %</td>
+                    <td> <input class="input1" type="text" id="CMAI_Rejeito_TC06_Teor_SiO2_OptSim"  name="CMAI_Rejeito_TC06_Teor_SiO2_OptSim"    value="0.00" disabled>   %</td>
+                </tr> 
+            </table>
+            <!-------------------------------------------------------------------------------------------------------------------------------------------->
+             <table id="table5">
+                
+                <!--  <caption> QUALIDADE</caption>TÍTULO-->
+
+                <tr><!-- CABEÇALHO-->
+                    <th> KPI's  GLOBAIS </th>
+                    <th>                </th>
+                </tr>  
+               
+                <tr class="tr1"><!-- LINHA 1-->
+                    <td> Rec. Mássíca Global (b.s.)</td>
+                    <td class="teste"> <input class="input1" type="text" id="SI_BP_DF" name="SI_BP_DF" value="0.00" disabled> %</td>
+                </tr> 
+
+                <tr class="tr1"><!-- LINHA 2-->
+                    <td> Rec. Mássíca Global (b.u.)</td>
+                    <td class="teste"> <input class="input2" type="text" id="SI_BP_UF" name="SI_BP_UF" value="0.00" disabled> %</td>
+                </tr> 
+
+                <tr class="tr1"><!-- LINHA 3 -->
+                    <td> Rec. Metalúrgica Global </td>
+                    <td class="teste"> <input class="input1" type="text" id="SI_BP_RO" name="SI_BP_RO" value="0.00" disabled>  %</td>
+                </tr> 
+                 
+                <tr class="tr1"><!-- LINHA 4-->
+                    <td> Produção </td>
+                    <td class="teste"> <input class="input2" type="text" id="SI_BP_RO" name="SI_BP_RO" value="0.00" disabled>  t/dia</td>
+                </tr>
+            </table>
+            <!-------------------------------------------------------------------------------------------------------------------------------------------->
+
+            <!--LABEL
+            <a id="LinkBritagem"                           href="./HMI/Britagem/Britagem.php">                                                 Britagem                                </a>
+            <a id="LinkEspessador"                         href="./HMI/Espessador/Espessador.php">                                             Espessador                              </a>
+            <a id="LinkFlotacao"                           href="./HMI/Flotacao/Flotacao.php">                                                 Flotação                                </a>  
+            <a id="LinkMoagem1"                            href="./HMI/MoagemLinha01/MoagemLinha01.php">                                       Moagem Linha 01                         </a>
+            <a id="LinkMoagem2"                            href="./HMI/MoagemLinha02/MoagemLinha02.html">                                       Moagem Linha 02                         </a>
+            <a id="LinkSeparacaoMagneticaAltaFrequencia"   href="./HMI/SeparacaoMagneticaAltaFrequencia/SeparacaoMagneticaAltaFrequencia.php"> Separação Magnética Alta Frequência     </a>
+            <a id="LinkSeparacaoMagneticaAltaTambor"       href="./HMI/SeparacaoMagneticaTambor/SeparacaoMagneticaTambor.html">                 Separação Magnética Tambor              </a>
+           -->
+            <!--FLUXO
+            <a id="Fluxo04"     href="./SimulacaoDinamica/SimulacaoDinamicaBritagem/SimulacaoDinamicaBritagem.php">           04 </a>
+            <a id="Fluxo05"     href="./SimulacaoDinamica/SimulacaoDinamicaBritagem/SimulacaoDinamicaBritagem.php">           05 </a>
+            <a id="Fluxo71"     href="./SimulacaoDinamica/SimulacaoDinamicaBritagem/SimulacaoDinamicaBritagem.php">           71 </a>
+            <a id="Fluxo74"     href="./SimulacaoDinamica/SimulacaoDinamicaBritagem/SimulacaoDinamicaBritagem.php">           74</a>
+            <a id="Fluxo82"     href="./SimulacaoDinamica/SimulacaoDinamicaMoagem/SimulacaoDinamicaMoagem.php">               82 </a>
+            <a id="Fluxo84"     href="./SimulacaoDinamica/SimulacaoDinamicaMoagem/SimulacaoDinamicaMoagem.php">               84 </a>  
+            <a id="Fluxo87"     href="./SimulacaoDinamica/SimulacaoDinamicaMoagem/SimulacaoDinamicaMoagem.php">               87 </a> 
+            <a id="Fluxo88"     href="./SimulacaoDinamica/SimulacaoDinamicaMoagem/SimulacaoDinamicaMoagem.php">               88 </a>  
+            <a id="Fluxo89"     href="./SimulacaoDinamica/SimulacaoDinamicaMoagem/SimulacaoDinamicaMoagem.php">               89 </a>  
+            <a id="Fluxo90"     href="./SimulacaoDinamica/SimulacaoDinamicaMoagem/SimulacaoDinamicaMoagem.php">               90 </a> 
+            <a id="Fluxo92"     href="./SimulacaoDinamica/SimulacaoDinamicaMoagem/SimulacaoDinamicaMoagem.php">               92 </a>    
+            <a id="Fluxo95"     href="./SimulacaoDinamica/SimulacaoDinamicaMoagem/SimulacaoDinamicaMoagem.php">               95 </a>   
+            <a id="Fluxo96"     href="./SimulacaoDinamica/SimulacaoDinamicaMoagem/SimulacaoDinamicaMoagem.php">               96 </a>  
+            <a id="Fluxo97"     href="./SimulacaoDinamica/SimulacaoDinamicaMoagem/SimulacaoDinamicaMoagem.php">               97 </a>-->  
+            <!--
+            <a id="Fluxo106"    href="./SimulacaoDinamica/SimulacaoDinamicaFlotacao/SimulacaoDinamicaFlotacao.php">          106 </a> 
+            <a id="Fluxo107"    href="./SimulacaoDinamica/SimulacaoDinamicaFlotacao/SimulacaoDinamicaFlotacao.php">          107 </a>  
+            <a id="Fluxo108"    href="./SimulacaoDinamica/SimulacaoDinamicaFlotacao/SimulacaoDinamicaFlotacao.php">          108 </a> 
+
+            <a id="Fluxo109"    href="./SimulacaoDinamica/SimulacaoDinamicaFlotacao/SimulacaoDinamicaFlotacao.php">          109 </a> 
+            <a id="Fluxo110"    href="./SimulacaoDinamica/SimulacaoDinamicaFlotacao/SimulacaoDinamicaFlotacao.php">          110 </a> 
+            <a id="Fluxo111"    href="./SimulacaoDinamica/SimulacaoDinamicaFlotacao/SimulacaoDinamicaFlotacao.php">          111 </a>
+            <a id="Fluxo112"    href="./SimulacaoDinamica/SimulacaoDinamicaFlotacao/SimulacaoDinamicaFlotacao.php">          112 </a>  
+            <a id="Fluxo113"    href="#">                                                                                     113 </a>  
+           
+            <a id="Fluxo118"    href="./SimulacaoDinamica/SimulacaoDinamicaEspessamento/SimulacaoDinamicaEspessamento.php">  118 </a>  
+            <a id="Fluxo119"    href="./SimulacaoDinamica/SimulacaoDinamicaEspessamento/SimulacaoDinamicaEspessamento.php">  119 </a>
+            <a id="Fluxo120">                                                                                                 120 </a>  
+            <a id="Fluxo121"    href="./SimulacaoDinamica/SimulacaoDinamicaEspessamento/SimulacaoDinamicaEspessamento.php">  121 </a>  
+            <a id="Fluxo123"    href="./SimulacaoDinamica/SimulacaoDinamicaEspessamento/SimulacaoDinamicaEspessamento.php">  123 </a>  
+            <a id="Fluxo124"    href="./SimulacaoDinamica/SimulacaoDinamicaEspessamento/SimulacaoDinamicaEspessamento.php">  124 </a>  -->  
+
+        </div>
+    </body>
+</html>  

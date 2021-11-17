@@ -1,0 +1,37 @@
+#ControleAvancadoDeProcessos{
+    color: #782327;
+    font-size: 1.8vw;
+    left: 36vw;
+    position:absolute;
+    top: 3vh;  
+    z-index: 2;
+}
+
+#EspessadorSupervisaoGeral{
+    color: #BFBFBF;
+    font-size: 1.5vw;
+    left: 39vw;
+    position:absolute;
+    top: 8vh;  
+    z-index: 2;
+}
+
+#WDRE{
+    color: #000000;
+    font-size: 1vw;
+    font-weight: bold;
+    left: 30.5vw;
+    position:absolute;
+    top: 49vh;  
+    z-index: 2;
+}
+
+#Moagem{
+    color: #000000;
+    font-size: 1vw;
+    font-weight: bold;
+    left: 70vw;
+    position:absolute;
+    top: 91vh;  
+    z-index: 2;
+}

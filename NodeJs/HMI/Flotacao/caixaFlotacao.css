@@ -1,0 +1,156 @@
+#FlotacaoCaixa01{
+    background-color:#99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 2.5vw;
+    position: absolute;
+    text-align: center;
+    top: 29.8vh;  
+    z-index: 2;   
+}
+
+#FlotacaoCaixa02{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 2.5vw;
+    position: absolute;
+    text-align: center ;
+    top: 42.5vh;  
+    z-index: 2; 
+}
+
+#FlotacaoCaixa03{ 
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 17.8vw;
+    position: absolute;
+    text-align: center ;
+    top: 41.7vh;  
+    z-index: 2; 
+}
+
+#FlotacaoCaixa04{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color:#000000;
+    font-size: 0.5vw;
+    left: 32.5vw;
+    position: absolute;
+    text-align: center;
+    top: 47vh;  
+    z-index: 2; 
+}    
+
+#FlotacaoCaixa05{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 47.3vw;
+    position: absolute;
+    text-align: center;
+    top: 52.8vh;  
+    z-index: 2; 
+}
+
+#FlotacaoCaixa06{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 66.8vw;
+    position: absolute;
+    text-align: center;
+    top: 35.6vh;
+    z-index: 2; 
+}
+
+#FlotacaoCaixa07{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 81.6vw;
+    position: absolute;
+    text-align: center ;
+    top: 41.1vh;   
+    z-index: 2; 
+}
+
+#FlotacaoCaixa08{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 95.5vw;
+    position: absolute;
+    text-align: center;
+    top: 48.5vh;   
+    z-index: 1;
+}
+
+#FlotacaoCaixa09{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color:#000000;
+    font-size: 0.5vw;
+    left: 17.8vw;
+    position: absolute;
+    text-align: center ;
+    top: 58.7vh;  
+    z-index: 2; 
+}
+
+#FlotacaoCaixa10{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color :#000000;
+    font-size: 0.5vw;
+    left: 32.8vw;
+    position: absolute;
+    text-align: center;
+    top: 64vh;  
+    z-index: 2;  
+}
+
+#FlotacaoCaixa11{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 47.3vw;
+    position: absolute;
+    text-align: center;
+    top: 69.8vh;  
+    z-index: 2;    
+}
+
+#FlotacaoCaixa12{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 61vw;
+    position: absolute;
+    text-align: center;
+    top: 76.8vh;  
+    width: 4vw;;
+    z-index: 2; 
+}
+
+#FlotacaoCaixa13{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 79vw;
+    position: absolute;
+    text-align: center;
+    top: 96.8vh;  
+    z-index: 2; 
+}

@@ -1,0 +1,131 @@
+$(document).ready(function(){
+    console.log("teste");
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+
+    var tagA = [];// [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+    var tagB = [];// [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+    var labels = [];// [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+
+    selectedTagA = "Moagem_MO01_CargaCirculante_Percentual_OptProcess";
+    selectedTagB = "Moagem_MO01_CargaCirculante_Percentual_OptProcess.sp";
+
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: selectedTagA,
+                data: tagA,
+                backgroundColor: [
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            },
+            {
+                label: selectedTagB,
+                data: tagB,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+        responsive: true,
+        maintainAspectRatio: false
+    }
+    });
+
+    currentDate = "";
+
+    setInterval(() => {
+        $.ajax({
+            url: "http://optcemi.com:21509/simulation/Vale_Viga",
+            type: "GET",
+            crossDomain: true,
+            //data: JSON.stringify(somejson),
+            dataType: "json",
+            success: function (response){
+                console.log(response);
+                for(i=0; i<response.desc.length; i++){
+
+                    tagdata = response.desc[i];
+
+                    tagname =tagdata.fullname;
+
+                    while(tagname.startsWith("."))
+                    {
+                        tagname = tagname.substring(1);
+                    }
+
+                    tagname =tagname.replace(/\./g,"-").replace(/ /g,"_");
+                    
+                    try{
+                        if(selectedTagA == tagname)
+                        {
+                            if(currentDate != new Date(tagdata.currenttime).toLocaleString("br-BR"))
+                            {
+                                //tagA.shift();
+                                tagA.push(tagdata.currentvalue);
+                                console.log(tagA);
+                                
+                                labels.push(new Date(tagdata.currenttime).toLocaleString("br-BR"));
+                                currentDate = new Date(tagdata.currenttime).toLocaleString("br-BR");  
+                                console.log("push");  
+                            }
+                        }                            
+                        if(selectedTagB == tagname)
+                        {
+                            if(currentDate != new Date(tagdata.currenttime).toLocaleString("br-BR"))
+                            {
+                                //tagB.shift();
+                                tagB.push(tagdata.currentvalue);    
+                                console.log(tagB);    
+                            }   
+                        }             
+                        
+                        if(i==response.desc.length-1)
+                        {
+                            currentDate = new Date(tagdata.currenttime).toLocaleString("br-BR");  
+                            myChart.update();
+                        }
+                    }catch(e){
+                        console.log("erro to attribute tag value",e);
+                    }
+                    //console.log(tagname);
+                }
+            },
+            error: function (xhr, status){
+                console.log("error", xhr,status);
+            }
+        });
+    }, 1000);
+});

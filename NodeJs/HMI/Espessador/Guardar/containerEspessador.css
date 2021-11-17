@@ -1,0 +1,125 @@
+#Container01{
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 14vw;
+    position: absolute;
+    top: 22vh;  
+    z-index: 1;     
+}
+
+#Container02{
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 53.5VW;
+    position: absolute;
+    top: 24.5vh;  
+    z-index: 1;       
+}
+
+#Container03{
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 67.3vw;
+    position: absolute;
+    top: 23vh;  
+    z-index: 1;     
+}
+
+#Container04{
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 73.5vw;
+    position: absolute;
+    top: 23vh;  
+    z-index: 1;     
+}
+
+#Container05{
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 3.5vw;
+    position: absolute;
+    top: 72vh;  
+    z-index: 1;     
+}
+
+#Container06{
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 10vw;
+    position: absolute;
+    top: 72vh;  
+    z-index: 1;     
+}
+
+#Container07{
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 18vw;
+    position: absolute;
+    top: 85vh;  
+    z-index: 1;     
+}
+
+#Container08{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 34.5vw;
+    position: absolute;
+    top: 70.5vh;  
+    z-index: 1;      
+}
+
+#Container09{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 40.5vw;
+    position: absolute;
+    top:70.5vh;  
+    z-index: 1;     
+}
+
+#Container10{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 54.3vw;
+    position: absolute;
+    top: 70.5vh;  
+    z-index: 1;     
+}
+
+#Container11{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 60.3vw;
+    position: absolute;
+    top: 70.5vh;  
+    z-index: 1;     
+}
+
+
+#Container12{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 63.4vw;
+    position: absolute;
+    top: 85vh;  
+    z-index: 1;     
+}

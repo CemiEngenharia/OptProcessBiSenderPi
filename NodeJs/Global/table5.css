@@ -1,0 +1,48 @@
+#table5 {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  overflow: scroll;
+  left: 57.5vw; 
+  width: 30vw;
+  overflow: scroll;
+  position: absolute;
+  top: 74vh;
+}
+
+#table5 td, #table5 th, #table5 caption  {
+  border: 1px solid #ddd;
+  padding: 2px;
+}
+
+#table5 tr:nth-child(even){
+  background-color: #f2f2f2;
+}
+
+#table5 tr:hover {
+  background-color: #ddd;
+}
+
+#table5 th,caption  {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  text-align: center;
+  background-color: #782327;
+  color: white;
+  font-weight: bold;
+}
+
+.input1{ 
+  background-color: #F2F2F2;
+  border: none;
+  text-align: right;
+  width: 10vw;
+  height: 3vh;  
+}
+
+.input2{ 
+  background-color: #FFFFFF;
+  border: none;
+  text-align: right;
+  width: 10vw;
+  height: 3vh;  
+}

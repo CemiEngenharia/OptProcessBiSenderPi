@@ -73,17 +73,20 @@ namespace OptProcessBiSenderService
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                //Console.WriteLine("Inicando Serviço de Aplicação");
+                //			writelog("Inicando Serviço de Aplicação");
                 __retry:
                 try{
                     runProcess(stoppingToken);
-                }catch(Exception e)
+                }
+                catch(Exception e)
                 {
-                    Console.Write("_________________________Falha Geral_____________________________");
-                    Console.Write(e);
+                    writelog("_________________________Falha Geral_____________________________", 3);
+                    writelog(e, 3);
                     goto __retry;
                 }
             }
+
+            			writelog("cancelation was Requested by service", 3);
         }
         
         static void runProcess(CancellationToken stoppingToken)
@@ -100,7 +103,7 @@ namespace OptProcessBiSenderService
             //caso a thread tenha sido cancelada
             if(stoppingToken.IsCancellationRequested)   return;
 
-            //Console.WriteLine(Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles)));
+            //			writelog(Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles)));
             //define localizacao do arquivo de configuração
             if(!Directory.Exists(Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles)) + "ProgramData\\CEMI"))
             {
@@ -130,7 +133,7 @@ namespace OptProcessBiSenderService
 
             //carrega configuração do device
 
-            Console.WriteLine("Carregando configuração");
+            			writelog("Carregando configuração");
             //inicializa a configuração
             while(loadConfiguration() == 0)
             {
@@ -150,14 +153,14 @@ namespace OptProcessBiSenderService
                 //procura dispositivo nas portas serial
                 _comSerialPort = optdevice.devicePort();
 
-                if(_comSerialPort == null) { Console.WriteLine("Device Nao Encontrado"); Thread.Sleep(2000); goto __findDevice;}
+                if(_comSerialPort == null) { 			writelog("Device Nao Encontrado", 2); Thread.Sleep(2000); goto __findDevice;}
 
-                Console.WriteLine(_comSerialPort);
+                			writelog(_comSerialPort);
 
-                Console.WriteLine("portas Abertas");
+                			writelog("portas Abertas");
                         
                 //Pega Dados de Informação do Device como Mac e Demais Dados Importantes
-                Console.WriteLine("lendo dados do dispositivo");
+                			writelog("lendo dados do dispositivo");
                 
                 //define funções comuns para os devices como leitura de dados internos
                 DeviceCommon commonFunctions;
@@ -169,7 +172,7 @@ namespace OptProcessBiSenderService
                 foreach(string tagsKeys in opcTags.Keys)    if((bool) opcTags[tagsKeys]["active"] == true)   isTag = true;
                 if(isTag == false)
                 {
-                    Console.WriteLine("Tags Nao Configuradas, Acesse a Pagina de Configuração");
+                    			writelog("Tags Nao Configuradas, Acesse a Pagina de Configuração", 2);
                 }
 
                 __setDeviceConfig:
@@ -183,19 +186,19 @@ namespace OptProcessBiSenderService
 
                 //configura dados do wifi
                 optdevice.setWifiSSID(configuration["ssid"], _comSerialPort);
-                Console.WriteLine("Aguardando 1 minuto para reestabelecer a rede");
+                			writelog("Aguardando 1 minuto para reestabelecer a rede");
                 //Thread.Sleep(5000);
                 optdevice.setWifiPass(configuration["password"], _comSerialPort);
-                Console.WriteLine("Aguardando 1 minuto para reestabelecer a rede");
+                			writelog("Aguardando 1 minuto para reestabelecer a rede");
                 //Thread.Sleep(5000);
                 optdevice.setWifiIp(configuration["ip"], _comSerialPort);
-                Console.WriteLine("Aguardando 1 minuto para reestabelecer a rede");
+                			writelog("Aguardando 1 minuto para reestabelecer a rede");
                 //Thread.Sleep(5000);
                 optdevice.setWifiGateway(configuration["gateway"], _comSerialPort);
-                Console.WriteLine("Aguardando 1 minuto para reestabelecer a rede");
+                			writelog("Aguardando 1 minuto para reestabelecer a rede");
                 //Thread.Sleep(5000);
                 optdevice.setWifiNetmask(configuration["netmask"], _comSerialPort);
-                Console.WriteLine("Aguardando 1 minuto para reestabelecer a rede");
+                			writelog("Aguardando 1 minuto para reestabelecer a rede");
                 //Thread.Sleep(5000);
 
                 
@@ -212,12 +215,12 @@ namespace OptProcessBiSenderService
                 { 
                     //caso a thread tenha sido cancelada
                     if(stoppingToken.IsCancellationRequested)   return; 
-                    Console.WriteLine("Dispositivo conectado com sucesso");
+                    			writelog("Dispositivo conectado com sucesso");
                 }
                 else
                 {
                     if(stoppingToken.IsCancellationRequested)   return; 
-                    Console.WriteLine("Dispositivo nao esta conectado a rede");
+                    			writelog("Dispositivo nao esta conectado a rede", 2);
                     goto __verifyNetwork;
                 }
 
@@ -230,7 +233,7 @@ namespace OptProcessBiSenderService
                 stopAllThreads = false;
                 reloadThreadConfig = true;
 
-                Console.WriteLine("Iniciando conexao");
+                			writelog("Iniciando conexao");
 
                 //inicializa processo de envio dos dados
 /*                
@@ -251,7 +254,6 @@ namespace OptProcessBiSenderService
 
                 //cria uma flag para os dados sendo enviados
                 bool alreadySent = true;
-                Console.WriteLine("1");
 
                 //define um callback de leitura para teste
                 void completed(OpcDaItemValue[] values)
@@ -265,21 +267,20 @@ namespace OptProcessBiSenderService
                     
                     /*************************************************/
                     try{
-                        Console.WriteLine("Leitura Completa");    
+                        			writelog("Leitura Completa");    
                         //Console.Write(("Leitura Completa"));
                         
                         if(!reloadThreadConfig)
                         {
                             //navega resultado das tags
-                            Console.Write("values.Length -> ");
-                            Console.WriteLine(values.Length);    
+                            writelog("values.Length -> " + values.Length.ToString());    
                             //Console.Write((values.Length));
 
                             //recupera timestamp atual
                             Int32 unixTimestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
                             for(int i=0; i<values.Length; i++)
                             {
-                                Console.WriteLine(i);    
+                                //writelog(i);    
                                 //Console.Write((i));
                                 OpcDaItemValue val = values[i];
                                 
@@ -294,10 +295,10 @@ namespace OptProcessBiSenderService
                                 //Console.Write(" -- ");
                                 //Console.Write(val.Timestamp);
                                 //Console.Write(" -- ");
-                                //Console.WriteLine((int) val.Error);    
+                                //			writelog((int) val.Error);    
                                 //Console.Write(((int) val.Error));
                                 //Console.Write(" -- ");
-                                //Console.WriteLine(val.Value.GetType());    
+                                //			writelog(val.Value.GetType());    
                                 //Console.Write((val.Value.GetType()));
                                 
                                 dataToWriteLen ++;
@@ -372,8 +373,8 @@ namespace OptProcessBiSenderService
                                 }
                                 catch(Exception e)
                                 {
-                                    Console.WriteLine("------ Problema ao pegar dado da tag linha 345");
-                                    Console.WriteLine(e.ToString());
+                                    			writelog("------ Problema ao pegar dado da tag linha 345", 3);
+                                    			writelog(e.ToString(), 3);
                                     
                                 }
 
@@ -390,10 +391,10 @@ namespace OptProcessBiSenderService
                                 }
                                 catch(Exception e)
                                 {
-                                    Console.WriteLine("------ Problema ao add tag para dataToWrite linha 409");
-                                    Console.WriteLine(e.ToString());
+                                    			writelog("------ Problema ao add tag para dataToWrite linha 409", 3);
+                                    			writelog(e.ToString(), 3);
                                 }
-                                //Console.WriteLine("___________________________________");    
+                                //			writelog("___________________________________");    
                                 //Console.Write(("___________________________________"));
                                 //Console.Write("now -> ");
                                 //Console.Write(DateTime.UtcNow);
@@ -403,26 +404,26 @@ namespace OptProcessBiSenderService
                                 //Console.Write(formatedValue);
                                 
                                 //Console.Write(" dataToWriteLen -> ");
-                                //Console.WriteLine(dataToWriteLen);    
+                                //			writelog(dataToWriteLen);    
                                 //Console.Write((dataToWriteLen));
 
                                 if(dataToWriteLen == int.Parse(configuration["tagsperrequest"]))
                                 {                                        
 
-                                    //Console.WriteLine("___________________________________");    
+                                    //			writelog("___________________________________");    
                                     //Console.Write(("___________________________________"));
                                     //Console.Write(" unixTimestamp -> ");
                                     //Console.Write(unixTimestamp);
 
-                                    //Console.WriteLine("dataToWrite ");    
+                                    //			writelog("dataToWrite ");    
                                     //Console.Write(("dataToWrite "));
-                                    //Console.WriteLine(dataToWrite);    
+                                    //			writelog(dataToWrite);    
                                     //Console.Write((dataToWrite));
-                                    //Console.WriteLine("___________________________________");    
+                                    //			writelog("___________________________________");    
                                     //Console.Write(("___________________________________"));
                                     
 
-                                    Console.WriteLine(JsonConvert.SerializeObject(dataToWrite));
+                                    			writelog(JsonConvert.SerializeObject(dataToWrite));
 
                                     int trys = 0;
 
@@ -433,14 +434,14 @@ namespace OptProcessBiSenderService
                                     string res = optdevice.setTagData(readedDateTime, dataToWrite, _comSerialPort);
 //                                  string res = cp.writeContinuousSocket("{\"type\": \"writevalue\", \"data\" : \""+unixTimestamp+"|"+dataToWrite+"\"}\r\n\r\n", ".*(ACK).*", response["token"], int.Parse(configuration["timeout"]), sockNro);
 
-                                    //Console.WriteLine("Wrote");    
+                                    //			writelog("Wrote");    
                                     //Console.Write(("Wrote"));
-                                    //Console.WriteLine(res);    
+                                    //			writelog(res);    
                                     //Console.Write((res));
 
                                     while(res == null)
                                     {
-                                        Console.WriteLine("null response received from server on post data");
+                                        			writelog("null response received from server on post data", 2);
                                         trys ++;
                                         if(trys >= 3)
                                         {
@@ -466,16 +467,16 @@ namespace OptProcessBiSenderService
                             //escreve dados remanecentes
                             if(dataToWriteLen > 0)
                             {
-                                //Console.WriteLine("___________________________________");    
+                                //			writelog("___________________________________");    
                                 //Console.Write(("___________________________________"));
                                 //Console.Write(" unixTimestamp -> ");
                                 //Console.Write(unixTimestamp);
 
-                                //Console.WriteLine("dataToWrite ");    
+                                //			writelog("dataToWrite ");    
                                 //Console.Write(("dataToWrite "));
-                                //Console.WriteLine(dataToWrite);    
+                                //			writelog(dataToWrite);    
                                 //Console.Write((dataToWrite));
-                                //Console.WriteLine("___________________________________");    
+                                //			writelog("___________________________________");    
                                 //Console.Write(("___________________________________"));
 
                                 
@@ -490,9 +491,9 @@ namespace OptProcessBiSenderService
                                 
                                 string res = optdevice.setTagData(readedDateTime, dataToWrite, _comSerialPort);
 
-                                //Console.WriteLine("Wrote");    
+                                //			writelog("Wrote");    
                                 //Console.Write(("Wrote"));
-                                //Console.WriteLine(res);    
+                                //			writelog(res);    
                                 //Console.Write((res));
 
                                 while(res == null)
@@ -506,7 +507,7 @@ namespace OptProcessBiSenderService
 //                                            cp.fininshContinuousSocket();
                                         return;
                                     }
-                                    Console.Write(("Tentando Envio Novamente novamente"));
+                                    Console.Write(("Tentando Envio Novamente novamente", 2));
                                     //espera 2 segundos
                                     Thread.Sleep(2000);
                                     goto _rewrite;
@@ -524,8 +525,8 @@ namespace OptProcessBiSenderService
                         }
                         else
                         {
-                            //Console.WriteLine("Escrita desabilitada para configuracao");    
-                            Console.Write(("Escrita desabilitada para configuracao"));
+                            //			writelog("Escrita desabilitada para configuracao");    
+                            Console.Write(("Escrita desabilitada para configuracao", 2));
 
                             //marca que os dados foram enviados
                             alreadySent = true;
@@ -535,20 +536,18 @@ namespace OptProcessBiSenderService
                     }
                     catch(Exception e)
                     {
-                        Console.WriteLine("Exceção disparada ao escrever tags -> "+e.ToString());
+                        			writelog("Exceção disparada ao escrever tags -> "+e.ToString(), 3);
                         Console.Write("Exceção disparada ao escrever tags -> "+e.ToString());
                         alreadySent = true;
                     }
                 }
-                    
-                Console.WriteLine("1");
                         
                     //opcMan.readTag(tags.ToArray(), false, completed);
 
                     //cria uma thread para leitura assyncrona do opc de tempos em tempos
                     if((opcReadingThread == null) || (!opcReadingThread.IsAlive))
                     {
-                        Console.WriteLine("Criando Thread");    
+                        			writelog("Criando Thread");    
                         //Console.Write(("Criando Thread"));
 
                         opcReadingThread = new Thread(() => {
@@ -561,7 +560,7 @@ namespace OptProcessBiSenderService
                                     //verifica se as configuracoes foram mudadas
                                     if(reloadThreadConfig)
                                     {
-                                        Console.WriteLine("iniciando postagem dos dados");
+                                        			writelog("iniciando postagem dos dados");
                                         //desativa conexao atual caso exista
                                         //adiciona as tags ao banco e recupera os dados 
                                         //string postData = ""
@@ -593,7 +592,7 @@ namespace OptProcessBiSenderService
                                         {
                                             if(alreadySent)
                                             {
-                                                //Console.WriteLine("Lendo Tags do OPC");    
+                                                //			writelog("Lendo Tags do OPC");    
                                                 //Console.Write(("Lendo Tags do OPC"));
                                                 //faz leitura das tags
                                                 opcMan.readTag(false, completed);
@@ -603,8 +602,8 @@ namespace OptProcessBiSenderService
                                             {
                                                 if(readingTryes >= 3)
                                                 {
-                                                    Console.Write("Falha ao Escrever Tags -> Nenhuma resposta recebida do servidor");
-                                                    Console.Write("Abortando e Reiniciando conexao Tags");
+                                                    writelog("Falha ao Escrever Tags -> Nenhuma resposta recebida do servidor", 2);
+                                                    writelog("Abortando e Reiniciando conexao Tags", 2);
                                                     readingTryes = 0;
                                                     alreadySent = true;
                                                     stopAllThreads = true;
@@ -614,8 +613,8 @@ namespace OptProcessBiSenderService
                                                 else
                                                 {
                                                     readingTryes ++;
-                                                    //Console.WriteLine("Esperando para Ler Tags do OPC");    
-                                                    Console.Write(("Esperando para Ler Tags do OPC"));
+                                                    //			writelog("Esperando para Ler Tags do OPC");    
+                                                    writelog(("Esperando para Ler Tags do OPC"), 2);
                                                 }
                                             }
                                         }
@@ -627,24 +626,24 @@ namespace OptProcessBiSenderService
 
                             catch(Exception e)
                             {
-                                Console.WriteLine("Uma Exceção foi encontrada em opcReadingThread " + e.ToString());
+                                			writelog("Uma Exceção foi encontrada em opcReadingThread " + e.ToString(), 3);
                                 Console.Write("Uma Exceção foi encontrada em opcReadingThread " + e.ToString());
                             }
 
-                            //Console.WriteLine("All Thread are Stopped");    
+                            //			writelog("All Thread are Stopped");    
                             //Console.Write(("All Thread are Stopped"));
 
                             if(_comSerialPort.IsOpen)  
                                 //fecha socket no device
                                 if(sockNro >= 0)
                                 {
-                                    //Console.WriteLine("Tentando Fechar Socket");    
+                                    //			writelog("Tentando Fechar Socket");    
 				                    //Console.Write(("Tentando Fechar Socket"));
 //                                    cp.fininshContinuousSocket();
 //                                    cp.closeSocket(sockNro);  
                                 }
 
-                            //Console.WriteLine("Finalizadno Thread");    
+                            //			writelog("Finalizadno Thread");    
 				            //Console.Write(("Finalizadno Thread"));
                             reloadThreadConfig = true;
                             ////Environment.Exit(1);
@@ -653,7 +652,7 @@ namespace OptProcessBiSenderService
                             return;
                         });
 
-                        //Console.WriteLine("All Thread are Stopped");    
+                        //			writelog("All Thread are Stopped");    
                         //Console.Write(("All Thread are Stopped"));
 
                         if(!opcReadingThread.IsAlive)
@@ -665,7 +664,7 @@ namespace OptProcessBiSenderService
                         //caso a thread tenha sido cancelada
                         if(stoppingToken.IsCancellationRequested)
                         {                 
-                            Console.WriteLine("Cancelation Requested");
+                            			writelog("Cancelation Requested", 3);
                             stopAllThreads = true;
                             return;
                         }
@@ -674,11 +673,11 @@ namespace OptProcessBiSenderService
                         //if((!_comSerialPort.IsOpen)  || (!opcReadingThread.IsAlive))
                         if((!opcReadingThread.IsAlive))
                         {
-                            Console.WriteLine("Algum erro com a seguinte clausula (!_comSerialPort.IsOpen)  || (!opcReadingThread.IsAlive)");  
+                            			writelog("Algum erro com a seguinte clausula (!_comSerialPort.IsOpen)  || (!opcReadingThread.IsAlive)", 3);  
 
                             if(_comSerialPort.IsOpen) _comSerialPort.Close();
 
-                            Console.WriteLine("Serial Port Is Closed");   
+                            			writelog("Serial Port Is Closed", 2);   
                             stopAllThreads = true;
                             Thread.Sleep(10000);
                             goto __findDevice;
@@ -689,7 +688,7 @@ namespace OptProcessBiSenderService
             catch(Exception e)
             {
                 Console.WriteLine("Thread Principal -> Uma Exceção nao tratada foi encontrada, reiniciando serviços -->> \t Stack Trace \r\n {0} \r\n\r\n \t Exception Message \r\n {1} \r\n\r\n \t Exception Source \r\n {2} \r\n\r\n", e.StackTrace, e.ToString(), e.Source);    
-				Console.Write("Thread Principal -> Uma Exceção nao tratada foi encontrada, reiniciando serviços -->> \t Stack Trace \r\n "+e.StackTrace+" \r\n\r\n \t Exception Message \r\n "+e.ToString()+" \r\n\r\n \t Exception Source \r\n "+e.Source+" \r\n\r\n");    
+				writelog("Thread Principal -> Uma Exceção nao tratada foi encontrada, reiniciando serviços -->> \t Stack Trace \r\n "+e.StackTrace+" \r\n\r\n \t Exception Message \r\n "+e.ToString()+" \r\n\r\n \t Exception Source \r\n "+e.Source+" \r\n\r\n", 3);    
                 //caso a thread tenha sido cancelada
                 if(stoppingToken.IsCancellationRequested)   return;
                 goto __findDevice;
@@ -707,7 +706,7 @@ namespace OptProcessBiSenderService
                 {
                     if (ip.AddressFamily == AddressFamily.InterNetwork)
                     {
-                        //Console.WriteLine(ip.ToString());    
+                        //			writelog(ip.ToString());    
 				        ////Console.Write((ip.ToString()));
                         return ip.ToString();
                     }
@@ -737,10 +736,10 @@ namespace OptProcessBiSenderService
 
                             //Console.Write(e.Reply.Status + " => ");
                             //Console.Write(e.Reply.Address + " => ");                                  
-                            //Console.WriteLine(host.HostName);    
+                            //			writelog(host.HostName);    
 				            //Console.Write(e.Reply.Address + " => " + host.HostName);  
 
-                            //Console.WriteLine("Buscando Servidores OPC");    
+                            //			writelog("Buscando Servidores OPC");    
 				            //Console.Write(("Buscando Servidores OPC"));
                             //busca servidores opc na maquina
                             var enumerator = new OpcServerEnumeratorAuto();                            
@@ -748,12 +747,12 @@ namespace OptProcessBiSenderService
 
                             foreach(OpcServerDescription desc in serverDescriptions)
                             {
-                                //Console.WriteLine(desc.ToString());    
+                                //			writelog(desc.ToString());    
 				                //Console.Write((desc.ToString()));
                                 if(!opcServers.Contains(desc.ToString()))
                                     opcServers.Add(desc.ToString());
                             }                   
-                            //Console.WriteLine("Fim da Busca por Servidores OPC");    
+                            //			writelog("Fim da Busca por Servidores OPC");    
 				            //Console.Write(("Fim da Busca por Servidores OPC"));
 
                         }
@@ -762,7 +761,7 @@ namespace OptProcessBiSenderService
                             try{
                                 //Console.Write("Tentando acessar dicionatia de network horts");
                                 NetworkHosts[rep.Address.ToString()] = rep.Address.ToString();
-                                //Console.WriteLine(rep.Address);    
+                                //			writelog(rep.Address);    
 				                //Console.Write((rep.Address));
 
                                 //busca servidores opc na maquina
@@ -771,7 +770,7 @@ namespace OptProcessBiSenderService
 
                                 foreach(OpcServerDescription desc in serverDescriptions)
                                 {
-                                    //Console.WriteLine(desc.ToString());    
+                                    //			writelog(desc.ToString());    
 				                    //Console.Write((desc.ToString()));
                                     if(!opcServers.Contains(desc.ToString()))
                                         opcServers.Add(desc.ToString());
@@ -779,7 +778,7 @@ namespace OptProcessBiSenderService
                             }
                             catch(Exception ex)
                             {
-                                //Console.WriteLine("N/D");    
+                                //			writelog("N/D");    
 				                //Console.Write(("N/D"));
                             }
                         }
@@ -877,6 +876,9 @@ namespace OptProcessBiSenderService
                                 "gateway=192.168.1.1\r\n"+
                                 "mode=mobile\r\n"+
                                 "project=null\r\n"+
+                                "projectalias=null\r\n"+
+                                "log=true\r\n"+
+                                "loglevel=0\r\n"+
                                 "netmask=255.255.255.0\r\n");
                     cfg.Close();
                 }
@@ -897,6 +899,10 @@ namespace OptProcessBiSenderService
                 configuration["browseopc"] = configuration.ContainsKey("browseopc") ? configuration["browseopc"]: "false";
                 configuration["projectalias"] = configuration.ContainsKey("projectalias") ? configuration["projectalias"]: "null";
                 configuration["mode"] = configuration.ContainsKey("mode") ? configuration["mode"]: "mobile";
+                
+                //log data
+                configuration["log"] = configuration.ContainsKey("log") ? configuration["log"]: "true";
+                configuration["loglevel"] = configuration.ContainsKey("loglevel") ? configuration["loglevel"]: "0";
                 
                 //wifi model
                 configuration["ssid"] = configuration.ContainsKey("ssid") ? configuration["ssid"]: "CEMI Network";
@@ -927,9 +933,19 @@ namespace OptProcessBiSenderService
                             string[] temp = line.Split("=");
                             if(temp[0].Replace(" ","").Length > 0)
                             {
+                                /*
                                 opcTags[temp[0].Replace("$","")] = new Dictionary<string, object>();
                                 opcTags[temp[0].Replace("$","")]["active"] = (temp[1]=="on") ? true : false;     
-                                opcTags[temp[0].Replace("$","")]["type"] = "double";                           
+                                opcTags[temp[0].Replace("$","")]["type"] = "double";     
+                                */
+
+                                string tempKey = temp[0].Substring(1);
+
+
+
+                                opcTags[tempKey] = new Dictionary<string, object>();
+                                opcTags[tempKey]["active"] = (temp[1]=="on") ? true : false;     
+                                opcTags[tempKey]["type"] = "double";                           
                             }
                         }
                     
@@ -949,10 +965,10 @@ namespace OptProcessBiSenderService
                 reloadThreadConfig = true;          
 
                 //tenta iniciar uma conxao com o opc
-                if(opcMan.startClient())    Console.WriteLine("Conexao Opc Iniciada com Sucesso");
+                if(opcMan.startClient())    			writelog("Conexao Opc Iniciada com Sucesso");
                 else
                 {
-				    Console.Write("Falha ao Iniciar Conexão do Opc");
+				    writelog("Falha ao Iniciar Conexão do Opc", 3);
                     return 0;
                 }
 
@@ -989,9 +1005,9 @@ namespace OptProcessBiSenderService
             }
             catch(Exception e)
             {
-                //Console.WriteLine("Configuração Nao Carregada no Sistema");    
-				Console.Write(("Configuração Nao Carregada no Sistema"));
-                //Console.WriteLine(e.ToString());    
+                			writelog("Configuração Nao Carregada no Sistema", 3);    
+				Console.Write(("Configuração Nao Carregada no Sistema"), 3);
+                //			writelog(e.ToString());    
 				Console.Write((e.ToString()));
 
                 return 0;
@@ -1018,9 +1034,9 @@ namespace OptProcessBiSenderService
 
             incoming = incoming.Replace("+CSQ: ", "").Replace("OK", "").Replace("+CCID: ", "");
 
-            //Console.WriteLine("Signal Check");    
+            //			writelog("Signal Check");    
 				//Console.Write(("Signal Check"));
-            //Console.WriteLine(incoming);    
+            //			writelog(incoming);    
 				//Console.Write((incoming));
 
             try{
@@ -1126,8 +1142,8 @@ namespace OptProcessBiSenderService
                 Console.Write(_buffer);
 
                 serial.Write(_start+_buffer+_end);
-                //Console.WriteLine("Enviando");
-                //Console.WriteLine(_buffer);
+                //			writelog("Enviando");
+                //			writelog(_buffer);
                 string incoming = "";
                 int timeout = 900;      //timeout de 1 minuto e meio devico ao post
                 do{
@@ -1162,7 +1178,7 @@ namespace OptProcessBiSenderService
             sendPacket("AT+ULOC=2,2,1,100,5000",  ".*(OK).*");
             string location = (string) sendPacket("AT+ULOC=2,2,1,100,5000",  @"\+UULOC\:\s(.*)");
 
-            Console.WriteLine("location -> {0}", location);
+            			writelog("location -> "+location.ToString());
 
             return location;
         }
@@ -1193,21 +1209,21 @@ namespace OptProcessBiSenderService
         static string getComputerId()
         {            
             /*
-            Console.WriteLine("Hard Disk");
-            Console.WriteLine("Model -> " + identifier("Win32_DiskDrive", "Model"));
-            Console.WriteLine("Manufacturer -> " + identifier("Win32_DiskDrive", "Manufacturer"));
-            Console.WriteLine("Signature -> " + identifier("Win32_DiskDrive", "Signature"));
-            Console.WriteLine("TotalHeads -> " + identifier("Win32_DiskDrive", "TotalHeads"));
-            Console.WriteLine("Win32_BaseBoard");
-            Console.WriteLine("Model -> " + identifier("Win32_BaseBoard", "Model"));
-            Console.WriteLine("Manufacturer -> " + identifier("Win32_BaseBoard", "Manufacturer"));
-            Console.WriteLine("Name -> " + identifier("Win32_BaseBoard", "Name"));
-            Console.WriteLine("SerialNumber -> " + identifier("Win32_BaseBoard", "SerialNumber"));
-            Console.WriteLine("Win32_Processor");
-            Console.WriteLine("Architecture -> " + identifier("Win32_Processor", "Architecture"));
-            Console.WriteLine("Caption -> " + identifier("Win32_Processor", "Caption"));
-            Console.WriteLine("Family -> " + identifier("Win32_Processor", "Family"));
-            Console.WriteLine("ProcessorId -> " + identifier("Win32_Processor", "ProcessorId"));
+            			writelog("Hard Disk");
+            			writelog("Model -> " + identifier("Win32_DiskDrive", "Model"));
+            			writelog("Manufacturer -> " + identifier("Win32_DiskDrive", "Manufacturer"));
+            			writelog("Signature -> " + identifier("Win32_DiskDrive", "Signature"));
+            			writelog("TotalHeads -> " + identifier("Win32_DiskDrive", "TotalHeads"));
+            			writelog("Win32_BaseBoard");
+            			writelog("Model -> " + identifier("Win32_BaseBoard", "Model"));
+            			writelog("Manufacturer -> " + identifier("Win32_BaseBoard", "Manufacturer"));
+            			writelog("Name -> " + identifier("Win32_BaseBoard", "Name"));
+            			writelog("SerialNumber -> " + identifier("Win32_BaseBoard", "SerialNumber"));
+            			writelog("Win32_Processor");
+            			writelog("Architecture -> " + identifier("Win32_Processor", "Architecture"));
+            			writelog("Caption -> " + identifier("Win32_Processor", "Caption"));
+            			writelog("Family -> " + identifier("Win32_Processor", "Family"));
+            			writelog("ProcessorId -> " + identifier("Win32_Processor", "ProcessorId"));
 */
             string deviceIdFile = Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles)) + "ProgramData\\CEMI\\OptBiSender\\machine.id";
 
@@ -1270,7 +1286,7 @@ namespace OptProcessBiSenderService
                     // Return the hexadecimal string.
                     string hash = sBuilder.ToString();
                     
-                    //Console.WriteLine("hash = {0}", hash);    
+                    //			writelog("hash = {0}", hash);    
                     //Console.Write(("hash = {0}", hash));
 
 
@@ -1279,8 +1295,8 @@ namespace OptProcessBiSenderService
 
             }
 
-            Console.WriteLine("Device Id File -> ");
-            Console.WriteLine(File.ReadAllText(deviceIdFile));
+            			writelog("Device Id File -> ");
+            			writelog(File.ReadAllText(deviceIdFile));
 
             return File.ReadAllText(deviceIdFile);
         }
@@ -1293,17 +1309,17 @@ namespace OptProcessBiSenderService
             if(!cp.isConnected())
             {
                 try{
-                    //Console.WriteLine("Start Pdp Event - Trying to start pdp connection");    
+                    //			writelog("Start Pdp Event - Trying to start pdp connection");    
 				//Console.Write(("Start Pdp Event - Trying to start pdp connection"));
 
                     if(cp.pdpConection()) {
-                        //Console.WriteLine("Sucessfuly connected");    
+                        //			writelog("Sucessfuly connected");    
 				        Console.Write("Sucessfuly connected");
                         }
                     else {
                         if(_connectNetworkTrys == 0) return;
                         _connectNetworkTrys--;
-                        //Console.WriteLine("Fail to Conect to Network");    
+                        //			writelog("Fail to Conect to Network");    
 				        Console.Write(("Fail to Conect to Network"));
                         /*
                         //finaliza thread de configuração
@@ -1319,7 +1335,7 @@ namespace OptProcessBiSenderService
                     if(_connectNetworkTrys == 0) return;                    
                     _connectNetworkTrys--;
 
-                    //Console.WriteLine("Start Pdp Error - Serial has Timeout");    
+                    //			writelog("Start Pdp Error - Serial has Timeout");    
 				    Console.Write(("Start Pdp Error - Serial has Timeout"));
                     goto startNetwork;                    
                 }
@@ -1343,14 +1359,14 @@ namespace OptProcessBiSenderService
                 {
                     SerialPort sp = new SerialPort(port, 115200);
                     sp.Open();
-                    //Console.WriteLine("Resetando device");    
+                    //			writelog("Resetando device");    
 				    //Console.Write(("Resetando device"));
                     sp.Write("\r\nAT+CFUN=16\r\n");
                     sp.Close();
 
                     //apos reset abre a serial atual
                     Thread.Sleep(60000);
-                    //Console.WriteLine("Religando device");    
+                    //			writelog("Religando device");    
 				    //Console.Write(("Religando device"));
 
                     //apos religar device sai do loop
@@ -1363,7 +1379,7 @@ namespace OptProcessBiSenderService
         {
             List<string> devices = new List<string>();
             //Console.Clear();
-            //Console.WriteLine("Procurando Portas de Comunicação");
+            //			writelog("Procurando Portas de Comunicação");
             
 		    Console.Write("Procurando Portas de Comunicação");
             
@@ -1394,7 +1410,7 @@ namespace OptProcessBiSenderService
                     
                     if(result.Contains("ERROR") && (!result.Contains("OK")))
                     {
-                        Console.WriteLine("Sim Card Not Found");    
+                        			writelog("Sim Card Not Found");    
 				        Console.Write(("Sim Card Not Found"));
                         goto jump;
                     }
@@ -1402,9 +1418,9 @@ namespace OptProcessBiSenderService
                     if(result.Contains("SDK"))  deviceType = 0;
                     else  deviceType = 1;
                     
-                    Console.WriteLine(result);    
+                    			writelog(result);    
                     //Console.Write((result));
-                    //Console.WriteLine("PORT FOUD") ;    
+                    //			writelog("PORT FOUD") ;    
                     //Console.Write(("PORT FOUD") );   
                     Console.Write(" - Device Encontrado em -> "+ "COM"+i.ToString()+"\r\n");      
                     
@@ -1426,14 +1442,14 @@ namespace OptProcessBiSenderService
                     
                     if(result.Contains("ERROR"))
                     {
-                        //Console.WriteLine("Sim Card Not Found");    
+                        //			writelog("Sim Card Not Found");    
 				        //Console.Write(("Sim Card Not Found"));
                         goto jump;
                     }
                     
-                    //Console.WriteLine(result);    
+                    //			writelog(result);    
                     //Console.Write((result));
-                    //Console.WriteLine("PORT FOUD") ;    
+                    //			writelog("PORT FOUD") ;    
                     //Console.Write(("PORT FOUD") );   
                     //Console.Write(" - Device Encontrado em -> "+ "COM"+i.ToString());      
                     
@@ -1478,14 +1494,26 @@ namespace OptProcessBiSenderService
                     //Console.Write(" - Device Nao Encontrado em -> "+ "COM"+i.ToString() + " Devido a Exceção -> " + e.ToString());
                 }
                 
-                //Console.WriteLine("");    
+                //			writelog("");    
 				//Console.Write((""));
             }
             return devices;
         }
 
-        static void writelog(Object Data)
+        static void writelog(Object Data, int eventType=0)
         {
+            /// <summary>
+            /// Write to logfile in programdata/cemi/optsync folder
+            /// </summary>
+            /// <param name="eventType"> Is the type of event \n 0 - all \n 1 - info \n 2 - alert \n 3 - error</param>
+            /// <returns></returns>
+            /// 
+           
+            string type = "info";
+            if(eventType == 1) type = "info";
+            else if(eventType == 2) type = "warning";
+            else if(eventType == 3) type = "error";
+            
             if(!configuration.ContainsKey("log") || (configuration["log"] == "true"))
             {
                 try{
@@ -1493,19 +1521,31 @@ namespace OptProcessBiSenderService
 
                     if(logQueue == null)        logQueue = new Stack<string>();
 
-                    if(!logQueue.Contains(DateTime.Now.ToString() + " => " + Data.ToString() + "\r\n"))
-                        logQueue.Push(DateTime.Now.ToString() + " => " + Data.ToString() + "\r\n");
+                    if(configuration.ContainsKey("loglevel"))
+                    {
+                        if(eventType >= int.Parse(configuration["loglevel"]))
+                        {
+                            if(!logQueue.Contains(DateTime.Now.ToString() + " => " + type + " => " + Data.ToString() + "\r\n"))
+                                logQueue.Push(DateTime.Now.ToString() + " => " + type + " => " + Data.ToString() + "\r\n");
+                        }
+
+                    }
+                    else
+                    {
+                            if(!logQueue.Contains(DateTime.Now.ToString() + " => " + type + " => " + Data.ToString() + "\r\n"))
+                                logQueue.Push(DateTime.Now.ToString() + " => " + type + " => " + Data.ToString() + "\r\n");
+                    }
                 }
                 catch(Exception e)
                 {
-                    Console.WriteLine("Erro ao Escrever Log");
-                    Console.WriteLine(e);
+                    			Console.WriteLine("Erro ao Escrever Log");
+                    			Console.WriteLine(e);
                 }
                 
                 while(logQueue.Count > 0)
                 {
                     try{
-                        //Console.WriteLine("Tentando Escrever Log");
+                        //			Console.WriteLine("Tentando Escrever Log");
                         string logFile  = Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles)) + "ProgramData\\CEMI\\OptBiSender\\optsync.log";
 
                         if(File.Exists(logFile))
@@ -1515,8 +1555,8 @@ namespace OptProcessBiSenderService
                     }
                     catch(Exception e)
                     {
-                        Console.WriteLine("Erro ao Escrever Log");
-                        Console.WriteLine(e);
+                        			Console.WriteLine("Erro ao Escrever Log");
+                        			Console.WriteLine(e);
                     }
                 }
             }

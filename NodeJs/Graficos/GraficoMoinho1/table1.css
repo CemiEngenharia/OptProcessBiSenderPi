@@ -1,0 +1,101 @@
+#ValueChart{
+    border: thin solid #DDDDDD;
+    border-collapse: collapse;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 0.6vw;
+    left: 1vw; 
+    overflow: scroll;
+    position: absolute;
+    top: 14vh;  
+    z-index: 2;
+    padding: 0vw !important;
+	 text-align: right;
+}
+
+#ValueChart td, #ValueChart caption  {
+    padding: 0vw !important;
+    width: 4vw;
+    height: 1.5vh; 
+}
+#ValueChart th {
+    padding: 0vw !important;
+    width: 4vw;
+    height: 3vh;   
+}
+
+#ValueChart .tr1:nth-child(even), #ValueChart .input1:nth-child(even){
+    background-color: #F2F2F2;
+}
+
+#ValueChart .tr1:hover, #ValueChart .input1:hover{
+    background-color: #DDDDDD;
+}
+
+#ValueChart .tr2:nth-child(even), #ValueChart .input2:nth-child(even){
+    background-color: #FFFFFF;
+}
+
+#ValueChart .tr2:hover, #ValueChart .input2:hover{
+    background-color: #DDDDDD;
+}
+
+#ValueChart th,caption  {
+    text-align: center;
+    background-color: #782327;
+    color: white;
+    font-weight: bold;
+}
+
+.input2{ 
+    background-color: #FFFFFF;
+    border: none;
+    text-align: right!important;
+    width: 4vw;
+    height: 1.5vh;  
+    text-align: left;
+    padding: 0vw !important;
+    margin: 0vw;
+}
+
+.TagA{  
+    color: #00cc00;    
+    font-weight: bold;
+	 text-align: right;
+}
+
+.TagB{  
+    color: #339966; 
+    font-weight: bold;
+		 text-align: right;
+}
+
+.TagC{  
+    color: #E14E73; 
+    font-weight: bold;
+}
+
+.TagD{ 
+    color: #FFCC00; 
+    font-weight: bold;
+
+}
+
+.TagE{ 
+    color: #5C0099;
+    font-weight: bold; 
+}
+
+.TagF{  
+    color: #991F00;    
+    font-weight: bold;
+}
+
+.TagG{  
+    color: #66CCFF;  
+    font-weight: bold;
+}
+
+.TagH{  
+    color: #004080;  
+    font-weight: bold;
+}

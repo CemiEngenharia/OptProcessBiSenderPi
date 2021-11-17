@@ -1,0 +1,81 @@
+#ControleAvancadoDeProcessos{
+    color: #782327;
+    font-size: 1.8vw;
+    left: 36vw;
+    position:absolute;
+    top: 3vh;  
+    z-index: 2;
+}
+
+#EspessadorSupervisaoGeral{
+    color: #BFBFBF;
+    font-size: 1.5vw;
+    left: 39vw;
+    position:absolute;
+    top: 8vh;  
+    z-index: 2;
+}
+
+#AguaDeProcesso1{
+    color: #000000;
+    font-size: 0.6vw;
+    left: 2vw;
+    position:absolute;
+    top: 34.8vh;  
+    z-index: 2;
+}
+
+#Rejeitoduto{
+    color: #000000;
+    font-size: 0.6vw;
+    left: 12vw;
+    position:absolute;
+    top: 81.5vh;  
+    z-index: 2;
+}
+
+#Principal{
+    color: #000000;
+    font-size: 0.6vw;
+    left: 19.5vw;
+    position:absolute;
+    top: 81.5vh;  
+    z-index: 2;
+}
+
+#Reserva{
+    color: #000000;
+    font-size: 0.6vw;
+    left: 66vw;
+    position:absolute;
+    top: 81.5vh;  
+    z-index: 2;
+}
+
+#SistemaDiluicaoDeFloculante{
+    color: #000000;
+    font-size: 1vw;
+    left: 19vw;
+    position:absolute;
+    top: 17vh;  
+    z-index: 2;
+}
+
+#AguaDeProcesso2{
+    color: #000000;
+    font-size: 0.6vw;
+    left: 93vw;
+    position:absolute;
+    top: 18.5vh;  
+    z-index: 2;
+}
+
+
+#SistemaDiluicaoDeCoagulante{
+    color: #000000;
+    font-size: 1vw;
+    left: 65vw;
+    position:absolute;
+    top: 18vh;  
+    z-index: 2;
+}

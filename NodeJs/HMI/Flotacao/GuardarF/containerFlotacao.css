@@ -1,0 +1,465 @@
+/*#Container01{
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 4vw;
+    position: absolute;
+    top: 13vh;  
+    z-index: 1;     
+}
+
+#Container02{
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 10vw;
+    position: absolute;
+    top: 13vh;  
+    z-index: 1;            
+}*/
+
+#Container01{
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 6.8vw;
+    position: absolute;
+    top: 25vh;  
+    z-index: 1;     
+}
+
+#Container02{
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 12.5vw;
+    position: absolute;
+    top: 25vh;  
+    z-index: 1;            
+}
+
+#Container03{
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 1.5vw;
+    position: absolute;
+    top: 44.5vh;  
+    z-index: 1;     
+}
+
+#Container04{
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 7.5vw;
+    position: absolute;
+    top: 38vh;
+    width: 6.2vw;    
+    z-index: 1;     
+}
+
+#Container05{
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 7.5vw;
+    position: absolute;
+    top: 47vh; 
+    width: 6.2vw;   
+    z-index: 1;     
+}
+
+#Container06{
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 7.5vw;
+    position: absolute;
+    top: 56vh;
+    width: 6.2vw; 
+    z-index: 1;     
+}
+
+#Container07{
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 23vw;
+    position: absolute;
+    top: 28vh;  
+    width: 6.2vw;
+    z-index: 1;     
+}
+
+#Container08{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 23vw;
+    position: absolute;
+    top: 36.5vh;
+    width: 6.2vw;
+    z-index: 1;         
+}
+
+#Container09{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 29.5vw;
+    position: absolute;
+    top:28vh;  
+    z-index: 1;     
+}
+
+#Container10{
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 37.8vw;
+    position: absolute;
+    top: 33.5vh;  
+    width: 6.2vw;
+    z-index: 1;         
+}
+
+#Container11{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 37.8vw;
+    position: absolute;
+    top: 42vh;
+    width: 6.2vw;
+    z-index: 1;         
+}
+
+#Container12{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 44.3vw;
+    position: absolute;
+    top: 33.5vh;  
+    z-index: 1;     
+}
+
+#Container13{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 52.5vw;
+    position: absolute;
+    top: 39vh;
+    width: 6.2vw;
+    z-index: 1;     
+}
+
+#Container14{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 52.5vw;
+    position: absolute;
+    top: 47.5vh;
+    width: 6.2vw;
+    z-index: 1;     
+}
+
+#Container15{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 58.8vw;
+    position: absolute;
+    top: 39vh;
+    z-index: 1;     
+}
+
+#Container16{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 68.5vw;
+    position: absolute;
+    top: 38.8vh;
+    width: 6.2vw;
+    z-index: 1;     
+}
+
+#Container17{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 75vw;
+    position: absolute;
+    top: 38.8vh;
+    z-index: 1;     
+}
+
+#Container18{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 68.5vw;
+    position: absolute;
+    top: 47.3vh;
+    width: 6.2vw;
+    z-index: 1;     
+}
+
+#Container19{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 75vw;
+    position: absolute;
+    top: 47.3vh;
+    z-index: 1;     
+}
+
+#Container20{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 87vw;
+    position: absolute;
+    top: 27.3vh;
+    z-index: 1;     
+}
+#Container21{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 87vw;
+    position: absolute;
+    top: 36vh;
+    z-index: 1;     
+}
+#Container22{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 92.8vw;
+    position: absolute;
+    top: 27.3vh;
+    z-index: 1;     
+}
+#Container23{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 89.5vw;
+    position: absolute;
+    top: 44vh;
+    z-index: 1;     
+}
+#Container24{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 19.5vw;
+    position: absolute;
+    top: 61.5vh;
+    width: 6.2vw;
+    z-index: 1;     
+}
+
+#Container25{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 26vw;
+    position: absolute;
+    top: 61.5vh;
+    z-index: 1;     
+}
+
+#Container26{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 19.5vw;
+    position: absolute;
+    width: 6.2vw;
+    top: 70vh;
+    z-index: 1;     
+}
+
+#Container27{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 26vw;
+    position: absolute;
+    top: 70vh;
+    z-index: 1;     
+}
+
+#Container28{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 34.3vw;
+    position: absolute;
+    top: 66.8vh;
+    width: 6.2vw;
+    z-index: 1;     
+}
+
+#Container29{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 41vw;
+    position: absolute;
+    top: 66.8vh;
+    z-index: 1;     
+}
+
+#Container30{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 34.3vw;
+    position: absolute;
+    top: 75.5vh;
+    width: 6.2vw;
+    z-index: 1;     
+}
+
+#Container31{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 49vw;
+    position: absolute;
+    top: 72.8vh;
+    width: 6.2vw;
+    z-index: 1;     
+}
+
+#Container32{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 49vw;
+    position: absolute;
+    top: 81vh;
+    width: 6.2vw;
+    z-index: 1;       
+}
+
+#Container33{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 55.5vw;
+    position: absolute;
+    top: 72.8vh;
+    z-index: 1;     
+}
+
+#Container34{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 65.5vw;
+    position: absolute;
+    top: 70vh;
+    z-index: 1;     
+}
+
+#Container35{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 82.5vw;
+    position: absolute;
+    top: 90vh;
+    z-index: 1;     
+}
+
+#Container36{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 92.5vw;
+    position: absolute;
+    top: 58vh;
+    width: 6.2vw;
+    z-index: 1;     
+}
+#Container37{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 92.5vw;
+    position: absolute;
+    top: 66.5vh;
+    width: 6.2vw;
+    z-index: 1;     
+}
+#Container38{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 92.5vw;
+    position: absolute;
+    top: 75.3vh;
+    width: 6.2vw;
+    z-index: 1;     
+}
+
+#Container39{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 1vw;
+    position: absolute;
+    top: 90vh;
+    z-index: 1;     
+}
+
+#Container40{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 8vw;
+    position: absolute;
+    top: 90vh;
+    z-index: 1;     
+}

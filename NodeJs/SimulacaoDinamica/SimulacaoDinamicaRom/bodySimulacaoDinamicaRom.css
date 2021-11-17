@@ -1,0 +1,19 @@
+#Vale{ 
+  height: 8vh;
+  left: 89vw;
+  overflow-y: none;
+  position: absolute !important;
+  top: 0vh;
+  width: 10vw;
+  z-index: 2; 
+}
+
+#LogoCemi{ 
+  height: 8vh;
+  left: 0vw;
+  overflow-y: none;
+  position: absolute !important;
+  top: 0vh;
+  width: 11vw;
+  z-index: 2; 
+}

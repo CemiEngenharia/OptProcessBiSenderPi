@@ -1,0 +1,17 @@
+#SimulacaoDeIndicadores{
+    color: #782327;
+    font-size: 1.8vw;
+    left: 36vw;
+    position:absolute;
+    top: 3vh;  
+    z-index: 2;
+}
+
+#SalaDeControle{
+    color: #BFBFBF;
+    font-size: 1.5vw;
+    left: 39vw;
+    position:absolute;
+    top: 8vh;  
+    z-index: 2;
+}

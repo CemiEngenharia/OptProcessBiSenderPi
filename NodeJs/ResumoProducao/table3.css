@@ -1,0 +1,65 @@
+#table3{
+    border: thin solid #DDDDDD;
+    border-collapse: collapse;
+    font-family: Arial, Helvetica, sans-serif;
+    left: 3vw; 
+    overflow: scroll;
+    position: absolute;
+    top: 48vh;  
+}
+
+#table3 td, #table3 th,  #table3 caption  {
+    border: thin solid #DDDDDD;
+    padding: 0.2vw;
+    width: 10vw;
+    height: 3vh;   
+}
+
+#table3 .tr1:nth-child(even), #table3 .input1:nth-child(even){
+    background-color: #F2F2F2;
+}
+
+#table3 .tr1:hover, #table3 .input1:hover{
+    background-color: #DDDDDD;
+}
+
+
+
+#table3 .tr2:nth-child(even), #table3 .input2:nth-child(even){
+    background-color: #FFFFFF;
+}
+
+#table3 .tr2:hover, #table3 .input2:hover{
+    background-color: #DDDDDD;
+}
+
+#table3 th,caption  {
+    text-align: center;
+    background-color: #782327;
+    color: white;
+    font-weight: bold;
+}
+
+.input1{ 
+    background-color: #F2F2F2;
+    border: none;
+    text-align: right;
+    width: 10vw;
+    height: 3vh;  
+}
+
+.input2{ 
+    background-color: #FFFFFF;
+    border: none;
+    text-align: right;
+    width: 10vw;
+    height: 3vh;  
+}
+
+#ro1{
+    display:none;
+}
+
+#ro1:hover {
+    display:block;
+  }

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<title>HMI</title>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <head>
+        <link href='https://fonts.googleapis.com/css?family=RobotoDraft' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+       <!-- <script src= "https://github.com/google/gson.git"></script>-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <link rel="stylesheet" href="./bodyMoagemLinha02.css">
+        <link rel="stylesheet" href="./caixaMoagemLinha02.css">
+        <link rel="stylesheet" href="./labelMoagemLinha02.css">
+        <link rel="stylesheet" href="./menuMoagemLinha02.css">
+    </head>
+
+	<body id="bodyMoagem">
+       
+        <div>
+            <div> <img id="LogoCemi"    src="../ImagensHMI/Cemi.jpeg">   </div> <!--LOGO CEMI--> 
+            <div> <img id="Vale"        src="../ImagensHMI/Vale1.jpg">    </div> <!--LOGO VALE-->                                                                                                                                             
+                 
+            <nav class="dropdown">
+                <a class="menu">MENU</a>
+                <div class="dropdown-content">
+                    <a href="../Britagem/Britagem.php">                                                     Britagem                                </a>
+                    <a href="../Espessador/Espessador.php">                                                 Espessador                              </a>
+                    <a href="../Flotacao/Flotacao.php">                                                     Flotação                                </a>   
+                    <a href="../inicio.html">                                                                 Global                                  </a>
+                    <a href="../MoagemLinha01/MoagemLinha01.php">                                           Moagem - Linha 01                       </a>
+                    <a href="./moagemLinha02.html">                                                          Moagem - Linha 02                       </a>
+                    <a href="../SeparacaoMagneticaAltaFrequencia/SeparacaoMagneticaAltaFrequencia.php">     Separação Magnética Alta Frequência     </a>
+                    <a href="../SeparacaoMagneticaTambor/SeparacaoMagneticaTambor.html">                     Separação Magnética Tambor              </a>
+                    <li>
+                        <a> Simulação Dinâmica </a>
+                        <ul>
+                            <li>    <a href="../SimulacaoDinamicaBritagem/SimulacaoDinamicaBritagem.php">                       Britagem           </a></li>
+                            <li>    <a class="nome" href="../SimulacaoDinamicaCmai1/SimulacaoDinamicaCmai1.php">                CMAI               </a></li>
+                            <li>    <a class="nome" href="../SimulacaoDinamicaDeslamagem/SimulacaoDinamicaDeslamagem.php">      Deslamagem         </a></li>
+                            <li>    <a class="nome" href="../SimulacaoDinamicaEspessamento/SimulacaoDinamicaEspessamento.php">  Espessamento       </a></li>
+                            <li>    <a class="nome" href="../SimulacaoDinamicaFlotacao/SimulacaoDinamicaFlotacao.php">          Flotação           </a></li>
+                            <li>    <a class="nome" href="../SimulacaoDinamicaMoagem/SimulacaoDinamicaMoagem.php">              Moagem             </a></li>
+                            <li>    <a class="nome" href="../SimulacaoDinamicaRom/SimulacaoDinamicaRom.php">                    Rom                </a></li>
+                        </ul>
+                    </li>   
+                    <a href="../SimulacaoIndicadores/SimulacaoIndicadores.html">                             Simulação Indicadores                   </a>
+                </div>
+            </nav> 
+            
+            <!--TITULO-->           
+            <label id="ControleAvancadoDeProcessos"     type="text" name="ControleAvancadoDeProcessos">     Controle Avançado de Processos          </label>
+            <label id="MoagemLinha01SupervisaoGeral"    type="text" name="MoagemLinha01SupervisaoGeral">    Moagem - Linha 02 - Supervisão Geral    </label>
+   
+            <!--SUBTITULO-->
+            <label id="Lamas"       type="text" name="Lamas">     Lamas     </label>
+            <label id="Flotacao"    type="text" name="Flotacao">  Flotação  </label>
+
+            <!--NOME DOS ESQUIPAMENTOS-->
+            <div id="MoagemCaixa01"  type="text" name="MoagemCaixa01"> VPT-2030-SI-001  </div>          
+            <div id="MoagemCaixa02"  type="text" name="MoagemCaixa02"> VPT-2030-CI-002  </div>
+            <div id="MoagemCaixa03"  type="text" name="MoagemCaixa03"> VPT-2030-DI-001  </div>
+            <div id="MoagemCaixa04"  type="text" name="MoagemCaixa04"> VPT-2030-MO-002  </div>
+            <div id="MoagemCaixa05"  type="text" name="MoagemCaixa05"> VPT-2030-CX-001  </div>         
+            <div id="MoagemCaixa06"  type="text" name="MoagemCaixa06"> 2040-CX-003      </div>
+            <div id="MoagemCaixa07"  type="text" name="MoagemCaixa07"> 2040-BP-002      </div>
+
+            <div> <!--Container01-->
+                <ul>
+                    <div id="Container01"  type="text" name="Container01"> 
+                        <li>
+                            <label class="tag" text-align="center"> Taxa Alimentação (ton/h)</label>
+                        </li> 
+            
+                        <li> 
+                            <label class="subTitle">PV:</label>
+                            <input type="text" id="2030_WIT_541_PV" name="2030_WIT_541_PV" value="0.01" readonly>  
+                        </li>
+            
+                        <li>
+                            <label class="subTitle">SP:</label>
+                            <input type="text" id="2030_WIT_541_SP" name="2030_WIT_541_SP" value="0.00" readonly>  
+                        </li>
+            
+                        <li>
+                            <label class="tag">2030_WIT_541</label>
+                        </li> 
+                    </div>    
+                </ul>
+            </div>
+            
+            <div> <!--Container02-->
+                <ul>
+                    <div id="Container02"  type="text" name="Container01"> 
+                        <li>
+                            <label class="tag" text-align="center">Ciclone Automático</label>
+                        </li> 
+            
+                        <li> 
+                            <label class="subTitle">PV:</label>
+                            <input type="text" id="2030_PV_702_PV" name="2030_PV_702_PV" value="0.02" readonly>  
+                        </li>
+            
+                        <li>
+                            <label class="subTitle">SP:</label>
+                            <input type="text" id="2030_PV_702_SP" name="2030_PV_702_SP" value="0.00" readonly>  
+                        </li>
+            
+                        <li>
+                            <label class="tag">2030_PV_702</label>
+                        </li> 
+                    </div>    
+                </ul>
+            </div>
+            
+            <div> <!--Container03-->
+                <ul>
+                    <div id="Container03"  type="text" name="Container03"> 
+                        <li>
+                            <label class="tag" text-align="center"> Pressão (MPa)</label>
+                        </li> 
+            
+                        <li> 
+                            <label class="subTitle">PV:</label>
+                            <input type="text" id="2030_PIT_701_PV" name="2030_PIT_701_PV" value="0.03" readonly>  
+                        </li>
+            
+                        <li>
+                            <label class="subTitle">SP:</label>
+                            <input type="text" id="2030_PIT_701_SP" name="2030_PIT_701_SP" value="0.00" readonly>  
+                        </li>
+            
+                        <li>
+                            <label class="tag"> 2030_PIT_701 </label>
+                        </li> 
+                    </div>    
+                </ul>
+            </div>
+            
+            <div> <!--Container04-->
+                <ul>
+                    <div id="Container04"  type="text" name="Container04"> 
+                        <li>
+                            <label class="tag" text-align="center"> Ciclone Automático</label>
+                        </li> 
+            
+                        <li> 
+                            <label class="subTitle">PV:</label>
+                            <input type="text" id="2030_PV_703_PV" name="2030_PV_703_PV" value="0.04" readonly>  
+                        </li>
+            
+                        <li>
+                            <label class="subTitle">SP:</label>
+                            <input type="text" id="2030_PV_703_SP" name="2030_PV_703_SP" value="0.00" readonly>  
+                        </li>
+            
+                        <li>
+                            <label class="tag"> 2030_PV_703 </label>
+                        </li> 
+                    </div>    
+                </ul>
+            </div>
+            
+            <div> <!--Container05-->
+                <ul>
+                    <div id="Container05"  type="text" name="Container05"> 
+                        <li>
+                            <label class="tag" text-align="center"> Potência Específica (KWh/ton)</label>
+                        </li> 
+            
+                        <li> 
+                            <label class="subTitle">PV:</label>
+                            <input type="text" id="POTENCIA_ESPECIFICA_PV" name="POTENCIA_ESPECIFICAPV" value="0.05" readonly>  
+                        </li>
+            
+                            <label class="tag"></label>
+                        </li> 
+                    </div>    
+                </ul>
+            </div>
+            
+            <div> <!--Container06-->
+                <ul>
+                    <div id="Container06"  type="text" name="Container06"> 
+                        <li>
+                            <label class="tag" text-align="center"> Nível (%)</label>
+                        </li> 
+            
+                        <li> 
+                            <label class="subTitle">PV:</label>
+                            <input type="text" id="2030_LIT_171_PV" name="2030_LIT_171_PV" value="0.06" readonly>  
+                        </li>
+            
+                        <li>
+                            <label class="subTitle">SP:</label>
+                            <input type="text" id="2030_LIT_171_SP" name="2030_LIT_171_SP" value="0.00" readonly>  
+                        </li>
+            
+                        <li>
+                            <label class="tag"> 2030_LIT_171</label>
+                        </li> 
+                    </div>    
+                </ul>
+            </div>
+            
+            <div> <!--Container07-->
+                <ul>
+                    <div id="Container07"  type="text" name="Container07"> 
+                        <li>
+                            <label class="tag" text-align="center"> Vazão (m&#x00B3/h)</label>
+                        </li> 
+            
+                        <li> 
+                            <label class="subTitle">PV:</label>
+                            <input type="text" id="2030_FV_292_PV" name="2030_FV_292_PV" value="0.07" readonly>  
+                        </li>
+            
+                        <li>
+                            <label class="subTitle">SP:</label>
+                            <input type="text" id="2030_FV_292_SP" name="2030_FV_292_SP" value="0.00" readonly>  
+                        </li>
+            
+                        <li>
+                            <label class="tag">2030_FV_292</label>
+                        </li> 
+                    </div>    
+                </ul>
+            </div>          
+            
+            <div> <!--Container08-->
+                <ul>
+                    <div id="Container08"  type="text" name="Container08"> 
+                        <li>
+                            <label class="tag" text-align="center"> Vazão Bomba (m&#x00B3/h)</label>
+                        </li> 
+            
+                        <li> 
+                            <label class="subTitle">PV:</label>
+                            <input type="text" id="2030_BP_002_PV" name="2030_BP_002_PV" value="0.08" readonly>  
+                        </li>
+            
+                        <li>
+                            <label class="subTitle">SP:</label>
+                            <input type="text" id="2030_BP_002_SP" name="2030_BP_002_SP" value="0.00" readonly>  
+                        </li>
+            
+                        <li>
+                            <label class="tag">2030_BP_002</label>
+                        </li> 
+                    </div>    
+                </ul>
+            </div>
+            
+            <div> <!--Container09-->
+                <ul>
+                    <div id="Container09"  type="text" name="Container09"> 
+                        <li>
+                            <label class="tag">Alimentação (ton/h)</label>
+                        </li> 
+            
+                        <li> 
+                            <label class="subTitle">PV:</label>
+                            <input type="text" id="2030_WIT_182_PV" name="2030_WIT_182_PV" value="0.09" readonly>  
+                        </li>
+            
+                        <li>
+                            <label class="subTitle">SP:</label>
+                            <input type="text" id="2030_WIT_182_SP" name="2030_WIT_182_SP" value="0.00" readonly>  
+                        </li>
+            
+                        <li>
+                            <label class="tag">2030_WIT_182</label>
+                        </li> 
+                    </div>    
+                </ul>
+            </div>
+            
+            <div> <!--Container10-->
+                <ul>
+                    <div id="Container10"  type="text" name="Container10"> 
+                        <li>
+                            <label class="tag" text-align="center">Densidade (kg/m&#x00B3)</label>
+                        </li> 
+            
+                        <li> 
+                            <label class="subTitle">PV:</label>
+                            <input type="text" id="2030_DIT_181_PV" name="2030_DIT_181_PV" value="0.10" readonly>  
+                        </li>
+            
+                        <li>
+                            <label class="subTitle">SP:</label>
+                            <input type="text" id="2030_DIT_181_SP" name="2030_DIT_181_SP" value="0.00" readonly>  
+                        </li>
+            
+                        <li>
+                            <label class="tag">2030_DIT_181</label>
+                        </li> 
+                    </div>    
+                </ul>
+            </div>  
+                        
+        </div>   
+    </body>
+</html> 

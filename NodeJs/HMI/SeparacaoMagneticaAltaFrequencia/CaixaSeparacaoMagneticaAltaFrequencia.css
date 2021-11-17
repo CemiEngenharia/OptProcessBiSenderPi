@@ -1,0 +1,83 @@
+#SeparacaoMagneticaAltaFrequenciaCaixa01{
+    background-color:#99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 43vw;
+    position: absolute;
+    text-align: center;
+    top: 23vh;  
+    z-index: 2;    
+}
+
+#SeparacaoMagneticaAltaFrequenciaCaixa02{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 42.5vw;
+    position: absolute;
+    text-align: center ;
+    top: 35vh;  
+    z-index: 2;
+}
+
+#SeparacaoMagneticaAltaFrequenciaCaixa03{ 
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 48vw;
+    position: absolute;
+    text-align: center ;
+    top: 56.5vh;  
+    z-index: 2;
+}
+
+#SeparacaoMagneticaAltaFrequenciaCaixa04{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color:#000000;
+    font-size: 0.5vw;
+    left: 70.3vw;
+    position: absolute;
+    text-align: center;
+    top: 69.3vh;  
+    z-index: 2;
+}
+
+#SeparacaoMagneticaAltaFrequenciaCaixa05{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 47.5vw;
+    position: absolute;
+    text-align: center;
+    top: 71vh;  
+    z-index: 2;
+}
+
+#SeparacaoMagneticaAltaFrequenciaCaixa06{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color:#000000;
+    font-size: 0.5vw;
+    left: 63vw;
+    position: absolute;
+    text-align: center;
+    top: 73vh;  
+    z-index: 2;
+}
+
+#SeparacaoMagneticaAltaFrequenciaCaixa07{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 63.5vw;
+    position: absolute;
+    text-align: center;
+    top: 89vh;  
+    z-index: 2;
+}

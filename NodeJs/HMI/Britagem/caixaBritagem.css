@@ -1,0 +1,59 @@
+#BritagemCaixa01{
+    background-color:#99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 35vw;
+    position: absolute;
+    text-align: center;
+    top: 32vh;  
+    z-index: 2;     
+}
+
+#BritagemCaixa02{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 61.5vw;
+    position: absolute;
+    text-align: center ;
+    top: 35vh;  
+    z-index: 2; 
+}
+
+#BritagemCaixa03{ 
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 62vw;
+    position: absolute;
+    text-align: center ;
+    top: 51.5vh;  
+    z-index: 2; 
+}
+
+#BritagemCaixa04{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color:#000000;
+    font-size: 0.5vw;
+    left: 75vw;
+    position: absolute;
+    text-align: center;
+    top: 50vh;  
+    z-index: 2; 
+}
+
+#BritagemCaixa05{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 58vw;
+    position: absolute;
+    text-align: center;
+    top: 80vh;  
+    z-index: 2; 
+}

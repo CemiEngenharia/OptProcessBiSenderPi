@@ -1,0 +1,414 @@
+#ControleAvancadoDeProcessos{
+    color: #782327;
+    font-size: 1.8vw;
+    left: 36vw;
+    position:absolute;
+    text-decoration:none;
+    top: 3vh;  
+    z-index: 2;
+}
+
+#SupervisaoGeral{
+    color: #BFBFBF;
+    font-size: 1.5vw;
+    left: 38vw;
+    position:absolute;
+    text-decoration:none;
+    top: 8vh;  
+    z-index: 2;
+}
+
+#LinkMoagem1{
+    color: #782327;
+    left: 48vw;
+    position:absolute;
+    top:64vh;
+    font-size: 0.6vw;
+    font-weight: bold; 
+    text-decoration:none;
+    width: 3.5vw;
+    z-index: 2; 
+}
+
+#LinkMoagem2{
+    color: #782327;
+    left: 57.5vw;
+    position:absolute;
+    top:66vh;
+    font-size: 0.6vw;
+    font-weight: bold;
+    text-decoration:none;
+    width: 3.5vw;
+    z-index: 2; 
+}
+
+#LinkEspessador{
+    color: #782327;
+    left: 90vw;
+    position:absolute;
+    top:28vh;
+    font-size: 0.6vw;
+    font-weight: bold;
+    text-decoration:none;
+    width: 3.5vw;
+    z-index: 2; 
+}
+
+#LinkFlotacao{
+    color: #782327;
+    left: 74vw;
+    position:absolute;
+    top:48vh;
+    font-size: 0.6vw;
+    font-weight: bold;
+    text-decoration:none;
+    width: 3.5vw;
+    z-index: 2; 
+}
+
+#LinkBritagem{
+    color: #782327;
+    left: 51vw;
+    position:absolute;
+    top:24vh;
+    font-size: 0.6vw;
+    font-weight: bold;
+    text-decoration:none;
+    width: 3.5vw;
+    z-index: 2; 
+}
+
+#LinkSeparacaoMagneticaAltaFrequencia{
+    color: #782327;
+    left: 32vw;
+    position:absolute;
+    top:63vh;
+    font-size: 0.6vw;
+    font-weight: bold;
+    text-align: center;
+    text-decoration:none;
+    width: 5vw;
+    z-index: 2; 
+}
+
+#LinkSeparacaoMagneticaAltaTambor{
+    color: #782327;
+    left: 8vw;
+    position:absolute;
+    top:48vh;
+    font-size: 0.6vw;
+    font-weight: bold;
+    text-align: center;
+    text-decoration:none;
+    width: 3.5vw;
+    z-index: 2; 
+}
+
+#Fluxo82{
+    color: #000000;
+    font-size: 0.6vw;
+    font-weight: bold;
+    left: 61.2vw;
+    position:absolute;
+    text-decoration:none;
+    top: 64vh;  
+    z-index: 2;
+}
+
+#Fluxo84{
+    color: #000000;
+    font-size: 0.6vw;
+    font-weight: bold;
+    left: 56.7vw;
+    position:absolute;
+    text-decoration:none;
+    top: 76Vh;  
+    z-index: 2;
+}
+
+#Fluxo87{
+    color: #000000;
+    font-size: 0.6vw;
+    font-weight: bold;
+    left: 61.8vw;
+    position:absolute;
+    text-decoration:none;
+    top: 53Vh;  
+    z-index: 2;
+}
+
+#Fluxo88{
+    color: #000000;
+    font-size: 0.6vw;
+    font-weight: bold;
+    left: 59.7vw;
+    position:absolute;
+    text-decoration:none;
+    top: 45Vh;  
+    z-index: 2;
+}
+
+#Fluxo89{
+    color: #000000;
+    font-size: 0.6vw;
+    font-weight: bold;
+    left: 59.8vw;
+    position:absolute;
+    text-decoration:none;
+    top: 57Vh;  
+    z-index: 2;
+}
+
+#Fluxo90{
+    color: #000000;
+    font-size: 0.6vw;
+    font-weight: bold;
+    left: 52.2vw;
+    position:absolute;
+    text-decoration:none;
+    top: 64vh;  
+    z-index: 2;
+}
+
+#Fluxo92{
+    color: #000000;
+    font-size: 0.6vw;
+    font-weight: bold;
+    left: 47.2vw;
+    position:absolute;
+    text-decoration:none;
+    top: 75vh;  
+    z-index: 2;
+}
+
+#Fluxo95{
+    color: #000000;
+    font-size: 0.6vw;
+    font-weight: bold;
+    left: 53.8vw;
+    position:absolute;
+    text-decoration:none;
+    top: 60vh;  
+    z-index: 2;
+}
+
+#Fluxo96{
+    color: #000000;
+    font-size: 0.6vw;
+    font-weight: bold;
+    left: 51.4vw;
+    position:absolute;
+    text-decoration:none;
+    top: 42vh;  
+    z-index: 2;
+}
+
+#Fluxo97{
+    color: #000000;
+    font-size: 0.6vw;
+    font-weight: bold;
+    left: 51.2vw;
+    position:absolute;
+    text-decoration:none;
+    top: 56vh;  
+    z-index: 2;
+}
+
+#Fluxo106{
+    color: #000000;
+    font-size: 0.6vw;
+    font-weight: bold;
+    left: 68vw;
+    position:absolute;
+    text-decoration:none;
+    top: 55.7vh;  
+    z-index: 2;
+}
+
+#Fluxo107{
+    color: #000000;
+    font-size: 0.6vw;
+    font-weight: bold;
+    left: 72.5vw;
+    position:absolute;
+    text-decoration:none;
+    top: 51.5Vh;  
+    z-index: 2;
+}
+
+#Fluxo108{
+    color: #000000;
+    font-size: 0.6vw;
+    font-weight: bold;
+    left: 67.5vw;
+    position:absolute;
+    text-decoration:none;
+    top: 66vh;  
+    z-index: 2;
+}
+
+#Fluxo109{
+    color: #000000;
+    font-size: 0.6vw;
+    font-weight: bold;
+    left: 72.7vw;
+    position:absolute;
+    text-decoration:none;
+    top: 68vh;  
+    z-index: 2;
+}
+
+#Fluxo110{
+    color: #000000;
+    font-size: 0.6vw;
+    font-weight: bold;
+    left: 67.5vw;
+    position:absolute;
+    text-decoration:none;
+    top: 77.5vh;  
+    z-index: 2;
+}
+
+#Fluxo111{
+    color: #000000;
+    font-size: 0.6vw;
+    font-weight: bold;
+    left: 77.5vw;
+    position:absolute;
+    text-decoration:none;
+    top: 51.5vh;  
+    z-index: 2;
+}
+
+#Fluxo112{
+    color: #000000;
+    font-size: 0.6vw;
+    font-weight: bold;
+    left: 74.8vw;
+    position:absolute;
+    text-decoration:none;
+    top: 64vh;  
+    z-index: 2;
+}
+
+#Fluxo113{
+    color: #000000;
+    font-size: 0.6vw;
+    font-weight: bold;
+    left: 78.5vw;
+    position:absolute;
+    text-decoration:none;
+    top: 68Vh;  
+    z-index: 2;
+}
+
+#Fluxo118{
+    color: #000000;
+    font-size: 0.6vw;
+    font-weight: bold;
+    left: 80.3vw;
+    position:absolute;
+    text-decoration:none;
+    top: 38Vh;  
+    z-index: 2;
+}
+
+#Fluxo119{
+    color: #000000;
+    font-size: 0.6vw;
+    font-weight: bold;
+    left: 83vw;
+    position:absolute;
+    text-decoration:none;
+    top: 18.5vh;  
+    z-index: 2;
+}
+
+#Fluxo120{
+    color: #99C2FF;
+    font-size: 0.6vw;
+    font-weight: bold;
+    left: 92vw;
+    position:absolute;
+    text-decoration:none;
+    top: 23.3vh;  
+    z-index: 2;
+}
+
+#Fluxo121{
+    color: #000000;
+    font-size: 0.6vw;
+    font-weight: bold;
+    left: 87.3vw;
+    position:absolute;
+    text-decoration:none;
+    top: 29.5Vh;  
+    z-index: 2;
+}
+
+#Fluxo123{
+    color: #000000;
+    font-size: 0.6vw;
+    font-weight: bold;
+    left: 92vw;
+    position:absolute;
+    text-decoration:none;
+    top: 39.5Vh;  
+    z-index: 2;
+}
+
+#Fluxo124{
+    color: #000000;
+    font-size: 0.6vw;
+    font-weight: bold;
+    left: 87.3vw;
+    position:absolute;
+    text-decoration:none;
+    top: 46vh;  
+    z-index: 2;
+}
+/******************************************************/
+
+#Fluxo04{
+    color: #000000;
+    font-size: 0.6vw;
+    font-weight: bold;
+    left: 15vw;
+    position:absolute;
+    text-decoration:none;
+    top: 20vh;  
+    z-index: 2;
+}
+
+#Fluxo05{
+    color: #000000;
+    font-size: 0.6vw;
+    font-weight: bold;
+    left: 87.3vw;
+    position:absolute;
+    text-decoration:none;
+    top: 28Vh;  
+    z-index: 2;
+}
+
+#Fluxo71{
+    color: #000000;
+    font-size: 0.6vw;
+    font-weight: bold;
+    left: 92vw;
+    position:absolute;
+    text-decoration:none;
+    top: 38Vh;  
+    z-index: 2;
+}
+
+#Fluxo74{
+    color: #000000;
+    font-size: 0.6vw;
+    font-weight: bold;
+    left: 87.3vw;
+    position:absolute;
+    text-decoration:none;
+    top: 45vh;  
+    z-index: 2;
+}

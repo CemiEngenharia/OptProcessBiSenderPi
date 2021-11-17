@@ -1,0 +1,41 @@
+#Vale{ 
+  height: 8vh;
+  left: 89vw;
+  overflow-y: none;
+  position: absolute !important;
+  top: 0vh;
+  width: 10vw;
+  z-index: 2; 
+}
+
+#LogoCemi{ 
+  height: 8vh;
+  left: 0vw;
+  overflow-y: none;
+  position: absolute !important;
+  top: 0vh;
+  width: 11vw;
+  z-index: 2; 
+}
+
+#divmyChart{
+  left: 0vw;
+  top: 22vh;
+  width: 97vw;
+  height: 75vh;  
+  overflow-y: none;
+  position: absolute !important;
+  z-index: 2;
+}
+
+#Time{
+  height: 22px !important;
+  display: inline-block;
+  font-size: 0.8vw;
+  width: 10vw;
+  font-family:Arial, Helvetica, sans-serif;
+  left: 80vw;
+  top: 18vh;
+  position: absolute;
+  border: thin solid #782327 !important;
+} 

@@ -1,0 +1,83 @@
+#MoagemCaixa01{
+    background-color:#99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 2.3vw;
+    position: absolute;
+    text-align: center;
+    top: 20vh;  
+    z-index: 2;     
+}
+
+#MoagemCaixa02{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 62.8vw;
+    position: absolute;
+    text-align: center ;
+    top: 25vh;  
+    z-index: 2; 
+}
+
+#MoagemCaixa03{ 
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 83.8vw;
+    position: absolute;
+    text-align: center ;
+    top: 55.8vh;  
+    z-index: 2; 
+}
+
+#MoagemCaixa04{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color:#000000;
+    font-size: 0.5vw;
+    left: 24.5vw;
+    position: absolute;
+    text-align: center;
+    top: 65.5vh;  
+    z-index: 2; 
+}
+
+#MoagemCaixa05{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 40vw;
+    position: absolute;
+    text-align: center;
+    top: 93.5vh;  
+    z-index: 2; 
+}
+
+#MoagemCaixa06{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 84.5vw;
+    position: absolute;
+    text-align: center;
+    top: 59.5vh;
+    z-index: 2; 
+}
+
+#MoagemCaixa07{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 64.3vw;
+    position: absolute;
+    text-align: center;
+    top: 93vh;   
+    z-index: 2;
+}

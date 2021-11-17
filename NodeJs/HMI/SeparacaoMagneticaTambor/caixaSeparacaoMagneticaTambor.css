@@ -1,0 +1,83 @@
+#SeparacaoMagneticaTamborCaixa01{
+    background-color:#99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 46vw;
+    position: absolute;
+    text-align: center;
+    top: 21vh;  
+    z-index: 2;     
+}
+
+#SeparacaoMagneticaTamborCaixa02{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 45vw;
+    position: absolute;
+    text-align: center ;
+    top: 28vh;  
+    z-index: 2; 
+}
+
+#SeparacaoMagneticaTamborCaixa03{ 
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 27vw;
+    position: absolute;
+    text-align: center ;
+    top: 39.3vh;  
+    z-index: 2; 
+}
+
+#SeparacaoMagneticaTamborCaixa04{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color:#000000;
+    font-size: 0.5vw;
+    left: 50vw;
+    position: absolute;
+    text-align: center;
+    top: 36vh;  
+    z-index: 2; 
+}
+
+#SeparacaoMagneticaTamborCaixa05{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 28vw;
+    position: absolute;
+    text-align: center;
+    top: 65.5vh;  
+    z-index: 2; 
+}
+
+#SeparacaoMagneticaTamborCaixa06{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color:#000000;
+    font-size: 0.5vw;
+    left: 52.5vw;
+    position: absolute;
+    text-align: center;
+    top: 65vh;  
+    z-index: 2; 
+}
+
+#SeparacaoMagneticaTamborCaixa07{
+    background-color: #99C2FF;
+    border: thin solid #000000;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 49vw;
+    position: absolute;
+    text-align: center;
+    top: 82.5vh;  
+    z-index: 2; 
+}

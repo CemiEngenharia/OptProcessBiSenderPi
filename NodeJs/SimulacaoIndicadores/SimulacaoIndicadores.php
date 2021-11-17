@@ -1,0 +1,259 @@
+<?php
+
+    if(isset($_COOKIE["session"]) == true){
+        if(strlen($_COOKIE["session"]) !=  32){
+            header("Location:  ../index.php");
+        }
+    }	
+    else{
+        header("Location: ../index.php");
+    }
+?>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+	<title>Simulador Dinâmico</title>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link href='https://fonts.googleapis.com/css?family=RobotoDraft' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="./visual.css">
+        <script src= "https://github.com/google/gson.git"></script>
+        <link href='https://icons8.com.br/icons'>
+
+        <script src="../values.js"> </script>
+        
+        <link rel="stylesheet" href="./bodySimulacaoIndicadores.css">
+        <link rel="stylesheet" href="./labelSimulacao.css">
+        <link rel="stylesheet" href="./menuSimulacao.css">
+        <link rel="stylesheet" href="./table1.css">
+        <link rel="stylesheet" href="./table2.css">
+        <link rel="stylesheet" href="./table3.css">
+        <link rel="stylesheet" href="./table4.css">
+
+    </head>
+
+	<body>
+        
+        <div> <img id="LogoCemi"    src="../ImagensHMI/Cemi.jpeg">   </div> <!--LOGO CEMI--> 
+        <div> <img id="Vale"        src="../ImagensHMI/Vale1.jpg">    </div> <!--LOGO VALE-->                                                                                                                                             
+             
+        <nav class="dropdown">
+            <a class="menu">MENU</a>
+            <div class="dropdown-content">
+                <li>
+                    <a> HMI </a>
+                    <ul>
+                        <li>    <a href="../HMI/Britagem/Britagem.php">                                                 Britagem                            </a></li>
+                        <li>    <a href="../HMI/Espessador/Espessador.php">                                             Espessador                          </a></li>
+                        <li>    <a href="../HMI/Flotacao/Flotacao.php">                                                 Flotação                            </a></li>
+                        <li>    <a href="../HMI/MoagemLinha01/MoagemLinha01.php">                                       Moagem - Linha 01                   </a></li>
+                        <li>    <a href="../HMI/MoagemLinha02/MoagemLinha02.php">                                       Moagem - Linha 02                   </a></li>
+                        <li>    <a href="../HMI/SeparacaoMagneticaAltaFrequencia/SeparacaoMagneticaAltaFrequencia.php"> Separação Magnética Alta Frequência </a></li>
+                        <li>    <a href="../HMI/SeparacaoMagneticaTambor/SeparacaoMagneticaTambor.php">                 Separação Magnética Tambor          </a></li>
+                    </ul>
+                </li>   
+                <a href="../global.php">      Global        </a>
+                <li>
+                    <a> Gráfico </a>
+                    <ul>
+                        <li>    <a href="../Graficos/GraficoCmai/GraficoCmai.php">                  CMAI            </a></li>  
+                        <li>    <a href="../Graficos/GraficoEspessamento/GraficoEspessamento.php">  Espessamento    </a></li>  
+                        <li>    <a href="../Graficos/GraficoFlotacao/GraficoFlotacao.php">          Flotação        </a></li>
+                        <li>    <a href="../Graficos/GraficoMoinho1/GraficoMoinho1.php">            Moinho 01       </a></li>
+                        <li>    <a href="../Graficos/GraficoMoinho2/GraficoMoinho2.php">            Moinho 02       </a></li>
+                    </ul>
+                </li> 
+                <li>
+                    <a> Simulação Dinâmica </a>
+                    <ul>
+                        <li>    <a href="../SimulacaoDinamica/SimulacaoDinamicaBritagem/SimulacaoDinamicaBritagem.php">          Britagem           </a></li>
+                        <li>    <a href="../SimulacaoDinamica/SimulacaoDinamicaCmai1/SimulacaoDinamicaCmai1.php">                CMAI               </a></li>
+                        <li>    <a href="../SimulacaoDinamica/SimulacaoDinamicaDeslamagem/SimulacaoDinamicaDeslamagem.php">      Deslamagem         </a></li>
+                        <li>    <a href="../SimulacaoDinamica/SimulacaoDinamicaEspessamento/SimulacaoDinamicaEspessamento.php">  Espessamento       </a></li>
+                        <li>    <a href="../SimulacaoDinamica/SimulacaoDinamicaFlotacao/SimulacaoDinamicaFlotacao.php">          Flotação           </a></li>
+                        <li>    <a href="../SimulacaoDinamica/SimulacaoDinamicaMoagem/SimulacaoDinamicaMoagem.php">              Moagem             </a></li>
+                        <li>    <a href="../SimulacaoDinamica/SimulacaoDinamicaRom/SimulacaoDinamicaRom.php">                    ROM                </a></li>
+                    </ul>
+                </li>   
+                <a href="./SimulacaoIndicadores.php"> Simulação Indicadores   </a>
+            </div>
+        </nav>
+            
+            <!--TITULO-->           
+            <label id="SimulacaoDeIndicadores"  type="text" name="SimulacaoDeIndicadores"> Simulação de Indicadores  </label>
+            <label id="SalaDeControle"          type="text" name="SalaDeControle">         KPI'S - Página 1          </label>
+
+              <!--LABEL-->
+              <label id="Pagina"         type="text" name="Pagina">        Páginas     </label>
+
+              <!--LINK--> 
+              <a id="LinkPagina1"     href="./SimulacaoIndicadores.php">                         1   </a>
+              <a id="LinkPagina2"     href="../SimulacaoIndicadores2/SimulacaoIndicadores2.php"> 2   </a>
+  
+
+            <!-------------------------------------------------------------------------------------------------------------------------------------------------->
+            <table id="table2">
+                <th rowspan="6"> BRITAGEM TERCIÁRIA </th><!-- TÍTULO COLUNA-->
+            
+                <tr class="tr1"><!-- LINHA 1-->
+                    <td> DF </td>
+                    <td class="teste"> <input class="input1" type="text" id="SI_BP_DF" name="SI_BP_DF" value="0.00" disabled> %</td>
+                </tr> 
+                
+                <tr class="tr2"><!-- LINHA 2-->
+                    <td> UF </td>
+                    <td class="teste"> <input class="input2" type="text" id="SI_BP_UF" name="SI_BP_UF" value="0.00" disabled> %</td>
+                </tr> 
+
+                <tr class="tr1"><!-- LINHA 3 -->
+                    <td> RO </td>
+                    <td class="teste"> <input class="input1" type="text" id="SI_BP_RO" name="SI_BP_RO" value="0.00" disabled> %</td>
+                </tr> 
+                
+                <tr class="tr2"><!-- LINHA 4 -->
+                    <td> Produtividade </td>
+                    <td class="teste"> <input class="input2" type="text" id="BritagemTerciaria_Peneira_OS_Taxa_BaseSeca_OptSim" name="BritagemTerciaria_Peneira_OS_Taxa_BaseSeca_OptSim" value="0.00" disabled> t/h</td>
+                </tr> 
+            </table>
+            <!-------------------------------------------------------------------------------------------------------------------------------------------------->
+
+            <table id="table3">
+                <th rowspan="9"> USINA </th><!-- TÍTULO COLUNA-->
+            
+                <tr class="tr1"><!-- LINHA 1-->
+                    <td> DF </td>
+                    <td class="teste"> <input class="input1" type="text" id="SI_U_DF" name="SI_U_DF" value="0.00" disabled> %</td>
+                </tr> 
+                
+                <tr class="tr2"><!-- LINHA 2-->
+                    <td> UF </td>
+                    <td class="teste"> <input class="input2" type="text" id="SI_U_UF" name="SI_U_UF" value="0.00" disabled> %</td>
+                </tr> 
+
+                <tr class="tr1"><!-- LINHA 3 -->
+                    <td> RO </td>
+                    <td class="teste"> <input class="input1" type="text" id="SI_U_RO" name="SI_U_RO" value="0.00" disabled> %</td>
+                </tr> 
+                
+                <tr class="tr2"><!-- LINHA 4 -->
+                    <td> Produção PCVI</td>
+                    <td class="teste"> <input class="input2" type="text" id="SI_U_PRODUTIVIDADE" name="SI_U_PRODUTIVIDADE" value="0.00" disabled> t/d</td>
+                </tr> 
+
+                <tr class="tr1"><!-- LINHA 5 -->
+                    <td> Produção Conc. Flotação</td>
+                    <td class="teste"> <input class="input1" type="text" id="SI_U_PRODUCAO" name="SI_U_PRODUCAO" value="0.00" disabled> t/d</td>
+                </tr> 
+
+                <tr class="tr2"><!-- LINHA 6 -->
+                    <td> Taxa de Alimentação (t/h) </td>
+                    <td class="teste"> <input class="input2" type="text" id="SI_U_TAXAALIMENTACAO" name="SI_U_TAXAALIMENTACAO" value="0.00" disabled></td>
+                </tr> 
+
+                <tr class="tr1"><!-- LINHA 7 -->
+                    <td> Produtividade PCVI</td>
+                    <td class="teste"> <input class="input1" type="text" id="SI_U_ALIMENTACAO" name="SI_U_ALIMENTACAO" value="0.00" disabled> t/h</td>
+                </tr> 
+
+                <tr class="tr2"><!-- LINHA  -->
+                    <td> Produtividade Conc. Flotação </td>
+                    <td class="teste"> <input class="input2"  type="text" id="SI_U_RECUPERACAOMASSA" name="SI_U_RECUPERACAOMASSA" value="0.00" disabled> t/h</td>
+                </tr> 
+
+            </table>
+            <!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <table id="table1">
+                <th rowspan="13">  MOAGEM </th><!-- TÍTULO COLUNA-->            
+                
+                <tr class="tr1"><!-- LINHA 1-->
+                    <td> Potência Específica (MO-01) </td>
+                    <td class="teste"> <input class="input1" type="text" id="Moagem_MO01_Potencia_Especifica_OptProcess" name="Moagem_MO01_Potencia_Especifica_OptProcess" value="0.00" disabled> kwh/t</td>
+                </tr> 
+                
+                <tr class="tr2"><!-- LINHA 2-->         
+                    <td>Potência Específica (MO-02) </td>
+                    <td class="teste"> <input class="input2" type="text" id="Moagem_MO02_Potencia_Especifica_OptProcess" name="Moagem_MO02_Potencia_Especifica_OptProcess" value="0.00" disabled> kwh/t</td>
+                </tr> 
+
+                <tr class="tr1"><!-- LINHA 3 -->
+                    <td> Água (CX-01) </td>
+                    <td class="teste"> <input class="input1" type="text" id="Moagem_CX01_VazaoAgua_OptSim" name="Moagem_CX01_VazaoAgua_OptSim" value="0.00" disabled> m&#x00B3/h</td>
+                </tr> 
+                
+                <tr class="tr2"><!-- LINHA 4 -->
+                    <td>  Água (CX-02) </td>
+                    <td class="teste"> <input class="input2" type="text" id="Moagem_CX02_VazaoAgua_OptSim" name="Moagem_CX02_VazaoAgua_OptSim" value="0.00" disabled> m&#x00B3/h</td>
+                </tr> 
+
+                <tr class="tr1"><!-- LINHA 5 -->
+                    <td> Densidade Alimentação (CI-01) </td>
+                    <td class="teste"> <input class="input1" type="text" id="Moagem_CI01_Alimentacao_Densidade_OptSim" name="Moagem_CI01_Alimentacao_Densidade_OptSim" value="0.00" disabled> t/m&#x00B3</td>
+                </tr> 
+
+                <tr class="tr2"><!-- LINHA 6 -->
+                    <td>  Densidade Alimentação (CI-02) </td>
+                    <td class="teste"> <input class="input2" type="text" id="Moagem_CI02_Alimentacao_Densidade_OptSim" name="Moagem_CI02_Alimentacao_Densidade_OptSim" value="0.00" disabled> t/m&#x00B3</td>
+                </tr> 
+                
+                <tr class="tr1"><!-- LINHA 7 -->
+                    <td>  Carga Circulante (UF-CI-01) </td>
+                    <td class="teste"> <input class="input1" type="text" id="Moagem_MO01_CargaCirculante_Percentual_OptProcess" name="Moagem_MO01_CargaCirculante_Percentual_OptProcess" value="0.00" disabled> %</td>
+                </tr> 
+
+                <tr class="tr2"><!-- LINHA 8 -->
+                    <td>  Carga Circulante (UF-CI-02) </td>
+                    <td class="teste"> <input class="input2" type="text" id="Moagem_MO02_CargaCirculante_Percentual_OptProcess" name="Moagem_MO02_CargaCirculante_Percentual_OptProcess" value="0.00" disabled> %</td>
+                </tr> 
+               
+                <tr class="tr1"><!-- LINHA 9 -->
+                    <td>  Pressão (CI-01) </td>
+                    <td class="teste"> <input class="input1" type="text" id="Moagem_CI01_Pressao_OptProcess" name="Moagem_CI01_Pressao_OptProcess" value="0.00" disabled> bar</td>
+                </tr> 
+
+                <tr class="tr2"><!-- LINHA 10 -->
+                    <td> Pressão (CI-02) </td>
+                    <td class="teste"> <input class="input2" type="text" id="Moagem_CI02_Pressao_OptProcess" name="Moagem_CI02_Pressao_OptProcess" value="0.00" disabled> bar</td>
+                </tr> 
+                
+                <tr class="tr1"><!-- LINHA 11 -->
+                    <td>   % Retido #100 (OF-CI-01) </td>
+                    <td class="teste"> <input class="input1" type="text" id="Moagem_CI01_OF_Retido_mesh100_OptSim" name="Moagem_CI01_OF_Retido_mesh100_OptSim" value="0.00" disabled> %</td>
+                </tr> 
+
+                <tr class="tr2"><!-- LINHA 12 -->
+                    <td>   % Retido #100 (OF-CI-02) </td>
+                    <td class="teste"> <input class="input2" type="text" id="Moagem_CI02_OF_Retido_mesh100_OptSim" name="Moagem_CI02_OF_Retido_mesh100_OptSim" value="0.00" disabled> %</td>
+                </tr> 
+            </table>
+            <!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+            <table id="table4">
+                <th rowspan="5">  INDICADORES GLOBAIS </th><!-- TÍTULO COLUNA-->            
+                
+                <tr class="tr1"><!-- LINHA 1-->
+                    <td> Rec. Mássíca Global (b.s.)</td>
+                    <td class="teste"> <input class="input1" type="text" id="SI_BP_DF" name="SI_BP_DF" value="0.00" disabled> %</td>
+                </tr> 
+                
+                <tr class="tr2"><!-- LINHA 2-->         
+                    <td>Rec. Mássíca Global (b.u.) </td>
+                    <td class="teste"><input class="input2" type="text" id="SI_BP_UF" name="SI_BP_UF" value="0.00" disabled> %</td>
+                </tr> 
+
+                <tr class="tr1"><!-- LINHA 3 -->
+                    <td> Rec. Metalúrgica Global </td>
+                    <td class="teste"> <input class="input1" type="text" id="SI_BP_RO" name="SI_BP_RO" value="0.00" disabled>  %</td>
+                </tr> 
+                
+                <tr class="tr2"><!-- LINHA 4 -->
+                    <td>  Rec. Metalúrgica da Flotação Global </td>
+                    <td class="teste"> <input class="input2" type="text" id="SI_BP_PRODUTIVIDADE" name="SI_BP_PRODUTIVIDADE" value="0.00" disabled>  %</td>
+                </tr> 
+
+            </table>
+        </div>
+    </body>
+</html> 

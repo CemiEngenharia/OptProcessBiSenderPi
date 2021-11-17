@@ -1,0 +1,58 @@
+#bodyEspessador{  
+    background-attachment: fixed;
+    background-repeat: no-repeat;  
+    height: 100vh;
+    overflow-y: none;
+    position: absolute;
+    width: 100vw;
+    z-index: 1;
+}
+
+#Vale{ 
+    height: 8vh;
+    left: 89vw;
+    overflow-y: none;
+    position: absolute !important;
+    top: 0vh;
+    width: 10vw;
+    z-index: 2; 
+}
+ 
+#LogoCemi{ 
+    height: 8vh;
+    left: 0vw;
+    overflow-y: none;
+    position: absolute !important;
+    top: 0vh;
+    width: 11vw;
+    z-index: 2; 
+}
+.subTitle{
+    font-weight: bolder;
+    font-size: 0.5vw;
+    color: #782327 ;
+}
+
+ul{
+    list-style-type: none;
+    padding-left: 1vw;
+}
+
+li{ 
+    list-style-type: none; 
+    text-align: left;
+}
+
+input{
+    display: inline-block;
+    font-size: 0.5vw;
+    width: 4vw;
+    text-align: right;
+    font-weight: bolder;
+} 
+
+.tag{
+    text-align: center!important;
+    font-size: 0.5vw;
+    font-weight: bolder;
+}

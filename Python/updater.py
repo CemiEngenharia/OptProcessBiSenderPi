@@ -5,7 +5,7 @@ import os, sys
 from datetime import datetime
 
 #repositorio de atualizacoes
-repositorio = "https://CemiEngenharia:Cemieng123@github.com/CemiEngenharia/OptProcessBISenderUpdater.git"
+repositorio = "https://CemiEngenharia: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@github.com/CemiEngenharia/OptProcessBISenderUpdater.git"
 
 #progam path
 ppath = "/var/cemi/.tmp/"

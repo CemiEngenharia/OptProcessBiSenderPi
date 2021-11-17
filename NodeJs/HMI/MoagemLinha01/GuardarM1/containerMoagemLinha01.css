@@ -1,0 +1,106 @@
+#Container01{
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 8vw;
+    position: absolute;
+    top: 13vh;  
+    z-index: 1;     
+}
+
+#Container02{
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 57.5vw;
+    position: absolute;
+    top: 30.5vh;  
+    z-index: 1;            
+}
+
+#Container03{
+    background-color: #FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 62vw;
+    position: absolute;
+    top: 39vh;  
+    z-index: 1;     
+}
+
+#Container04{
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 66.5vw;
+    position: absolute;
+    top: 30.5vh;    
+    z-index: 1;     
+}
+
+#Container05{
+    background-color: #FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 22.5vw;
+    position: absolute;
+    top: 71vh;   
+    z-index: 1;     
+}
+
+#Container06{
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 44.5vw;
+    position: absolute;
+    top: 74.5vh; 
+    z-index: 1;     
+}
+
+#Container07{
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 44.5vw;
+    position: absolute;
+    top: 83vh;  
+    z-index: 1;     
+}
+
+#Container08{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 65.5vw;
+    position: absolute;
+    top: 82vh;
+    width: 6.4vw;
+    z-index: 1;         
+}
+
+#Container09{
+    background-color:#FFFFFF;
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 65.5vw;
+    position: absolute;
+    top: 65vh;  
+    width: 6.4vw;
+    z-index: 1;     
+}
+
+#Container10{
+    border: medium inset #BFBFBF;
+    color: #000000;
+    font-size: 0.5vw;
+    left: 65.5vw;
+    position: absolute;
+    top: 73.5vh;  
+    width: 6.4vw;
+    z-index: 1;         
+}

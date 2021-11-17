@@ -1,0 +1,55 @@
+#ControleAvancadoDeProcessos{
+    color: #782327;
+    font-size: 1.8vw;
+    left: 34vw;
+    position:absolute;
+    top: 3vh;  
+    z-index: 2;
+}
+
+#EspessadorSupervisaoGeral{
+    color: #BFBFBF;
+    font-size: 1.5vw;
+    left: 28vw;
+    position:absolute;
+    top: 8vh;  
+    z-index: 2;
+}
+
+#Rejeito{
+    color: #000000;
+    font-size: 1vw;
+    font-weight: bold;
+    left: 77.5vw;
+    position:absolute;
+    top: 21vh;  
+    z-index: 2;
+}
+
+#Moagem{
+    color: #000000;
+    font-size: 1vw;
+    font-weight: bold;
+    left: 77vw;
+    position:absolute;
+    top: 65vh;  
+    z-index: 2;
+}
+
+#PNProtecao{
+    color: #000000;
+    font-size: 0.6vw;
+    left: 26.5vw;
+    position:absolute;
+    top: 20vh;  
+    z-index: 2;
+}
+
+#RejeitoGrosso{
+    color: #000000;
+    font-size: 0.6vw;
+    left: 16.5vw;
+    position:absolute;
+    top: 42.5vh;  
+    z-index: 2;
+}

@@ -1,0 +1,36 @@
+
+0:  {tag: "G_TON_FLOCULANTE_SP",    value: "0,000",         date: "2021-03-25T18:57:01.000Z"}
+1:  {tag: "G_TON_FLOCULANTE_PV",    value: "0,1",           date: "2021-03-25T18:57:01.000Z"}
+
+2:  {tag: "VPT_2070_FLC842_SP",     value: "0.524",         date: "2021-03-25T18:57:01.000Z"}
+3:  {tag: "VPT_2070_FLC842_PV",     value: "100",           date: "2021-03-25T18:57:01.000Z"}
+
+4:  {tag: "VPT_2070_FLT843_SP",     value: "12.54",         date: "2021-03-25T18:57:01.000Z"}
+5:  {tag: "VPT_2070_FLT843_PV",     value: "578.41",        date: "2021-03-25T18:57:01.000Z"}
+
+6:  {tag: "COAGULANTE_SP",          value: "15.24",         date: "2021-03-25T18:57:01.000Z"}
+7:  {tag: "COAGULANTE_VP",          value: "16.2458",       date: "2021-03-25T18:57:01.000Z"}
+
+8:  {tag: "VPT_2062_FLT0101_SP",    value: "0.15468",       date: "2021-03-25T18:57:01.000Z"}
+9:  {tag: "VPT_2062_FLT0101_PV",    value: "1.3215",        date: "2021-03-25T18:57:01.000Z"}
+
+10: {tag: "VPT_2062_DLT0103_SP",    value: "3513.31",       date: "2021-03-25T18:57:01.000Z"}
+11: {tag: "VPT_2062_DLT0103_PV",    value: "3.5133",        date: "2021-03-25T18:57:01.000Z"}
+
+12: {tag: "VPT_2062_DLT0101_SP",    value: "3.51541635",    date: "2021-03-25T18:57:01.000Z"}
+13: {tag: "VPT_2062_DLT0101_PV",    value: "1.3548",        date: "2021-03-25T18:57:01.000Z"}
+
+14: {tag: "VPT_2060_ZLT501_SP",     value: "35.1351",       date: "2021-03-25T18:57:01.000Z"}
+15: {tag: "VPT_2060_ZLT501_PV",     value: "351684.3",      date: "2021-03-25T18:57:01.000Z"}
+
+16: {tag: "VPT_2060_YLT501_SP",     value: "35468.35",      date: "2021-03-25T18:57:01.000Z"}
+17: {tag: "VPT_2060_YLT501_PV",     value: "54.358",        date: "2021-03-25T18:57:01.000Z"}
+
+18: {tag: "VPT_2070_ALC903_SP",     value: "68.4351",       date: "2021-03-25T18:57:01.000Z"}
+19: {tag: "VPT_2070_ALC903_PV",     value: "3254.45",       date: "2021-03-25T18:57:01.000Z"}
+
+20: {tag: "VELOCIDADE_GIRO_SP",     value: "4.24",          date: "2021-03-25T18:57:01.000Z"}
+21: {tag: "VELOCIDADE_GIRO_PV",     value: "5564.654",      date: "2021-03-25T18:57:01.000Z"}
+
+22: {tag: "VPT_2062_DLT0102_SP",    value: "789.54",        date: "2021-03-25T18:57:01.000Z"}
+23: {tag: "VPT_2062_DLT0102_PV",    value: "756.15",        date: "2021-03-25T18:57:01.000Z"}

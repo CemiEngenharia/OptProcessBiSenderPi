@@ -1,0 +1,29 @@
+
+#NumeroHoras{
+  text-align: center;
+  background-color: #782327;
+  color: white;
+  font-weight: bold;
+  border: thin solid #782327;
+  border-collapse: collapse;
+  font-family: Arial, Helvetica, sans-serif;
+  height: 3vh;   
+  left: 3vw; 
+  padding: 0.2vw;
+  position: absolute;
+  top: 17vh;  
+  width: 20vw;
+}
+
+#ValorNumeroHoras .input1{
+  text-align: right;
+  background-color: #DDDDDD;
+  border: thin solid #DDDDDD;
+  border-collapse: collapse;
+  font-family: Arial, Helvetica, sans-serif;
+  height: 3vh;   
+  left:23vw; 
+  position: absolute;
+  top: 17vh;  
+  width: 10.5vw;
+}

@@ -1,0 +1,77 @@
+#ControleAvancadoDeProcessos{
+    color: #782327;
+    font-size: 1.8vw;
+    left: 33.5vw;
+    position:absolute;
+    top: 3vh;  
+    z-index: 2;
+}
+
+
+#EspessadorSupervisaoGeral{
+    color: #BFBFBF;
+    font-size: 1.5vw;
+    left: 30vw;
+    position:absolute;
+    top: 8vh;  
+    z-index: 2;
+}
+
+#Moagem1{
+    color: #000000;
+    font-size: 1vw;
+    font-weight: bold;
+    left: 77.5vw;
+    position:absolute;
+    top: 32.5vh;  
+    z-index: 2;
+}
+
+
+#Moagem2{
+    color: #000000;
+    font-size: 1vw;
+    font-weight: bold;
+    left:25vw;
+    position:absolute;
+    top: 76.5vh;  
+    z-index: 2;
+}
+
+#WHIMS{
+    color: #000000;
+    font-size: 1vw;
+    font-weight: bold;
+    left: 79vw;
+    position:absolute;
+    top: 39.5vh;  
+    z-index: 2;
+}
+
+#Rejeito{
+    color: #000000;
+    font-size: 1vw;
+    font-weight: bold;
+    left: 54.5vw;
+    position:absolute;
+    top: 87vh;  
+    z-index: 2;
+}
+
+#PeneiramentoPrimario{
+    color: #000000;
+    font-size: 0.6vw;
+    left: 45vw;
+    position:absolute;
+    top: 15vh;  
+    z-index: 2;
+}
+
+#Pcvi{
+    color: #000000;
+    font-size: 0.6vw;
+    left: 67.5vw;
+    position:absolute;
+    top: 88vh;  
+    z-index: 2;
+}
